@@ -1,0 +1,24 @@
+<div class="page">
+        <h3>–аздел редактировани€ шаблонов скрипта.</h3>
+        <p> –едактор шаблонов позвол€ет вам вносить изменение в уже существующий шаблон,
+          создание нового шаблона не предусмотренно. ƒл€ корректной работы редактора
+          должна быть включена поддержка JavaScript в вашем браузере.</p>
+        <p>¬озможности редактора:</p>
+        <ul class="info">
+          <li>быстрый доступ к редактируемому файлу <a href="http://codemirror.net/" class="web-link">(ajax)</a></li>
+          <li>поддерживаемые форматы: <span class="tpl">.tpl</span>,<span class="js"> .js</span>, <span class="css">.css</span></li>
+          <li>подсветка синтаксиса <a href="http://ru.wikipedia.org/wiki/Ajax" class="web-link">CodeMirror 2.0</a></li>
+          <li>подсветка тегов шаблона.</li>
+          <li>гор€чие клавиши.</li>
+        </ul>
+        <p>Ќачало работы:</p>
+        <ul class="info-2">
+          <li>выбирете редактируемый файл в дереве шаблона, дождитесь  окончани€ загрузки активной области редактора.</li>
+          <li>индикатор в левом верхнем углу показывает доступен ли файл дл€ записи.</li>
+          <li><span class="keyboard">Ctrl</span> + <span class="keyboard">space</span>: вызов списка тегов данного шаблона.</li>
+          <li><span class="keyboard">Ctrl</span> + <span class="keyboard">S</span>: сохранение шаблона, активна€ область редактора должна быть в фокусе.</li>
+        </ul>
+        <div class="info b-4">
+          <p>ѕоддерживаемые браузеры: IE 8,+9, Firefox 4.0, Opera 11.10, Google Chrome 10.0.xxx.xxx</p>
+        </div>
+</div>
