@@ -1,12 +1,12 @@
 <?php
-
 /**
- * Класс: related
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class view_related extends view_template {
 
     public function render($result) {

@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * Р¤РѕСЂРјР° РґРѕР±Р°РІР»РµРЅРёСЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ Р°Р»СЊР±РѕРјР° СЃ СЃР°Р№С‚Р°.
+ * Form for edit the album in front end.
+ */
 
 return array(
     'form' => array(
@@ -6,15 +14,15 @@ return array(
         'method' => 'post',
         'name' => 'addalbum',
         'editalbum' => array(
-            'legend' => 'Редактирование альбома',
+            'legend' => 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р°Р»СЊР±РѕРјР°',
             'row' => array(
                 array(
-                    'label' => 'Название:<br /><small></small>',
+                    'label' => 'РќР°Р·РІР°РЅРёРµ:<br /><small></small>',
                     'type' => 'text',
                     'key' => 'title'
                 ),
 //                array(
-//                    'label' => 'Категория:<br /><small></small>',
+//                    'label' => 'РљР°С‚РµРіРѕСЂРёСЏ:<br /><small></small>',
 //                    'type' => 'select',
 //                    'key' => 'parent_id',
 //                    'values' => array(
@@ -25,27 +33,27 @@ return array(
 //                    )
 //                ),
                 array(
-                    'label' => 'Альтернативное имя:<br /><small>метатег title</small>',
+                    'label' => 'РђР»СЊС‚РµСЂРЅР°С‚РёРІРЅРѕРµ РёРјСЏ:<br /><small>РјРµС‚Р°С‚РµРі title</small>',
                     'type' => 'text',
                     'key' => 'meta_title'
                 ),
 //                array(
-//                    'label' => 'Описание:<br /><small>полное описание</small>',
+//                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РїРѕР»РЅРѕРµ РѕРїРёСЃР°РЅРёРµ</small>',
 //                    'type' => 'bbcode',
 //                    'key' => 'descr'
 //                ),
-                   array(
-                    'label' => 'Описание:<br /><small>полное описание</small>',
+                array(
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РїРѕР»РЅРѕРµ РѕРїРёСЃР°РЅРёРµ</small>',
                     'type' => 'textareawysiwyg',
                     'key' => 'descr'
                 ),
                 array(
-                    'label' => 'Описание:<br /><small>метатег description</small>',
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РјРµС‚Р°С‚РµРі description</small>',
                     'type' => 'textarea',
                     'key' => 'meta_descr'
                 ),
                 array(
-                    'label' => 'Ключевые слова:<br /><small>метатег keywords</small>',
+                    'label' => 'РљР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР°:<br /><small>РјРµС‚Р°С‚РµРі keywords</small>',
                     'type' => 'textarea',
                     'key' => 'meta_keywords'
                 ),
@@ -60,15 +68,15 @@ return array(
             )
         ),
         'contentAccessAlbom' => array(
-            'legend' => 'Настройки доступа.',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РґРѕСЃС‚СѓРїР°.',
             'row' => array(
 //                array(
-//                    'label' => 'Гостевой режим:',
+//                    'label' => 'Р“РѕСЃС‚РµРІРѕР№ СЂРµР¶РёРј:',
 //                    'type' => 'checkbox',
 //                    'key' => 'guestMode'
 //                ),
                 array(
-                    'label' => 'Просмотр:',
+                    'label' => 'РџСЂРѕСЃРјРѕС‚СЂ:',
                     'type' => 'multiple',
                     'key' => 'accessView',
                     'values' => array(
@@ -78,7 +86,7 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Комментирование файлов:',
+                    'label' => 'РљРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»РѕРІ:',
                     'type' => 'multiple',
                     'key' => 'accessCommentsFile',
                     'values' => array(

@@ -1,15 +1,12 @@
 <?php
-
 /**
- * Маршрутизатор,то еще ..............................
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
- *
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class model_route extends model_gallery {
 
     /**
@@ -43,6 +40,10 @@ class model_route extends model_gallery {
      */
     protected $_uri;
 
+
+    /**
+     *
+     */
     public function __construct() {
         $this->_uri = trim($_SERVER['REQUEST_URI'], '/');
         $uri = explode('/', $this->_uri);
@@ -68,12 +69,15 @@ class model_route extends model_gallery {
 
     }
 
+    /**
+     * @return string
+     */
     public function getServerURI() {
         return $this->_uri;
     }
 
     /**
-     * Определение параметров запроса.
+     * РћРїСЂРµРґРµР»РµРЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ Р·Р°РїСЂРѕСЃР°.
      * @param string $str
      */
     private function _setParam($str) {
@@ -93,20 +97,23 @@ class model_route extends model_gallery {
     }
 
     /**
-     * Получение параметов запроса.
+     * РџРѕР»СѓС‡РµРЅРёРµ РїР°СЂР°РјРµС‚РѕРІ Р·Р°РїСЂРѕСЃР°.
      * @return array
      */
     public function getParam() {
         return $this->_params;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getAction() {
         return $this->_action;
     }
 
     /**
-     * Вычисление маршрута, определение запрошенного контроллера, вызов деиствия,
-     * если деиствия не существует в контроллере вызов indexAction() контроллера по умолчанию
+     * Р’С‹С‡РёСЃР»РµРЅРёРµ РјР°СЂС€СЂСѓС‚Р°, РѕРїСЂРµРґРµР»РµРЅРёРµ Р·Р°РїСЂРѕС€РµРЅРЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°, РІС‹Р·РѕРІ РґРµРёСЃС‚РІРёСЏ,
+     * РµСЃР»Рё РґРµРёСЃС‚РІРёСЏ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РІ РєРѕРЅС‚СЂРѕР»Р»РµСЂРµ РІС‹Р·РѕРІ indexAction() РєРѕРЅС‚СЂРѕР»Р»РµСЂР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
      * @return mixed
      */
     public function route() {

@@ -1,13 +1,14 @@
 <?php
-
 /**
- * Класс: admin
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
-class controller_admin extends controller_gallery {
+
+
+class controller_admin extends controller_gallery
+{
 
     /**
      * @var array
@@ -25,9 +26,10 @@ class controller_admin extends controller_gallery {
     protected $_config;
 
     /**
-     * @return void
+     *
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct(false);
         $this->_lang = model_gallery::getRegistry('lang');
     }
@@ -36,7 +38,8 @@ class controller_admin extends controller_gallery {
      *
      * @return array
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $page = array();
         $page ['add_cat'] = $this->setRowTbl($this->_lang ['index_page'] ['add_cat'] ['title'], $this->_lang ['index_page'] ['add_cat'] ['descr'], 'add_cat', FALSE);
         $page ['tpl_edit'] = $this->setRowTbl($this->_lang ['index_page'] ['edit-template'] ['title'], $this->_lang ['index_page'] ['edit-template'] ['descr'], 'edit-template', null);
@@ -56,10 +59,10 @@ class controller_admin extends controller_gallery {
         if (!$count['count'] && !$_count['count']) {
             $page ['moder'] = $this->setRowTbl($this->_lang ['index_page'] ['moder'] ['title'], $this->_lang ['index_page'] ['moder'] ['descr'], 'disable', '');
         }
-//add user db
+        //add user db
         $this->_user = assistant::$_user;
         $check = $this->_db->super_query('SELECT * FROM ' . DBNAME . '.' . PREFIX .
-                "_dg_gallery_user WHERE user_id='{$this->_user['user_id']}'");
+            "_dg_gallery_user WHERE user_id='{$this->_user['user_id']}'");
         if (null === $check['id']) {
             $this->_db->query('INSERT INTO ' . DBNAME . '.' . PREFIX . '_dg_gallery_user (user_id) VALUES ' . "('{$this->_user['user_id']}')");
         }
@@ -74,14 +77,15 @@ class controller_admin extends controller_gallery {
     }
 
     /**
-     * Настройки скрипта
+     * РќР°СЃС‚СЂРѕР№РєРё СЃРєСЂРёРїС‚Р°
      * @return array
      */
-    public function settingAction() {
-//sidebar
+    public function settingAction()
+    {
+        //sidebar
         $sidebar = array('setting', 'upload', 'access', 'view', 'video', 'perf', 'bugs');
-//javascript
-        $inlineJs .= 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
+        //javascript
+        $inlineJs = 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
         $inlineJs .= "gallery.ass.selectDecorator($('select'));\r";
         $inlineJs .= "gallery.ass.checkBoxWrap($('input[type=\"checkbox\"]'));\r";
         $inlineJs .= "gallery.ass.initSideBar(sidebar,'setting');\r";
@@ -93,16 +97,17 @@ class controller_admin extends controller_gallery {
     }
 
     /**
-     * Сохранение настроек
+     * РЎРѕС…СЂР°РЅРµРЅРёРµ РЅР°СЃС‚СЂРѕРµРє
      * @return void
      */
-    public function save_settingAction() {
+    public function save_settingAction()
+    {
         $set = $_REQUEST ['config'];
         if (!$set) {
             return;
         }
         $set ['dle'] = (file_exists(ROOT_DIR . '/engine/data/config.php')) ? 1 : 0;
-//empty field (checkbox)
+        //empty field (checkbox)
         $int = array('status', 'guest_mode', 'allowYouTube',
             'youTubeThumbAuto', 'youTubeThumbManualLoad', 'vimeoThumbManualLoad',
             'watermark', 'rainbow', 'fileFrame', 'guestMode',
@@ -114,7 +119,7 @@ class controller_admin extends controller_gallery {
             'defaultCahe', 'defaultJson', 'debug',
             'altExceptionHandler', 'debugAjax', 'FileHash',
             'watermarkSlider', 'watermarkCover', 'video_setting_dle', 'allow_smotri_com', 'allow_vimeo_com',
-            'allow_rutube_ru', 'allow_gametrailers_com', 'autoPlay','watermarkVideo','tube_related'
+            'allow_rutube_ru', 'allow_gametrailers_com', 'autoPlay', 'watermarkVideo', 'tube_related'
         );
         foreach ($set as $k => $v) {
             if (is_array($v)) {
@@ -133,7 +138,7 @@ class controller_admin extends controller_gallery {
         }
         return array(
             'content' => $this->_setInfoSuccess($this->_lang['info']['save_ok']) .
-            '<table width="100%" border="0" cellpadding="50">
+                '<table width="100%" border="0" cellpadding="50">
 <tr>' . $page['add_cat'] . $page['add_albom'] . '</tr>
 
 </table>'
@@ -141,25 +146,42 @@ class controller_admin extends controller_gallery {
     }
 
     /**
-     *
+     * @return array
      */
-    public function add_catAction() {
+    public function add_catAction()
+    {
         return $this->_category();
     }
 
-    public function editcatAction() {
+    /**
+     * @return array
+     */
+    public function editcatAction()
+    {
         return $this->_category();
     }
 
-    public function add_categoryAction() {
+    /**
+     * @return type
+     */
+    public function add_categoryAction()
+    {
         return $this->_addCategory('add_category');
     }
 
-    public function update_categoryAction() {
+    /**
+     * @return type
+     */
+    public function update_categoryAction()
+    {
         return $this->_addCategory('update_category');
     }
 
-    public function add_albAction() {
+    /**
+     * @return array
+     */
+    public function add_albAction()
+    {
         if ($this->_config['mode'] == 2) {
             return array(
                 'content' => $this->_setWarning($this->_lang['info']['not_support'])
@@ -167,7 +189,7 @@ class controller_admin extends controller_gallery {
         }
         $edit_id = intval(model_request::getGet('id'));
         $sidebar = array('add', 'access');
-        $inlineJs .= 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
+        $inlineJs = 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
         $contextMenu = array(
             'add' => $this->_lang ['contextMenu'] ['create'],
             'update' => $this->_lang ['contextMenu'] ['update']);
@@ -186,7 +208,11 @@ class controller_admin extends controller_gallery {
         );
     }
 
-    public function massAction() {
+    /**
+     * @return array
+     */
+    public function massAction()
+    {
         if ($this->_config['mode'] == 1) {
             return array(
                 'content' => $this->_setWarning($this->_lang['info']['not_support'])
@@ -202,8 +228,8 @@ class controller_admin extends controller_gallery {
         $inlineJs = 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
         $inlineJs .= "gallery.ass.initSideBar(sidebar,'upload',null);\r";
         $html = $form->getForm('upload', 'upload', true, false);
-//        $total = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ');
-//        $total = (int) $total['count'];
+        //        $total = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ');
+        //        $total = (int) $total['count'];
         $upload = new model_upload ();
         $json = $upload->setPlugin(100, 'category', 'all', 0);
         $inlineJs .= "gallery.upload.pluginVar={$json};\r";
@@ -260,14 +286,14 @@ gallery.ass.setDatePicker($('.file-item'));
               <thead>
                 <tr>
                   <td colspan="2"><fieldset  class="b-4" style="background:#F1F5F7">
-                  <legend>Параметры  показа</legend>
-                        <label for="category">Категория</label>
+                  <legend>РџР°СЂР°РјРµС‚СЂС‹  РїРѕРєР°Р·Р°</legend>
+                        <label for="category">РљР°С‚РµРіРѕСЂРёСЏ</label>
                         <select name="category" id="category" style="width:200px;">
                           {$option}
                               </select>
-                        <label for="search1"> за период с: </label>
+                        <label for="search1"> Р·Р° РїРµСЂРёРѕРґ СЃ: </label>
                         <input type="text" name="date-1" class="date f_input" style="width:80px" id="search1"/>
-                        <label for="search2">по: </label>
+                        <label for="search2">РїРѕ: </label>
                         <input type="text" name="date-2"  class="date f_input" style="width:80px" id="search2"/>
                     </fieldset></td>
                 </tr>
@@ -293,7 +319,11 @@ HTML;
         );
     }
 
-    public function add_album_dbAction() {
+    /**
+     * @return array
+     */
+    public function add_album_dbAction()
+    {
         return array(
             'content' => model_gallery::getClass('model_albom')->add(model_request::getPost('config')),
             'inlineJs' => '',
@@ -301,22 +331,30 @@ HTML;
         );
     }
 
-    public function edit_templateAction() {
+    /**
+     * @return array
+     */
+    public function edit_templateAction()
+    {
         $editor = new module_editFile ();
         $inlineJs = 'var dirEdit =' . $editor->getStart() . ";\r";
         $inlineJs .= "gallery.ass.setListEdit(dirEdit);\r";
-        $content = ( file_exists(ROOT_DIR . '/DGGallery/cache/system/page/editor.tmp')) ? stripslashes(file_get_contents(ROOT_DIR . '/DGGallery/cache/system/page/editor.tmp')) : 'error load page';
+        $content = (file_exists(ROOT_DIR . '/DGGallery/cache/system/page/editor.tmp')) ? stripslashes(file_get_contents(ROOT_DIR . '/DGGallery/cache/system/page/editor.tmp')) : 'error load page';
         return array(
             'content' => $content,
             'inlineJs' => $inlineJs
         );
     }
 
-    public function moderAction() {
+    /**
+     * @return array
+     */
+    public function moderAction()
+    {
         global $user_group, $is_logged;
         $sidebar = array('comments',);
 
-        $inlineJs .= 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
+        $inlineJs = 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
         $inlineJs .= "gallery.ass.initSideBar(sidebar,'comments',null);\r";
         require_once ROOT_DIR . '/engine/classes/templates.class.php';
         $tpl = new dle_template;
@@ -324,30 +362,30 @@ HTML;
         $tpl->dir = ROOT_DIR . '/DGGallery/admin/theme/default/';
 
         $_comm = model_gallery::getClass('model_comments');
-        $offset = (int) model_request::getRequest('page');
+        $offset = (int)model_request::getRequest('page');
         $param['start'] = ($offset > 1) ? (($offset - 1) * $param['end']) : 0;
         $count = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_comments WHERE approve='0'");
         if ($count['count'])
             $mysqlId = $this->_db->query('SELECT  ' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.*,'
-                    . DBNAME . '.' . PREFIX . '_users.name,'
-                    . DBNAME . '.' . PREFIX . '_users.reg_date,'
-                    . DBNAME . '.' . PREFIX . '_users.reg_date,fullname,'
-                    . DBNAME . '.' . PREFIX . '_users.icq,'
-                    . DBNAME . '.' . PREFIX . '_users.user_group,'
-                    . DBNAME . '.' . PREFIX . '_users.news_num,'
-                    . DBNAME . '.' . PREFIX . '_users.comm_num,'
-                    . DBNAME . '.' . PREFIX . '_users.signature  FROM '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_comments LEFT JOIN '
-                    . DBNAME . '.' . PREFIX . '_users ON '
-                    . DBNAME . '.' . PREFIX . '_users.user_id=' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.user_id  WHERE '
-                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.approve='0'  ORDER BY "
-                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.date ASC LIMIT {$param['start']},10 ");
+                . DBNAME . '.' . PREFIX . '_users.name,'
+                . DBNAME . '.' . PREFIX . '_users.reg_date,'
+                . DBNAME . '.' . PREFIX . '_users.reg_date,fullname,'
+                . DBNAME . '.' . PREFIX . '_users.icq,'
+                . DBNAME . '.' . PREFIX . '_users.user_group,'
+                . DBNAME . '.' . PREFIX . '_users.news_num,'
+                . DBNAME . '.' . PREFIX . '_users.comm_num,'
+                . DBNAME . '.' . PREFIX . '_users.signature  FROM '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_comments LEFT JOIN '
+                . DBNAME . '.' . PREFIX . '_users ON '
+                . DBNAME . '.' . PREFIX . '_users.user_id=' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.user_id  WHERE '
+                . DBNAME . '.' . PREFIX . "_dg_gallery_comments.approve='0'  ORDER BY "
+                . DBNAME . '.' . PREFIX . "_dg_gallery_comments.date ASC LIMIT {$param['start']},10 ");
         $_comm->_user = assistant::$_user;
         if ($count['count'])
             $comments = $_comm->load(array(
                 'mysqlId' => $mysqlId,
                 'count' => $count
-                    ), $tpl, true);
+            ), $tpl, true);
         else
             $comments = $this->_setWarning($this->_lang['info']['no_comment']);
 
@@ -357,14 +395,14 @@ HTML;
         $content = '<form name="#" action="#" method="post">';
         $content .= '<div id="part-comments" style="background:#fff; height:600px;overflow:auto">' . $comments . '</div>';
         $content .= '<div id="part-image" style="background:#fff; height:600px;overflow:auto; display:none">';
-//        if ($_count['count']) {
-//            $this->_db->query('SELECT * FROM '.DBNAME.'.'.PREFIX."_dg_gallery_albom WHERE approve='0' ORDER BY id DESC");
-//            while ($row = $this->_db->get_row()) {
-//
-//            }
-//        }
+        //        if ($_count['count']) {
+        //            $this->_db->query('SELECT * FROM '.DBNAME.'.'.PREFIX."_dg_gallery_albom WHERE approve='0' ORDER BY id DESC");
+        //            while ($row = $this->_db->get_row()) {
+        //
+        //            }
+        //        }
         $content .= '</div>';
-        $content.='</form>';
+        $content .= '</form>';
         return array(
             'content' => $content,
             'inlineJs' => $inlineJs,
@@ -373,9 +411,10 @@ HTML;
     }
 
     /**
-     *
+     * @return array
      */
-    public function openAction() {
+    public function openAction()
+    {
         $alb = model_gallery::getRegistry('model_albom');
         $content = '';
         $inlineJs = '';
@@ -388,7 +427,7 @@ HTML;
             $sidebar = array('open', 'upload', 'access', 'setting');
             $inlineJs .= 'var sidebar =' . module_json::getJson($sidebar) . ";\r";
             $inlineJs .= "gallery.ass.initSideBar(sidebar,'open',null);\r";
-//$inlineJs .= "gallery.ass.checkBoxWrap($('input[type=\"checkbox\"]'));\r";
+            //$inlineJs .= "gallery.ass.checkBoxWrap($('input[type=\"checkbox\"]'));\r";
             $inlineJs .= "gallery.ass.selectDecorator($('select'));\r";
             $files = $alb->getFileListTable();
             $inlineJs .= 'gallery.core.data =' . module_json::getJson($alb->getFileList()) . ";\r";
@@ -402,14 +441,14 @@ HTML;
             $inlineJs .= 'var contextMenu =' . module_json::getJson($contextMenu) . ";\r";
             $inlineJs .= "gallery.ass.setContextMenu(contextMenu,$('textarea'));\r";
 
-//init upload
+            //init upload
             $upload = new model_upload ();
             $json = $upload->setPlugin(100, 'useralbom', 'all', model_request::getRequest('id'));
             $inlineJs .= "gallery.upload.pluginVar={$json};\r";
             $info = $alb->openAlbom();
 
             $form = new module_form(require ROOT_DIR . '/DGGallery/app/config/adminForms/editAlbom.php');
-//start form setting
+            //start form setting
             $form->setValue = true;
             $form->setconfig = unserialize($info['info']["access_data"]);
 
@@ -521,7 +560,7 @@ $('input[name=\"config[guestMode]\"]').live('click',function(){
 <table border="0" height="450" width="100%" style="margin:10px 0 20px 0;" valign="top">
   <thead>
     <tr height="20">
-      <td align="center" colspan="3">загрузка файлов в альбом</td>
+      <td align="center" colspan="3">Р·Р°РіСЂСѓР·РєР° С„Р°Р№Р»РѕРІ РІ Р°Р»СЊР±РѕРј</td>
     </tr>
   </thead>
   <tbody>
@@ -553,19 +592,23 @@ $('input[name=\"config[guestMode]\"]').live('click',function(){
         );
     }
 
-    private function _category() {
+    /**
+     * @return array
+     */
+    private function _category()
+    {
         $edit_id = intval(model_request::getGet('id'));
 
-//init upload
+        //init upload
         $upload = new model_upload ();
-//javascript
+        //javascript
         $inlineJs .= "gallery.ass.selectDecorator($('select'));\r";
         $inlineJs .= "gallery.ass.InitWYSIWYG();\r";
-//setUploadify
+        //setUploadify
         $cover = model_gallery::getRegistry('model_category')->getCover($edit_id);
 
 
-        $inlineJs .= ( $cover ['path'] == '') ? 'gallery.upload.loadImg = "' . $this->_config ['http'] . "uploads/gallery/assets/no-image.png\"\r" : 'gallery.upload.loadImg = "' . substr($this->_config ['http'], 0, -1) . $cover ['path'] . "\"\r";
+        $inlineJs .= ($cover ['path'] == '') ? 'gallery.upload.loadImg = "' . $this->_config ['http'] . "uploads/gallery/assets/no-image.png\"\r" : 'gallery.upload.loadImg = "' . substr($this->_config ['http'], 0, -1) . $cover ['path'] . "\"\r";
         $inlineJs .= "gallery.upload.preloadCover();\r";
         $json = $upload->setPlugin(1, 'categoryCover', 'images', $edit_id);
         $inlineJs .= "gallery.upload.pluginVar={$json};\r";
@@ -590,7 +633,8 @@ $('input[name=\"config[guestMode]\"]').live('click',function(){
      * @param type $action
      * @return type
      */
-    private function _addCategory($action) {
+    private function _addCategory($action)
+    {
         $this->_getDleClass('parse', 'parse');
         $page = null;
         $content = '';
@@ -599,7 +643,7 @@ $('input[name=\"config[guestMode]\"]').live('click',function(){
             model_gallery::getRegistry('model_category')->addCategory();
             if ('add_category' === $action) {
                 $content .= $this->_setInfoSuccess($this->_lang ['info'] ['add_cat_ok']);
-//$page ['add_tender'] = $this->setRowTbl ( $this->_lang ['index_page'] ['add_tender'] ['title'], $this->_lang ['index_page'] ['add_tender'] ['descr'], 'add_tender', '' );
+                //$page ['add_tender'] = $this->setRowTbl ( $this->_lang ['index_page'] ['add_tender'] ['title'], $this->_lang ['index_page'] ['add_tender'] ['descr'], 'add_tender', '' );
                 $page ['add_albom'] = $this->setRowTbl($this->_lang ['index_page'] ['add_alb'] ['title'], $this->_lang ['index_page'] ['add_alb'] ['descr'], 'add_alb', '');
                 $page ['mass_load'] = $this->setRowTbl($this->_lang ['index_page'] ['mass'] ['title'], $this->_lang ['index_page'] ['mass'] ['descr'], 'mass', '');
                 if (GALLERY_MODE === 2) {
@@ -622,10 +666,15 @@ HTML;
         );
     }
 
-    private function _addCatForm($edit_id = 0) {
-//init forms
+    /**
+     * @param int $edit_id
+     * @return string|void
+     */
+    private function _addCatForm($edit_id = 0)
+    {
+        //init forms
         $form = new module_form(require ROOT_DIR . '/DGGallery/app/config/adminForms/addCat.php');
-//start form add_Cat
+        //start form add_Cat
         if ($edit_id)
             $form->setValue = true;
         $form_action = '';
@@ -642,13 +691,21 @@ HTML;
 
         $content = $form->getForm('addcat', 'addcat', false);
         $form_action .= '<input type="hidden" name="mod" value="dg_gallery" />';
-        $form_action .= '<input type="submit" value="применить" class="buttons b-6" />';
-//end form
+        $form_action .= '<input type="submit" value="РїСЂРёРјРµРЅРёС‚СЊ" class="buttons b-6" />';
+        //end form
         $content .= $form->closeForm($form_action);
         return $content;
     }
 
-    private function setRowTbl($title, $descr, $cat = '', $js = '') {
+    /**
+     * @param $title
+     * @param $descr
+     * @param string $cat
+     * @param string $js
+     * @return string
+     */
+    private function setRowTbl($title, $descr, $cat = '', $js = '')
+    {
         $admin = '/admin/index.php?';
         if ($this->_config_cms) {
             $admin = $this->_config_cms ['http_home_url'] . $this->_config_cms ['admin_path'] . '?mod=dg_gallery';
@@ -670,7 +727,11 @@ HTML;
 HTML;
     }
 
-    private function _settingForm() {//init forms
+    /**
+     * @return string|void
+     */
+    private function _settingForm()
+    { //init forms
         $form = new module_form (); //start form setting
         $form->setValue = true;
         $form->setconfig = $this->_config;
@@ -681,17 +742,14 @@ HTML;
         $content .= $form->setPatr('upload', true, false); //upload setting
         $content .= $form->setPatr('fileWork', false, false);
         $content .= $form->setPatr('uploadify', false, true);
-//pay system
-#$content .= $form->setPatr ( 'paysystemSC', true, false );
-#$content .= $form->setPatr ( 'paysystemWM', false, false );
-#$content .= $form->setPatr ( 'paysystemA1A', false, false );
-#$content .= $form->setPatr ( 'paysystemRC', false, true );
-//access content, function
+        //pay system
+        #$content .= $form->setPatr ( 'paysystemSC', true, false );
+        #$content .= $form->setPatr ( 'paysystemWM', false, false );
+        #$content .= $form->setPatr ( 'paysystemA1A', false, false );
+        #$content .= $form->setPatr ( 'paysystemRC', false, true );
+        //access content, function
         $content .= $form->setPatr('contentAccess', true, true);
         $content .= $form->setPatr('viewTools', true, false); //output setting
-
-
-
 
 
         $content .= $form->setPatr('pagination', false, true);
@@ -703,31 +761,51 @@ HTML;
         $content .= $form->setPatr('debug', true, true);
         $form_action = '<input type="hidden" name="mod" value="dg_gallery" />';
         $form_action .= '<input type="hidden" name="action" value="save_setting" />';
-        $form_action .= '<input type="submit" value="применить" class="buttons b-6" />';
+        $form_action .= '<input type="submit" value="РїСЂРёРјРµРЅРёС‚СЊ" class="buttons b-6" />';
         //end form setting
         $content .= $form->closeForm($form_action);
         return $content;
     }
 
-    private function _setErrorInfo($msg) {
+    /**
+     * @param $msg
+     * @return string
+     */
+    private function _setErrorInfo($msg)
+    {
         return '<div class="error b-4"><p>' . $msg . '</p><a class="close" href="javascript:">close</a></div>';
     }
 
-    private function _setInfoSuccess($msg) {
+    /**
+     * @param $msg
+     * @return string
+     */
+    private function _setInfoSuccess($msg)
+    {
         return '<div class="success b-4"><p>' . $msg . '</p><a class="close" href="javascript:">close</a></div>';
     }
 
-    private function _setWarning($msg) {
+    /**
+     * @param $msg
+     * @return string
+     */
+    private function _setWarning($msg)
+    {
         return '<div class="warning b-4 ">
 <p>' . $msg . '</p>
 <a class="close" href="javascript:">close</a>
 </div>';
     }
 
-    private function _addAlbumForm($edit_id = null) {
-//init forms
+    /**
+     * @param null $edit_id
+     * @return string|void
+     */
+    private function _addAlbumForm($edit_id = null)
+    {
+        //init forms
         $form = new module_form(require ROOT_DIR . '/DGGallery/app/config/adminForms/addAlbum.php');
-//start form add_Cat
+        //start form add_Cat
         $form->setValue = true;
         $form_action = '';
         if (null === $edit_id) {
@@ -744,8 +822,8 @@ HTML;
         $content .= $form->setPatr('contentAccess', true, true);
 
         $form_action .= '<input type="hidden" name="mod" value="dg_gallery" />';
-        $form_action .= '<input type="submit" value="применить" class="buttons b-6" />';
-//end form
+        $form_action .= '<input type="submit" value="РїСЂРёРјРµРЅРёС‚СЊ" class="buttons b-6" />';
+        //end form
         $content .= $form->closeForm($form_action);
         return $content;
     }

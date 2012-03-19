@@ -1,12 +1,12 @@
 <?php
-
 /**
- * Класс: view_comments
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class view_comments extends view_template {
 
     /**
@@ -21,6 +21,9 @@ class view_comments extends view_template {
      */
     protected $_db;
 
+    /**
+     *
+     */
     public function __construct() {
         parent::__construct();
         if (class_exists('assistant')) {// adminpanel
@@ -33,6 +36,12 @@ class view_comments extends view_template {
         $this->_db = model_gallery::getRegistry('module_db');
     }
 
+    /**
+     * @param array $param
+     * @param array $row
+     * @param $id
+     * @return mixed
+     */
     public function renderComments(array $param, array $row, $id) {
 
         global $lang, $user_group, $is_logged;
@@ -176,13 +185,12 @@ class view_comments extends view_template {
         global $user_group;
         if ($is_reg)
             return ((true === $this->_isLogged ) && (($this->_user['name'] == $row['name']) && (1 == $row['is_register'])
-                    || (1 == $user_group[$this->_user['user_group']]['allow_editc'])) ||
-                    (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group'])) ? true : false;
+                || (1 == $user_group[$this->_user['user_group']]['allow_editc'])) ||
+                (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group'])) ? true : false;
         else
             return
-                    (((true === $this->_isLogged ) && (1 == $user_group[$this->_user['user_group']]['allow_editc']))
+                (((true === $this->_isLogged ) && (1 == $user_group[$this->_user['user_group']]['allow_editc']))
                     || (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group'])) ? true : false;
     }
 
 }
-

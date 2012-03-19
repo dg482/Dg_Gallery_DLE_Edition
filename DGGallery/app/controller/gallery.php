@@ -1,26 +1,27 @@
 <?php
-
 /**
- * Основной контроллер скрипта, вывод категорий, альбомов, файлов, полный просмотр отдельного файла.
- * Параметры вывода определяются до начала маршрутизации запроса  в index.php.
- * <pre>
- * $INDEXMODE - параметры главной страницы может принимать три значения.
- * * 1. category [default] - выводятся категории, альбомы, файлы.
- * * 2. albuom - выводится список альбомов. (проверка доступа альбом, категория)
- * * 3. files - выводятся файлы. (без проверок доступа)
- * $SHOWMODE - параметры просмотра альбомов, може принимать два значения
- * * 1.albom [default] - выводятся альбомы.
- * * 2.files - выводятся файлы.
- * </pre>
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
- *
+ * @since 1.5.6 (19.03.12)
  */
-class controller_gallery {
+
+
+/**
+ * РћСЃРЅРѕРІРЅРѕР№ РєРѕРЅС‚СЂРѕР»Р»РµСЂ СЃРєСЂРёРїС‚Р°, РІС‹РІРѕРґ РєР°С‚РµРіРѕСЂРёР№, Р°Р»СЊР±РѕРјРѕРІ, С„Р°Р№Р»РѕРІ, РїРѕР»РЅС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ РѕС‚РґРµР»СЊРЅРѕРіРѕ С„Р°Р№Р»Р°.
+ * РџР°СЂР°РјРµС‚СЂС‹ РІС‹РІРѕРґР° РѕРїСЂРµРґРµР»СЏСЋС‚СЃСЏ РґРѕ РЅР°С‡Р°Р»Р° РјР°СЂС€СЂСѓС‚РёР·Р°С†РёРё Р·Р°РїСЂРѕСЃР°  РІ index.php.
+ * <pre>
+ * $INDEXMODE - РїР°СЂР°РјРµС‚СЂС‹ РіР»Р°РІРЅРѕР№ СЃС‚СЂР°РЅРёС†С‹ РјРѕР¶РµС‚ РїСЂРёРЅРёРјР°С‚СЊ С‚СЂРё Р·РЅР°С‡РµРЅРёСЏ.
+ * 1. category [default] - РІС‹РІРѕРґСЏС‚СЃСЏ РєР°С‚РµРіРѕСЂРёРё, Р°Р»СЊР±РѕРјС‹, С„Р°Р№Р»С‹.
+ * 2. albuom - РІС‹РІРѕРґРёС‚СЃСЏ СЃРїРёСЃРѕРє Р°Р»СЊР±РѕРјРѕРІ. (РїСЂРѕРІРµСЂРєР° РґРѕСЃС‚СѓРїР° Р°Р»СЊР±РѕРј, РєР°С‚РµРіРѕСЂРёСЏ)
+ * 3. files - РІС‹РІРѕРґСЏС‚СЃСЏ С„Р°Р№Р»С‹. (Р±РµР· РїСЂРѕРІРµСЂРѕРє РґРѕСЃС‚СѓРїР°)
+ * $SHOWMODE - РїР°СЂР°РјРµС‚СЂС‹ РїСЂРѕСЃРјРѕС‚СЂР° Р°Р»СЊР±РѕРјРѕРІ, РјРѕР¶Рµ РїСЂРёРЅРёРјР°С‚СЊ РґРІР° Р·РЅР°С‡РµРЅРёСЏ
+ * 1.albom [default] - РІС‹РІРѕРґСЏС‚СЃСЏ Р°Р»СЊР±РѕРјС‹.
+ * 2.files - РІС‹РІРѕРґСЏС‚СЃСЏ С„Р°Р№Р»С‹.
+ * </pre>
+ */
+class controller_gallery
+{
 
     /**
      *
@@ -82,7 +83,8 @@ class controller_gallery {
      */
     public static $CATEGORY;
 
-    public function __construct($site = true) {
+    public function __construct($site = true)
+    {
         $config = null;
         include ROOT_DIR . '/engine/data/config.php';
         $this->_config_cms = $config;
@@ -130,10 +132,10 @@ class controller_gallery {
     }
 
     /**
-     *
-     * @return  event
+     * @return string
      */
-    public function sortAction() {
+    public function sortAction()
+    {
         $param = model_gallery::getRegistry('route')->getParam();
         $order = current($param);
         $allow = array('ORDER_COMMENTS', 'ORDER_DATE', 'ORDER_RATING', 'ORDER_DOWNLOAD');
@@ -152,15 +154,12 @@ class controller_gallery {
 
     /**
      * http://site.ru/gallery/
-     * В зависимости от значения переменной self::$INDEXMODE будут выведены категоии, альбомы или файлы.
-     *
-     * Перехват исключений:
-     * 1 - массив категорий пуст
-     * 2 - неопределено или неподдерживаемое значение self::$INDEXMODE
+     * Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ Р·РЅР°С‡РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅРѕР№ self::$INDEXMODE Р±СѓРґСѓС‚ РІС‹РІРµРґРµРЅС‹ РєР°С‚РµРіРѕРёРё, Р°Р»СЊР±РѕРјС‹ РёР»Рё С„Р°Р№Р»С‹.
      *
      * @return string
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $content = '';
         $lang = null;
         $model = model_gallery::getClass('model_gallery');
@@ -210,13 +209,13 @@ class controller_gallery {
                     default :
                         break;
                 }
-                $counter = (int) $result ['count'];
+                $counter = (int)$result ['count'];
                 if ($counter > $this->_config ['indexPage']) {
-                    $this->_tpl->set('{pagination}', $model->_nav((int) $counter, array(
-                                'global_query_end' => $this->_config ['indexPage'],
-                                'nav_prefix' => $navPrefix)
-                                    //'nav_suffix' => '.html'
-                                    , clone $this->_tpl));
+                    $this->_tpl->set('{pagination}', $model->_nav((int)$counter, array(
+                            'global_query_end' => $this->_config ['indexPage'],
+                            'nav_prefix' => $navPrefix)
+                        //'nav_suffix' => '.html'
+                        , clone $this->_tpl));
                 } else {
                     $this->_tpl->set('{pagination}', '');
                 }
@@ -240,17 +239,12 @@ class controller_gallery {
 
     /**
      * http://site.ru/gallery/show/[ID_CATEGORY]-[META_TITLE_ALBOM]
-     * В зависимости от значения переменной self::self::$SHOWMODE бедут выведенв альбомы или файлы.
-     *
-     * Перехват исключений по следующим событиям:
-     * 1 - пустой массив результатов
-     * 2 - у группы пользователя нет доступа к категории
-     * 3 - неопределено или неподдерживаемое значение self::$SHOWMODE
-     *
+     * Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ Р·РЅР°С‡РµРЅРёСЏ РїРµСЂРµРјРµРЅРЅРѕР№ self::self::$SHOWMODE Р±РµРґСѓС‚ РІС‹РІРµРґРµРЅРІ Р°Р»СЊР±РѕРјС‹ РёР»Рё С„Р°Р№Р»С‹.
      * @global type $metatags
      * @return type
      */
-    public function showAction() {
+    public function showAction()
+    {
         $this->_setOrder(HOME_URL . model_gallery::getRegistry('route')->getServerURI() . '/');
         $id = model_request::getRequest('id');
         $content = '';
@@ -268,7 +262,7 @@ class controller_gallery {
         }
         if (GALLERY_MODE === 1) {
             $count = $alb->count($id);
-            $count = (int) $count ['count'];
+            $count = (int)$count ['count'];
         } elseif (GALLERY_MODE === 2)
             $count = 1;
 
@@ -291,10 +285,10 @@ class controller_gallery {
                             }
 
                             if ($count > $this->_config ['catPage']) {
-                                $this->_tpl->set('{pagination}', $model->_nav((int) $count, array(
-                                            'global_query_end' => $this->_config ['catPage'],
-                                            'nav_prefix' => 'gallery/show/' . self::$CATEGORY ['id'] . '-' . self::$CATEGORY ['meta_title']), //'nav_suffix' => '.html'
-                                                clone $this->_tpl));
+                                $this->_tpl->set('{pagination}', $model->_nav((int)$count, array(
+                                        'global_query_end' => $this->_config ['catPage'],
+                                        'nav_prefix' => 'gallery/show/' . self::$CATEGORY ['id'] . '-' . self::$CATEGORY ['meta_title']), //'nav_suffix' => '.html'
+                                    clone $this->_tpl));
                             } else {
                                 $this->_tpl->set('{pagination}', '');
                             }
@@ -312,12 +306,12 @@ class controller_gallery {
                         if (false === model_gallery::getClass('model_category')->getAccessCat($id)) {
                             throw new controller_exception($this->_lang ['exception'] ['access_denied']);
                         }
-                        if (GALLERY_MODE == 1) {//albom
+                        if (GALLERY_MODE == 1) { //albom
                             $result = model_gallery::getClass('model_file')->getPage($this->_config ['catPage']);
-                        } elseif (GALLERY_MODE == 2) {//only file
+                        } elseif (GALLERY_MODE == 2) { //only file
                             $result = model_gallery::getClass('model_file')->getPage($this->_config ['catPage'], array(
                                 'parent_id' => "parent_id='" . self::$CATEGORY ['id'] . "'"
-                                    ));
+                            ));
                         }
 
                         if (null === $result ['file']) {
@@ -327,12 +321,12 @@ class controller_gallery {
                         $content = model_gallery::getClass('view_cover')->renderFile($result);
 
                         $this->_setSpeedbar(array('cat' => stripslashes(self::$CATEGORY ['title'])));
-                        $counter = (int) $result ['count'];
+                        $counter = (int)$result ['count'];
                         if ($counter > $this->_config ['indexPage']) {
-                            $this->_tpl->set('{pagination}', $model->_nav((int) $counter, array(
-                                        'global_query_end' => $this->_config ['indexPage'],
-                                        'nav_prefix' => 'gallery/show/' . self::$CATEGORY ['id'] . '-' . self::$CATEGORY ['meta_title']
-                                            ), clone $this->_tpl));
+                            $this->_tpl->set('{pagination}', $model->_nav((int)$counter, array(
+                                'global_query_end' => $this->_config ['indexPage'],
+                                'nav_prefix' => 'gallery/show/' . self::$CATEGORY ['id'] . '-' . self::$CATEGORY ['meta_title']
+                            ), clone $this->_tpl));
                         } else {
                             $this->_tpl->set('{pagination}', '');
                         }
@@ -358,11 +352,12 @@ class controller_gallery {
     }
 
     /**
-     * Просмотр альбома, результат зависит от статичной переменной model_albom::$MODE определяющей текущий режим вывода по умолчанию.
-     * Дополнительные методы будут вызываться в зависимости от наличия в шаблонах тегов {json},[file-list] и т.д.
+     * РџСЂРѕСЃРјРѕС‚СЂ Р°Р»СЊР±РѕРјР°, СЂРµР·СѓР»СЊС‚Р°С‚ Р·Р°РІРёСЃРёС‚ РѕС‚ СЃС‚Р°С‚РёС‡РЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ model_albom::$MODE РѕРїСЂРµРґРµР»СЏСЋС‰РµР№ С‚РµРєСѓС‰РёР№ СЂРµР¶РёРј РІС‹РІРѕРґР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
+     * Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РјРµС‚РѕРґС‹ Р±СѓРґСѓС‚ РІС‹Р·С‹РІР°С‚СЊСЃСЏ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅР°Р»РёС‡РёСЏ РІ С€Р°Р±Р»РѕРЅР°С… С‚РµРіРѕРІ {json},[file-list] Рё С‚.Рґ.
      * @return mixed|string
      */
-    public function albomAction() {
+    public function albomAction()
+    {
         $this->_setOrder(HOME_URL . model_gallery::getRegistry('route')->getServerURI() . '/');
         model_gallery::setRegistry('view_action', 'albom');
         $content = '';
@@ -387,7 +382,7 @@ class controller_gallery {
             }
             if (null === $result) {
                 $this->_tpl->set('{pagination}', '');
-                throw new controller_exception('ошибка, скрипт вернул пустой набор параметров.');
+                throw new controller_exception('РѕС€РёР±РєР°, СЃРєСЂРёРїС‚ РІРµСЂРЅСѓР» РїСѓСЃС‚РѕР№ РЅР°Р±РѕСЂ РїР°СЂР°РјРµС‚СЂРѕРІ.');
                 $this->_setSpeedbar(array('err' => 'error'));
             } else {
                 switch (model_albom::$MODE) {
@@ -408,9 +403,9 @@ class controller_gallery {
                     'cat' => '<a href="' . HOME_URL . 'gallery/show/' . self::$CATEGORY ['id'] . '-' . stripslashes(self::$CATEGORY ['meta_title']) . '">' . stripslashes(self::$CATEGORY ['title']) . '</a>',
                     'alb' => $result ['info'] ['title']
                 ));
-//                if (null === model_request::getRequest('id_file')) {
-//                    $this->_setMetaTag(array('meta_title' => $_albomInfo ['meta_data'] ['meta_title'], 'meta_descr' => $_albomInfo ['meta_data'] ['meta_descr'], 'meta_keywords' => $_albomInfo ['meta_data'] ['meta_keywords']));
-//                }
+                //                if (null === model_request::getRequest('id_file')) {
+                //                    $this->_setMetaTag(array('meta_title' => $_albomInfo ['meta_data'] ['meta_title'], 'meta_descr' => $_albomInfo ['meta_data'] ['meta_descr'], 'meta_keywords' => $_albomInfo ['meta_data'] ['meta_keywords']));
+                //                }
             }
         } catch (controller_exception $exc) {
             $this->_tpl->set('{pagination}', '');
@@ -422,10 +417,11 @@ class controller_gallery {
     }
 
     /**
-     * Просмотр превью, слаидера, информации о авторе, комментариеи.
+     * РџСЂРѕСЃРјРѕС‚СЂ РїСЂРµРІСЊСЋ, СЃР»Р°РёРґРµСЂР°, РёРЅС„РѕСЂРјР°С†РёРё Рѕ Р°РІС‚РѕСЂРµ, РєРѕРјРјРµРЅС‚Р°СЂРёРµРё.
      * @return string
      */
-    public function fullAction() {
+    public function fullAction()
+    {
         $content = '';
         model_gallery::setRegistry('view_action', 'full');
         $result = model_gallery::getClass('model_albom')->openAlbomSite();
@@ -451,7 +447,8 @@ class controller_gallery {
      * @param string $uri
      * @return void
      */
-    protected function _setOrder($uri) {
+    protected function _setOrder($uri)
+    {
         $param = model_gallery::getRegistry('route')->getServerURI();
         $order = end(explode('/', $param));
         $allow = array(
@@ -479,7 +476,8 @@ class controller_gallery {
      *
      * @return type
      */
-    public function searchAction() {
+    public function searchAction()
+    {
         model_gallery::setRegistry('view_action', 'search');
         $param = model_gallery::getRegistry('route')->getParam();
         $this->_setOrder(HOME_URL . model_gallery::getRegistry('route')->getServerURI() . '/');
@@ -520,7 +518,7 @@ class controller_gallery {
                             $mId = model_gallery::getClass('model_search')->get(array(
                                 'search' => $query,
                                 'where' => $param [0]
-                                    ), $this->_config ['searchPage']);
+                            ), $this->_config ['searchPage']);
                             if ($mId) {
                                 $this->_db = model_gallery::getRegistry('module_db');
                                 while ($row = $this->_db->get_row($mId)) {
@@ -556,10 +554,10 @@ class controller_gallery {
                         if ($count ['count'] > $this->_config ['searchPage']) {
                             $query = str_replace("\\", '', $query);
                             $this->_tpl->set('{pagination}', model_gallery::getClass('model_gallery')->_nav((int)
-                                            $count ['count'], array(
-                                        'global_query_end' => $this->_config ['searchPage'],
-                                        'nav_prefix' => 'gallery/search/' . $param [0] . '/' . urlencode($query)), ////'nav_suffix' => '.html'
-                                            clone $this->_tpl));
+                                $count ['count'], array(
+                                    'global_query_end' => $this->_config ['searchPage'],
+                                    'nav_prefix' => 'gallery/search/' . $param [0] . '/' . urlencode($query)), ////'nav_suffix' => '.html'
+                                clone $this->_tpl));
                         } else {
                             $this->_tpl->set('{pagination}', '');
                         }
@@ -582,14 +580,15 @@ class controller_gallery {
     }
 
     /**
-     * Вспомогательный метод.
-     * Вывод списка файлов.
+     * Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РјРµС‚РѕРґ.
+     * Р’С‹РІРѕРґ СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ.
      *
      * @param array $result
      * @return string
      * @deprecated
      */
-    private function _showFile($result) {
+    private function _showFile($result)
+    {
         return 'depricated';
     }
 
@@ -601,29 +600,32 @@ class controller_gallery {
      * @return string
      * @deprecated
      */
-    private function _setAlbom($result, dle_template $tpl, view_template $view) {
+    private function _setAlbom($result, dle_template $tpl, view_template $view)
+    {
         return 'depricated';
     }
 
     /**
-     * Просмотр альбома, слайдер, инфо, комм. и т.д.
+     * РџСЂРѕСЃРјРѕС‚СЂ Р°Р»СЊР±РѕРјР°, СЃР»Р°Р№РґРµСЂ, РёРЅС„Рѕ, РєРѕРјРј. Рё С‚.Рґ.
      * @param string $tplName
      * @param array $result
      * @return string
      * @deprecated
      */
-    private function _showPreview(array $result, $tplName = 'show_preview.tpl') {
+    private function _showPreview(array $result, $tplName = 'show_preview.tpl')
+    {
         return 'depricated';
     }
 
     /**
-     * Просмотр альбома, пердпроасмотр, пагинация, запрошенное изображение первое.
+     * РџСЂРѕСЃРјРѕС‚СЂ Р°Р»СЊР±РѕРјР°, РїРµСЂРґРїСЂРѕР°СЃРјРѕС‚СЂ, РїР°РіРёРЅР°С†РёСЏ, Р·Р°РїСЂРѕС€РµРЅРЅРѕРµ РёР·РѕР±СЂР°Р¶РµРЅРёРµ РїРµСЂРІРѕРµ.
      *
-     * Ссылка ведет на fullAction()
+     * РЎСЃС‹Р»РєР° РІРµРґРµС‚ РЅР° fullAction()
      * @param array $result
      * @return string
      */
-    private function _showTile(array $result) {
+    private function _showTile(array $result)
+    {
         $content = '';
         $view = model_gallery::getClass('view_template');
         $view->setView('tile.tpl');
@@ -638,15 +640,15 @@ class controller_gallery {
             }
             foreach ($result ['file'] as $file) {
                 $tpl->set('{meta_name}', $file ["title"]);
-                $tpl->set('{meta_keyword}', ($file ["other_dat"] ["tag"]) ? stripcslashes($file ["other_dat"] ["tag"]) : '' );
+                $tpl->set('{meta_keyword}', ($file ["other_dat"] ["tag"]) ? stripcslashes($file ["other_dat"] ["tag"]) : '');
                 $tpl->set('{cover}', model_file::getThumb($file ['path']));
                 #$tpl->set('{css_active}', ($file['id'] == $_current_file_id) ? ' class="active"' : '');
                 $tpl->set('[link]', '<a href="' . HOME_URL . 'gallery/full/' . $_albomInfo ['id'] . '-' . $_albomInfo ['meta_data'] ['meta_title'] . '.' . $file ['id'] . '">');
                 $tpl->set('[/link]', '</a>');
                 $content = $view->compile('tile');
             }
-            $this->_tpl->set('{pagination}', model_gallery::getClass('model_gallery')->_nav((int) $result ['count'], array('global_query_end' => $this->_config ['albomPage'], 'nav_prefix' => 'gallery/albom/' . $_albomInfo ['id'] . '-' . $_albomInfo ['meta_data'] ['meta_title']), //'nav_suffix' => '.html'
-                            clone $this->_tpl));
+            $this->_tpl->set('{pagination}', model_gallery::getClass('model_gallery')->_nav((int)$result ['count'], array('global_query_end' => $this->_config ['albomPage'], 'nav_prefix' => 'gallery/albom/' . $_albomInfo ['id'] . '-' . $_albomInfo ['meta_data'] ['meta_title']), //'nav_suffix' => '.html'
+                clone $this->_tpl));
         } catch (controller_exception $exc) {
             $content = $exc->set404();
         }
@@ -654,10 +656,12 @@ class controller_gallery {
     }
 
     /**
-     * Метод возвращает адрес при использование сжатия скриптов
-     * @return sting
+     * РњРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ Р°РґСЂРµСЃ РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃР¶Р°С‚РёСЏ СЃРєСЂРёРїС‚РѕРІ
+     * @param string $name
+     * @return bool
      */
-    protected function _setJsMin($name = 'jssite') {
+    protected function _setJsMin($name = 'jssite')
+    {
         if (!$this->_config ['minJs'] || $this->_config ['minJs'] == '') {
             return false;
         }
@@ -668,13 +672,14 @@ class controller_gallery {
     }
 
     /**
-     * Получение классов DLE, метод не востребован но несколько раз применяется.
+     * РџРѕР»СѓС‡РµРЅРёРµ РєР»Р°СЃСЃРѕРІ DLE, РјРµС‚РѕРґ РЅРµ РІРѕСЃС‚СЂРµР±РѕРІР°РЅ РЅРѕ РЅРµСЃРєРѕР»СЊРєРѕ СЂР°Р· РїСЂРёРјРµРЅСЏРµС‚СЃСЏ.
      * @param string $name
      * @param string $className
      * @return className obj
      * @deprecated
      */
-    protected function _getDleClass($name, $className) {
+    protected function _getDleClass($name, $className)
+    {
         $class = null;
         if ($name == 'parse') {
             $className = 'ParseFilter';
@@ -686,12 +691,13 @@ class controller_gallery {
     }
 
     /**
-     * Установка значений глобальной переменной используемой для вывода заголовка, описания, ключевых слов.
+     * РЈСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёР№ РіР»РѕР±Р°Р»СЊРЅРѕР№ РїРµСЂРµРјРµРЅРЅРѕР№ РёСЃРїРѕР»СЊР·СѓРµРјРѕР№ РґР»СЏ РІС‹РІРѕРґР° Р·Р°РіРѕР»РѕРІРєР°, РѕРїРёСЃР°РЅРёСЏ, РєР»СЋС‡РµРІС‹С… СЃР»РѕРІ.
      * @global array $metatags
      * @param array $meta
      * @return void
      */
-    protected function _setMetaTag($meta) {
+    protected function _setMetaTag($meta)
+    {
         global $metatags;
         $metatags ['title'] = $meta ['meta_title'];
         $metatags ['description'] = $meta ['meta_descr'];
@@ -699,12 +705,13 @@ class controller_gallery {
     }
 
     /**
-     * Вывод контекстной навигации, упрощенная реализация.
+     * Р’С‹РІРѕРґ РєРѕРЅС‚РµРєСЃС‚РЅРѕР№ РЅР°РІРёРіР°С†РёРё, СѓРїСЂРѕС‰РµРЅРЅР°СЏ СЂРµР°Р»РёР·Р°С†РёСЏ.
      *
      * @param array $data
      * @return string
      */
-    protected function _setSpeedbar(array $data) {
+    protected function _setSpeedbar(array $data)
+    {
         global $_s_navigation;
         if (stripos($this->_tpl->copy_template, '{speedbar}') === false) {
             return;

@@ -1,13 +1,13 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.2 (06.2011)
+ * @since 1.5.6 (19.03.12)
  */
-class model_upload {
+
+class model_upload
+{
 
     /**
      * @var string
@@ -102,9 +102,10 @@ class model_upload {
     private $_status;
 
     /**
-     * @return void
+     *
      */
-    public function __construct() {
+    public function __construct()
+    {
         if (!defined('ROOT_DIR')) {
             define('ROOT_DIR', $_SERVER ["DOCUMENT_ROOT"]);
         }
@@ -136,7 +137,8 @@ class model_upload {
      * @param int $parent_id
      * @return json
      */
-    public function setPlugin($maxFile = null, $key = '', $fileType = 'images', $parent_id = 0) {
+    public function setPlugin($maxFile = null, $key = '', $fileType = 'images', $parent_id = 0)
+    {
         if ($this->_count) {
             $count = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ');
             if ($this->_count <= $count['count']) {
@@ -174,12 +176,11 @@ class model_upload {
     }
 
     /**
-     * model_upload::_setFileType()
-     *
-     * @param mixed $dat
-     * @return
+     * @param $dat
+     * @return string
      */
-    private function _setFileType($dat) {
+    private function _setFileType($dat)
+    {
         $ext_arr = null;
         $allowed_ext = '';
         if (is_string($dat)) {
@@ -201,7 +202,8 @@ class model_upload {
      *
      * @return void
      */
-    public function MoveFile() {
+    public function MoveFile()
+    {
         if ($this->_count) {
             $count = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ');
             if ($this->_count <= $count['count']) {
@@ -256,9 +258,9 @@ class model_upload {
                         if ($this->_config ['rainbow']) {
                             require_once ROOT_DIR . '/DGGallery/app/model/images/ExtractColors.php';
                             $this->_inserValue ['info'] ['colors'] [] =
-                                    $img->extractColors($this->_fileComplete, $this->_config ['rainbowColorNum']);
+                                $img->extractColors($this->_fileComplete, $this->_config ['rainbowColorNum']);
                         }
-                        if ($this->_config['FileHash']) {//uin
+                        if ($this->_config['FileHash']) { //uin
                             $this->_inserValue['info']['md5_hash'] = md5_file($this->_fileComplete);
                         } else {
                             $this->_inserValue['uid'] = '';
@@ -346,7 +348,8 @@ class model_upload {
      * @param array $data
      * @return void
      */
-    public function youTubeImages($name, $data) {
+    public function youTubeImages($name, $data)
+    {
         $thumb = $this->_dir . $name . '.jpg';
         $other = array();
         $inserValue = array();
@@ -371,9 +374,9 @@ class model_upload {
             $parse = new ParseFilter(array(), array(), 1, 1);
             $this->_inserValue['descr'] = $parse->process($this->_inserValue['descr']);
             $this->_inserValue['descr'] = str_replace(array('\r', '\n'), array('', '<br />'), $this->_inserValue['descr']);
-            $other['viewCount'] = (int) $data['viewCount'];
-            $other['length'] = (int) $data['length'];
-            $other['rating'] = (int) $data['rating'];
+            $other['viewCount'] = (int)$data['viewCount'];
+            $other['length'] = (int)$data['length'];
+            $other['rating'] = (int)$data['rating'];
             $other['name'] = $name; //lost
             $inserValue['path'] = '/uploads/gallery/' . FOLDER_PREFIX . '%replace%/' . $name . '.jpg';
             $dat ['date'] = date('Y-m-d H:i:s');
@@ -399,7 +402,13 @@ class model_upload {
         }
     }
 
-    public function videoServiceFile($name, $url) {
+    /**
+     * @param $name
+     * @param $url
+     * @return string
+     */
+    public function videoServiceFile($name, $url)
+    {
         if ($this->_count) {
             $count = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ');
             if ($count['count'] >= $this->_count) {
@@ -536,9 +545,6 @@ class model_upload {
 
                     $this->_insertDb('vimeo', $id);
                 }
-
-
-
                 break;
             default:
                 break;
@@ -550,16 +556,17 @@ class model_upload {
      * @param type $mode
      * @return Default_Model_Images_Gd
      */
-    private function _getHandler($mode) {
+    private function _getHandler($mode)
+    {
 
         require_once ROOT_DIR . '/DGGallery/app/model/images/Gd.php';
         return new Default_Model_Images_Gd($this->_fileComplete);
-//        if ($mode == 0) {
-//
-//        } elseif ($mode == 1) {
-//            require_once ROOT_DIR . '/DGGallery/app/model/images/Imagick.php';
-//            return new Default_Model_Images_Imagick($this->_fileComplete);
-//        }
+        //        if ($mode == 0) {
+        //
+        //        } elseif ($mode == 1) {
+        //            require_once ROOT_DIR . '/DGGallery/app/model/images/Imagick.php';
+        //            return new Default_Model_Images_Imagick($this->_fileComplete);
+        //        }
     }
 
     /**
@@ -568,7 +575,8 @@ class model_upload {
      * @param int $parent_id
      * @return viod
      */
-    private function _insertDb($type, $parent_id = 0) {
+    private function _insertDb($type, $parent_id = 0)
+    {
         $dat = array();
         $dat ['date'] = date('Y-m-d H:i:s');
         $position = 0;
@@ -584,7 +592,7 @@ class model_upload {
                 $position = ($count['count']) ? $count['count'] + 1 : 1;
                 $this->_db->query('INSERT INTO ' . PREFIX . "_dg_gallery_file (parent_id,author,title,descr, path, other_dat, date,position, status ) VALUES
 		('{$parent_id}','{$this->_user['name']}','{$this->_inserValue['title']}','{$this->_inserValue['descr']}','{$this->_inserValue['path']}','" .
-                        $this->_inserValue['other_dat'] . "','{$dat['date']}','{$position}','{$dat['status']}' )");
+                    $this->_inserValue['other_dat'] . "','{$dat['date']}','{$position}','{$dat['status']}' )");
                 $this->_lastInsertId = $this->_db->insert_id();
                 $this->_db->query('UPDATE ' . PREFIX . "_dg_gallery_albom SET images=images+1 WHERE id='{$parent_id}' LIMIT 1");
 
@@ -623,30 +631,29 @@ class model_upload {
         }
         $this->_db->query('INSERT INTO ' . PREFIX . "_dg_gallery_file (parent_id,author,author_id,descr, path, other_dat, date,position, status,hash,original ) VALUES
 		('{$parent_id}','{$this->_user['name']}','{$this->_user['user_id']}','','{$this->_inserValue['path']}','" .
-                serialize($this->_inserValue) . "','{$dat['date']}','{$position}','{$dat['status']}','{$this->_inserValue['uid']}','{$this->_inserValue['original']}')");
+            serialize($this->_inserValue) . "','{$dat['date']}','{$position}','{$dat['status']}','{$this->_inserValue['uid']}','{$this->_inserValue['original']}')");
         $this->_lastInsertId = $this->_db->insert_id();
 
         if ($this->_config['countFile']) {
             $this->_db->query('UPDATE ' . PREFIX . "_dg_gallery_user SET files=files+1 WHERE user_id='{$this->_user['user_id']}' LIMIT 1");
         }
 
-//        if (isset($this->_inserValue ['info'] ['colors'][0]) && is_array($this->_inserValue ['info'] ['colors'][0])) {
-//            $color = array();
-//            $_color = array_keys($this->_inserValue ['info'] ['colors'][0]);
-//            foreach ($_color as $k) {
-//                $color[] = "('{$this->_lastInsertId}','" . $k . "')";
-//            }
-//            $this->_db->query('INSERT INTO ' . PREFIX . "_dg_gallery_color (parent_id,rgba) VALUES " . implode(',', $color));
-//        }
+        //        if (isset($this->_inserValue ['info'] ['colors'][0]) && is_array($this->_inserValue ['info'] ['colors'][0])) {
+        //            $color = array();
+        //            $_color = array_keys($this->_inserValue ['info'] ['colors'][0]);
+        //            foreach ($_color as $k) {
+        //                $color[] = "('{$this->_lastInsertId}','" . $k . "')";
+        //            }
+        //            $this->_db->query('INSERT INTO ' . PREFIX . "_dg_gallery_color (parent_id,rgba) VALUES " . implode(',', $color));
+        //        }
     }
 
     /**
-     * model_upload::_deleteOld()
-     *
-     * @param mixed $status
-     * @return void
+     * @param $status
+     * @param int $id
      */
-    private function _deleteOld($status, $id = 0) {
+    private function _deleteOld($status, $id = 0)
+    {
         $row = $this->_db->super_query('SELECT id,path FROM ' . PREFIX . "_dg_gallery_file  WHERE parent_id='{$id}' AND status='{$status}' LIMIT 1");
         if ($row ['id']) {
             @unlink(ROOT_DIR . DIRECTORY_SEPARATOR . $row ['path']);
@@ -660,10 +667,11 @@ class model_upload {
      * @param mixed $check_dir
      * @return void
      */
-    protected function _checkDir($check_dir) {
+    protected function _checkDir($check_dir)
+    {
         if (!is_dir($check_dir)) {
             @mkdir($check_dir, 0777);
-            @chmod(0777);
+            @chmod($check_dir,0777);
         }
         $subDir = array('original', 'cover', 'thumbs');
         foreach ($subDir as $value) {
@@ -680,7 +688,8 @@ class model_upload {
      * @param mixed $path
      * @return string
      */
-    protected function _getFileExt($path) {
+    protected function _getFileExt($path)
+    {
         return strtolower(end(explode('.', end(explode('/', $path)))));
     }
 
@@ -690,12 +699,13 @@ class model_upload {
      * @param string $str
      * @return string
      */
-    protected function _fixNameFile($str) {
-        $pattern = '/[à-ÿÀ-ß]+/';
+    protected function _fixNameFile($str)
+    {
+        $pattern = '/[Ð°-ÑÐ-Ð¯]+/';
         $s = null;
         preg_match($pattern, $str, $s);
         if ($s) {
-            //FIX: òðàíñëèòåðàöèÿ èìåíè ôàéëà ñ ðóññêèì íàçâàíèåì
+            //FIX: Ñ‚Ñ€Ð°Ð½ÑÐ»Ð¸Ñ‚ÐµÑ€Ð°Ñ†Ð¸Ñ Ð¸Ð¼ÐµÐ½Ð¸ Ñ„Ð°Ð¹Ð»Ð° Ñ Ñ€ÑƒÑÑÐºÐ¸Ð¼ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸ÐµÐ¼
             return totranslit(iconv("UTF-8", 'windows-1251', $str));
         } else {
             return $str;
@@ -707,12 +717,13 @@ class model_upload {
      *
      * @return viod
      */
-    protected function _ffmpegExpotrFrame() {
+    protected function _ffmpegExpotrFrame()
+    {
         if (!extension_loaded('ffmpeg'))
             return;
         $frames = 5; //($this->_config ['FrameCount'] and $this->_config ['FrameCount'] <= 10) ? $this->_config ['FrameCount'] :
         //$frames += 1;
-        $this->movie = new ffmpeg_movie($this->_fileComplete);
+        $this->movie = new ffmpeg_movie($this->_fileComplete, false);
         $count = $this->movie->getFrameCount();
         $frame = ceil($count / $frames);
 
@@ -749,7 +760,8 @@ class model_upload {
      *
      * @return void
      */
-    protected function _unZip() {
+    protected function _unZip()
+    {
         if (function_exists('set_time_limit'))
             @set_time_limit(600); //5 min
         if (file_exists(ROOT_DIR . '/DGGallery/app/lib/pclzip.lib.php')) {
@@ -770,12 +782,13 @@ class model_upload {
         $_user = $this->_user;
 
         /**
-         *
-         * @global array $config, $_user
-         * @return void
+         * @param $p_event
+         * @param $p_header
+         * @return int
          */
-        function postExtract($p_event, &$p_header) {
-            //TODO: ïåðåèìåíîâàòü ôàéëû ïîñëå èçâëå÷åíèÿ íî äî îáðàáîòêè
+        function postExtract($p_event, &$p_header)
+        {
+            //TODO: Ð¿ÐµÑ€ÐµÐ¸Ð¼ÐµÐ½Ð¾Ð²Ð°Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»Ñ‹ Ð¿Ð¾ÑÐ»Ðµ Ð¸Ð·Ð²Ð»ÐµÑ‡ÐµÐ½Ð¸Ñ Ð½Ð¾ Ð´Ð¾ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ¸
             global $config, $_user, $_status, $member_id;
             //emty global config gallery
             $parent_id = model_request::getRequest('id');
@@ -801,7 +814,7 @@ class model_upload {
                     if ($config ['rainbow']) {
                         require_once ROOT_DIR . '/DGGallery/app/model/images/ExtractColors.php';
                         $extractFiles [$p_header ['index']] ['info'] ['colors'] [] =
-                                $img->extractColors($newname, $config['rainbowColorNum']);
+                            $img->extractColors($newname, $config['rainbowColorNum']);
                     }
                     $extractFiles [$p_header ['index']] ['info'] ['size'] = filesize($newname);
                     $extractFiles [$p_header ['index']]['info'] ['originalWidth'] = $img->getWidth();
@@ -817,7 +830,7 @@ class model_upload {
                     $status = ($config['mode'] == 1) ? 'albom' : 'catfile';
                     $_db->query('INSERT INTO ' . PREFIX . "_dg_gallery_file (parent_id,author,author_id,descr, path, other_dat, date,position, status ) VALUES
 		('{$parent_id}','{$member_id['name']}','{$member_id['user_id']}','','{$extractFiles [$p_header ['index']]['path']}','" . serialize($extractFiles [$p_header ['index']]) . "','" . date('Y-m-d H:i:s') .
-                            "','{$position}','{$status}' )");
+                        "','{$position}','{$status}' )");
                     $_lastInsertId = $_db->insert_id();
                     if ($config['countFile']) {
                         $_db->query('UPDATE ' . DBNAME . '.' . PREFIX . "_dg_gallery_user SET files=files+1 WHERE user_id='{$member_id['user_id']}' LIMIT 1");
@@ -845,21 +858,28 @@ class model_upload {
         }
 
         /**
-         * _extFilter()
-         * */
-        function extFilter($p_event, &$p_header) {
+         * @param $p_event
+         * @param $p_header
+         * @return bool|string
+         */
+        function extFilter($p_event, &$p_header)
+        {
             $allowed_extensions = array("gif", "jpg", "png", "jpe", "jpeg");
             $info = pathinfo($p_header ['filename']);
             return (in_array($info ['extension'], $allowed_extensions)) ? '1' : false;
         }
 
         $this->_zip->extract(
-                PCLZIP_OPT_PATH, $this->_dir, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_CB_PRE_EXTRACT, "extFilter", PCLZIP_CB_POST_EXTRACT, 'postExtract'
+            PCLZIP_OPT_PATH, $this->_dir, PCLZIP_OPT_REMOVE_ALL_PATH, PCLZIP_CB_PRE_EXTRACT, "extFilter", PCLZIP_CB_POST_EXTRACT, 'postExtract'
         );
         @unlink($this->_fileComplete);
     }
 
-    protected function _log($s) {
+    /**
+     * @param $s
+     */
+    protected function _log($s)
+    {
         $h = fopen(ROOT_DIR . '/log.txt', "a+");
         fwrite($h, $s);
         fclose($h);

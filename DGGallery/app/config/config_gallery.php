@@ -1,18 +1,18 @@
-<?PHP 
+<?PHP
 
 //Configurations D.G. Gallery 1.5
 
- return array (
+return array (
 
     'http' => "",
 
     'adminskin' => "",
 
-    'title' => "Ãàëåğåÿ 1.5",
+    'title' => "Ğ“Ğ°Ğ»ĞµÑ€ĞµÑ 1.5",
 
-    'title_speedbar' => "Ãàëåğåÿ",
+    'title_speedbar' => "Ğ“Ğ°Ğ»ĞµÑ€ĞµÑ",
 
-    'metatitle' => "Ãàëåğåÿ DG",
+    'metatitle' => "Ğ“Ğ°Ğ»ĞµÑ€ĞµÑ DG",
 
     'metadescr' => "dg,dg,dg,dg",
 

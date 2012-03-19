@@ -1,13 +1,11 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
- *
+ * @since 1.5.6 (19.03.12)
  */
+
 class model_user extends model_gallery {
 
     public function __construct() {
@@ -17,18 +15,18 @@ class model_user extends model_gallery {
     }
 
     /**
-     * Получение альбомов определенного пользователя.
+     * РџРѕР»СѓС‡РµРЅРёРµ Р°Р»СЊР±РѕРјРѕРІ РѕРїСЂРµРґРµР»РµРЅРЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ.
      * @param string $name
      * @return array
      */
     public function getAlbom($name) {
 
         $sql = 'SELECT * FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_albom WHERE author='{$name}'";
-         return model_gallery::getClass('model_albom')->getAlbomResult($sql);
+        return model_gallery::getClass('model_albom')->getAlbomResult($sql);
     }
 
     /**
-     * Обновление кол-ва альбомов в таблице статистики
+     * РћР±РЅРѕРІР»РµРЅРёРµ РєРѕР»-РІР° Р°Р»СЊР±РѕРјРѕРІ РІ С‚Р°Р±Р»РёС†Рµ СЃС‚Р°С‚РёСЃС‚РёРєРё
      * @param string $set
      * @param int $id
      */
@@ -37,7 +35,7 @@ class model_user extends model_gallery {
     }
 
     /**
-     * Обновление кол-ва комментариев таблице статистики
+     * РћР±РЅРѕРІР»РµРЅРёРµ РєРѕР»-РІР° РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ С‚Р°Р±Р»РёС†Рµ СЃС‚Р°С‚РёСЃС‚РёРєРё
      * @param string $set
      * @param int $id
      */

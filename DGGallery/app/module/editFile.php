@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Ïðîñòîè ôàéîâûé ðåäàêòîð, çàâèñèìîñòè module_json
+ * ÐŸÑ€Ð¾ÑÑ‚Ð¾Ð¸ Ñ„Ð°Ð¹Ð¾Ð²Ñ‹Ð¹ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€, Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ module_json
  *
  * @package dg_r
  * @author Dark Ghost
@@ -36,14 +36,12 @@ class module_editFile extends assistant {
      * */
     protected $_editExt;
     /**
-     * Äèðåêòîðèÿ øàáëîíîâ
+     * Ð”Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ñ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð²
      */
     const DIR = 'templates/';
 
     /**
-     * module_editFile::__construct()
      *
-     * @return void
      */
     public function __construct() {
         $this->_config = parent::$_registry['config'];
@@ -57,11 +55,11 @@ class module_editFile extends assistant {
         global $config;
         $this->_tplDir = ROOT_DIR .'/'. self::DIR . $config['skin'] . '/gallery/';
         $this->_editExt = array('tpl', 'css', 'js', 'html', 'png', 'gif', 'jpg',
-                /* 'php','tmp','json' */                );
+            /* 'php','tmp','json' */                );
     }
 
     /**
-     * ×òåíèå äèðåêòîðèè
+     * Ð§Ñ‚ÐµÐ½Ð¸Ðµ Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸
      * set  array
      * @return void
      */
@@ -92,8 +90,7 @@ class module_editFile extends assistant {
     }
 
     /**
-     *
-     * @return string (json obj)
+     * @return string
      */
     public function getStart() {
         $this->getInfoDir();
@@ -101,8 +98,7 @@ class module_editFile extends assistant {
     }
 
     /**
-     *
-     * @return
+     * @return string (json obj)
      */
     protected function _setCurrentDir() {
         $this->dir = model_request::getRequest('dir');
@@ -119,8 +115,8 @@ class module_editFile extends assistant {
     }
 
     /**
-     *
-     * @return void
+     * @param $file
+     * @return bool
      */
     protected function _openFileEdit($file) {
         if (file_exists($this->_tplDir . $file)) {
@@ -142,9 +138,8 @@ class module_editFile extends assistant {
     }
 
     /**
-     *
-     * @param mixed $info
-     * @return
+     * @param null $info
+     * @return bool
      */
     protected function _check($info = null) {
         if (null == $info) {
@@ -181,10 +176,7 @@ class module_editFile extends assistant {
     }
 
     /**
-     * module_editFile::_saveFile()
-     *
-     * @param mixed $file
-     * @return void
+     * @param $file
      */
     protected function _saveFile($file) {
         $info = pathinfo($this->_tplDir . $file);
@@ -203,9 +195,7 @@ class module_editFile extends assistant {
     }
 
     /**
-     * module_editFile::go()
-     *
-     * @return
+     * @return string|void
      */
     public function go() {
         $action = model_request::getRequest('cmd');

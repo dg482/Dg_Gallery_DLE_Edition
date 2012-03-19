@@ -1,16 +1,18 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ */
 
 /**
- * Êëàññ: admin
  *
- * @author Dark Ghost
- * @copyright 2011
- * @package
  */
 class controller_ajax_admin extends controller_gallery {
 
     /**
-     * Ïîëó÷åíèå îáëîæêè êàòåãîðèè
+     * ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð¾Ð±Ð»Ð¾Ð¶ÐºÐ¸ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸
      * @return json
      */
     public function getCatCoverAction() {
@@ -19,7 +21,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ãåíåðàöèÿ îïèñàíèÿ
+     * Ð“ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ñ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ
      * @return json
      */
     public function addDescrAction() {
@@ -33,7 +35,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ãåíåðàöèÿ êëþ÷åâûõ ñëîâ
+     * Ð“ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ñ ÐºÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ñ… ÑÐ»Ð¾Ð²
      * @return json
      */
     public function addKeywordAction() {
@@ -51,7 +53,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ðåäàêòèðîâàíèå øàáëîíîâ
+     * Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð²
      * @return mixed json -|- string
      */
     public function edit_templateAction() {
@@ -60,7 +62,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ïðîñìîòð àëüáîìà
+     * ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°
      * @return string
      */
     public function openAction() {
@@ -69,7 +71,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Äîáàâëåíèå îòìåòêè
+     * Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¾Ñ‚Ð¼ÐµÑ‚ÐºÐ¸
      * @return json
      */
     public function addLabelAction() {
@@ -78,7 +80,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Îáíîâëåíèå êåøà àëüáîìà
+     * ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐµÑˆÐ° Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°
      * @return void
      */
     public function updateAlbomAction() {
@@ -91,7 +93,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ðàçðåøèòü -|- çàïðåòèòü êîììåíòàðèè äëÿ îïðåäåëåííîãî ôàéëà.
+     * Ð Ð°Ð·Ñ€ÐµÑˆÐ¸Ñ‚ÑŒ -|- Ð·Ð°Ð¿Ñ€ÐµÑ‚Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¼Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¸ Ð´Ð»Ñ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°.
      * @return void
      */
     public function comm_accessAction() {
@@ -99,7 +101,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Ðàçðåøèòü -|- çàïðåòèòü ðåéòèíã äëÿ îïðåäåëåííîãî ôàéëà.
+     * Ð Ð°Ð·Ñ€ÐµÑˆÐ¸Ñ‚ÑŒ -|- Ð·Ð°Ð¿Ñ€ÐµÑ‚Ð¸Ñ‚ÑŒ Ñ€ÐµÐ¹Ñ‚Ð¸Ð½Ð³ Ð´Ð»Ñ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð°.
      * @return void
      */
     public function rating_accessAction() {
@@ -107,7 +109,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Óäàëåíèå îòìåòêè
+     * Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð¾Ñ‚Ð¼ÐµÑ‚ÐºÐ¸
      * @return void
      */
     public function deleteLabelAction() {
@@ -116,56 +118,54 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     * Óäàëåíèå ôàéëà
-     * @return json
+     * Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°
+     * @return string
      */
     public function deleteFileAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->deleteFile());
     }
 
     /**
-     * Ñîðòèðîâêà ôàéëîâ â àëüáîìå
-     * @return json
+     * Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ° Ñ„Ð°Ð¹Ð»Ð¾Ð² Ð² Ð°Ð»ÑŒÐ±Ð¾Ð¼Ðµ
+     * @return string
      */
     public function sortFileAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->sortFile());
     }
 
     /**
-     * Âêëþ÷åíèå -|- îòêëþ÷íèå âûâîäà ïàíåëåé îòìåòîê
-     * @return json
+     * Ð’ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ -|- Ð¾Ñ‚ÐºÐ»ÑŽÑ‡Ð½Ð¸Ðµ Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð¿Ð°Ð½ÐµÐ»ÐµÐ¹ Ð¾Ñ‚Ð¼ÐµÑ‚Ð¾Ðº
+     * @return string
      */
     public function labelFileAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->label());
     }
 
     /**
-     * Íàçíà÷åíèå -|- îáíîâëåíèå çàãîëîâêà
-     * @return json
+     * ÐÐ°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ -|- Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ°
+     * @return string
      */
     public function settitleAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->setTitle());
     }
 
     /**
-     * Íàçíà÷åíèå -|- îáíîâëåíèå îïèñàíèÿ
-     * @return json
+     * ÐÐ°Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ -|- Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ
+     * @return string
      */
     public function setdescriptionAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->setDescr());
     }
 
     /**
-     *
-     * @return json|string
+     * @return string
      */
     public function settagAction() {
         return module_json::getJson(model_gallery::getClass('model_search')->addKeywordsFile());
     }
 
     /**
-     *
-     * @return json
+     * @return string
      */
     public function addYoutubeAction() {
         $id = model_request::getPost('id');
@@ -217,38 +217,35 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     *
-     * @return json
+     * @return string
      */
     public function setplayerAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->setDefaultPlayer());
     }
 
     /**
-     *
-     * @return json
+     * @return string
      */
     public function deletecoverAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->deleteCover());
     }
 
     /**
-     *
-     * @return json
+     * @return string
      */
     public function setvideocoverAction() {
         return module_json::getJson(model_gallery::getClass('model_file')->setCover());
     }
 
     /**
-     * Óäàëåíèå àëüáîìà
+     * Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°
      * @return void
      */
     public function deletealbomAction() {
         model_gallery::getClass('model_albom')->deleteAlbum();
     }
 
-    /** Èçìåíåíèå ïðàâ äîñòóïà ê àëüáîìó.
+    /** Ð˜Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð°Ð² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñƒ.
      * @return void
      */
     public function changepermalbumAction() {
@@ -256,22 +253,21 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     *
-     * @return json
+     * @return string
      */
     public function setcoverAction() {
         return module_json::getJson(model_gallery::getClass('model_albom')->setCoverAlbom());
     }
 
     /**
-     * @return void
+     *
      */
     public function deletecatAction() {
         model_gallery::getClass('model_category')->deleteCat();
     }
 
     /**
-     * @return void
+     *
      */
     public function approvecommentsAction() {
         $id = (int) model_request::getPost('id');
@@ -284,9 +280,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     *
-     * @param string $name
-     * @return void
+     * @param $name
      */
     protected function _setAccess($name) {
         $id = model_request::getPost('id');
@@ -304,9 +298,7 @@ class controller_ajax_admin extends controller_gallery {
     }
 
     /**
-     *
-     * @global type $config
-     * @return json|string
+     * @return string
      */
     public function loadfileAction() {
         $html = '';
@@ -335,8 +327,7 @@ HTML;
     }
 
     /**
-     *
-     * @return json|string
+     * @return string
      */
     public function getfileAction() {
         $_id = model_request::getPost('id');
@@ -344,8 +335,7 @@ HTML;
     }
 
     /**
-     *
-     * @return json|string
+     * @return mixed
      */
     public function setfileparamAction() {
         return model_gallery::getClass('model_file')->setParam();

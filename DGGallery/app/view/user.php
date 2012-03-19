@@ -1,12 +1,11 @@
 <?php
-
 /**
- * Класс: view_user
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
 class view_user extends view_template {
 
     protected $_user;
@@ -16,6 +15,10 @@ class view_user extends view_template {
         $this->_db = model_gallery::getRegistry('module_db');
     }
 
+    /**
+     * @param $mode
+     * @return string
+     */
     public function render($mode) {
         if (1 === $mode)
             return $this->renderModeOne();
@@ -173,9 +176,9 @@ JSS;
     }
 
     /**
-     * Формирование списка файлов.
-     * @param string $tpl
-     * @return string
+     * Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ.
+     * @param $_tpl
+     * @return mixed
      */
     public function createFileLits($_tpl) {
         $view = new view_template ();
@@ -194,4 +197,3 @@ JSS;
     }
 
 }
-

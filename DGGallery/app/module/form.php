@@ -1,14 +1,15 @@
 <?php
-
 /**
- * Ãåíåðàòîð ôîðì èç ìàññèâîâ ïî çàäàííûì ïàðàìåòðàì,
- * åñòü çàâèñèìîñòè îò ãëîáàëüíûõ ïåðåìåííûõ DLE è Register Globals.
- * Ïîäõîäèò äëÿ óçêîãî ïðèìåíåíèÿ â ðàìêàõ îäíîãî ñêðèïòà.
- *
  * @package dg_r
  * @author Dark Ghost
- * @copyright 2010
  * @access public
+ * @since 1.5.6 (19.03.12)
+ */
+
+/**
+ * Ð“ÐµÐ½ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ñ„Ð¾Ñ€Ð¼ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð¾Ð² Ð¿Ð¾ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ð¼ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ð¼,
+ * ÐµÑÑ‚ÑŒ Ð·Ð°Ð²Ð¸ÑÐ¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¾Ñ‚ Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ñ‹Ñ… Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ñ… DLE Ð¸ Register Globals.
+ * ÐŸÐ¾Ð´Ñ…Ð¾Ð´Ð¸Ñ‚ Ð´Ð»Ñ ÑƒÐ·ÐºÐ¾Ð³Ð¾ Ð¿Ñ€Ð¸Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ Ð² Ñ€Ð°Ð¼ÐºÐ°Ñ… Ð¾Ð´Ð½Ð¾Ð³Ð¾ ÑÐºÑ€Ð¸Ð¿Ñ‚Ð°.
  */
 class module_form {
 
@@ -18,12 +19,12 @@ class module_form {
      */
     protected $_config;
     /**
-     * Êîíôèãóðàöèîííûé ìàññèâ ôîðìû
+     * ÐšÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ð¾Ð½Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² Ñ„Ð¾Ñ€Ð¼Ñ‹
      * @var array
      */
     protected $_forms;
     /**
-     * Èñêàòü çíà÷åíèÿ â setValue
+     * Ð˜ÑÐºÐ°Ñ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð² setValue
      * @var bool
      */
     public $setconfig;
@@ -33,11 +34,14 @@ class module_form {
      */
     public $actionPath;
     /**
-     * Ìàññèâ óñòàíàâëèâàåìûõ çíà÷åíèé
+     * ÐœÐ°ÑÑÐ¸Ð² ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼Ñ‹Ñ… Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹
      * @var array
      */
     public $setValue;
 
+    /**
+     * @param null $option
+     */
     public function __construct($option = null) {
         if (null === $option) {
             $this->_forms = require_once ROOT_DIR . '/DGGallery/app/config/adminForms/forms.php';
@@ -52,11 +56,11 @@ class module_form {
     }
 
     /**
-     * module_form::getForm()
-     *
      * @param string $name
      * @param string $nameForm
-     * @return void
+     * @param bool $part
+     * @param bool $block
+     * @return string
      */
     public function getForm($name = 'setting', $nameForm = '', $part = false, $block = false) {
         $form = $this->_forms;
@@ -89,11 +93,10 @@ class module_form {
     }
 
     /**
-     * module_form::setPatr()
-     *
-     * @param mixed $nameForm
+     * @param $nameForm
+     * @param bool $startPart
      * @param bool $endPatr
-     * @return
+     * @return string
      */
     public function setPatr($nameForm, $startPart = false, $endPatr = false) {
         $form = $this->_forms;
@@ -127,10 +130,10 @@ class module_form {
     }
 
     /**
-     * module_form::setElement()
-     *
-     * @param mixed $type
-     * @return
+     * @param $type
+     * @param $key
+     * @param null $value
+     * @return string
      */
     protected function setElement($type, $key, $value = null) {
         $result = '';
@@ -151,7 +154,7 @@ class module_form {
             case 'uploadify' :
                 return '<div id="view-image" class="cover"></div><div id="fileQueue"></div><input type="file" name="uploadify" id="uploadify"/>';
             case 'submit':
-                return '<input type="submit" value="ïðèìåíèòü" />';
+                return '<input type="submit" value="Ð¿Ñ€Ð¸Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ" />';
             case 'bbcode':
                 return $this->getEditor($value, $key);
             case 'hidden':
@@ -162,11 +165,9 @@ class module_form {
     }
 
     /**
-     * module_form::setSelectMultiple()
-     *
      * @param string $n
-     * @param mixed $v
-     * @return
+     * @param null $v
+     * @return string
      */
     protected function setSelectMultiple($n = '', $v = null) {
         $s = '<div><select name="config[' . $n . '][]"  multiple="multiple" >';
@@ -185,11 +186,9 @@ class module_form {
     }
 
     /**
-     * module_form::setSelect()
-     *
      * @param string $n
-     * @param mixed $v
-     * @return
+     * @param null $v
+     * @return string
      */
     protected function setSelect($n = '', $v = null) {
         $s = '<div><select name="config[' . $n . ']" >';
@@ -210,13 +209,11 @@ class module_form {
     }
 
     /**
-     * module_form::selectCategories()
-     *
-     * @param mixed $current_arr
+     * @param $current_arr
      * @param string $trigger
-     * @param integer $current_id
+     * @param int $current_id
      * @param bool $r_id
-     * @return
+     * @return string
      */
     public function selectCategories($current_arr, $trigger = '', $current_id = 0, $r_id = true) {
         $global_cat = $current_arr;
@@ -270,6 +267,7 @@ class module_form {
             if (!is_array($current_arr)) {
                 //.........................
             } else {
+                 $select  = '';
                 foreach ($current_arr as $val) {
                     if ($val ['parent_id'] == 0) {
                         $trigger = '';
@@ -294,10 +292,8 @@ class module_form {
     }
 
     /**
-     * module_form::setCheckbox()
-     *
      * @param string $n
-     * @return void
+     * @return string
      */
     protected function setCheckbox($n = '') {
         if (intval($this->setconfig [$n])) {
@@ -308,10 +304,8 @@ class module_form {
     }
 
     /**
-     * module_form::setTextfield()
-     *
      * @param string $n
-     * @return
+     * @return string
      */
     protected function setTextfield($n = '') {
         if ($this->setValue) {
@@ -322,10 +316,9 @@ class module_form {
     }
 
     /**
-     * module_form::setTextarea()
-     *
      * @param string $n
-     * @return
+     * @param string $w
+     * @return string
      */
     protected function setTextarea($n = '', $w = '') {
         if ($this->setValue) {
@@ -336,14 +329,19 @@ class module_form {
     }
 
     /**
-     * module_form::closeForm()
-     *
-     * @return
+     * @param string $html
+     * @return string
      */
     public function closeForm($html = '') {
         return $html . '</form>';
     }
 
+    /**
+     * @param string $text
+     * @param string $name
+     * @param string $field
+     * @return string
+     */
     public function getEditor($text = '', $name='gallery_add_form', $field='config[descr]') {
         global $lang;
         $config = model_gallery::getRegistry('config_cms');

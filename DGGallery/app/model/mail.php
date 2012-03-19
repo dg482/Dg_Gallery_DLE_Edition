@@ -1,19 +1,21 @@
 <?php
-
 /**
- * Класс: mail
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
-class model_mail {
 
-    public function __construct() {
+class model_mail
+{
 
-    }
-
-    public static function send($title, $msg) {
+    /**
+     * @static
+     * @param $title
+     * @param $msg
+     */
+    public static function send($title, $msg)
+    {
         global $config;
         if (null === $config) {
             include ROOT_DIR . '/engine/data/config.php';

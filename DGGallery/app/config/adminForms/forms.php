@@ -1,42 +1,40 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * Р¤РѕСЂРјР° РѕСЃРЅРѕРІРЅС‹С… РЅР°СЃС‚СЂРѕРµРє СЃРєСЂРёРїС‚Р°.
+ * Form general setting.
+ */
 
-//$options = array();
-//if (extension_loaded('gd')) {
-//    $gd = gd_info();
-//    $options[0] = 'GD ' . $gd["GD Version"];
-//}
-//
-//if (extension_loaded('imagick')) {
-//    //$i = imagick::getVersion();
-//    $options[1] = 'Imagick'; //substr($i["versionString"], 0, 31);
-//}
 return array(
     'form' => array(
         'action' => '?&action=save_setting',
         'method' => 'post',
         'name' => 'config',
         'setting' => array(
-            'legend' => 'Основные настройки скрипта',
+            'legend' => 'РћСЃРЅРѕРІРЅС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё СЃРєСЂРёРїС‚Р°',
             'row' => array(
                 array(
-                    'label' => 'Выключить галерею:',
+                    'label' => 'Р’С‹РєР»СЋС‡РёС‚СЊ РіР°Р»РµСЂРµСЋ:',
                     'type' => 'checkbox',
                     'key' => 'status'
                 ),
                 array(
-                    'label' => 'Заголовок страницы:',
+                    'label' => 'Р—Р°РіРѕР»РѕРІРѕРє СЃС‚СЂР°РЅРёС†С‹:',
                     'type' => 'text',
                     'key' => 'title'
                 ),
                 array(
-                    'label' => 'Текст в контекстной навигации:',
+                    'label' => 'РўРµРєСЃС‚ РІ РєРѕРЅС‚РµРєСЃС‚РЅРѕР№ РЅР°РІРёРіР°С†РёРё:',
                     'type' => 'text',
                     'key' => 'title_speedbar'
                 )
             )
         ),
         'meta' => array(
-            'legend' => 'Настройки meta описания',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё meta РѕРїРёСЃР°РЅРёСЏ',
             'row' => array(
                 array(
                     'label' => ' Title:',
@@ -56,20 +54,20 @@ return array(
             )
         ),
         'upload' => array(
-            'legend' => 'Настройки загрузки файлов на сервер',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»РѕРІ РЅР° СЃРµСЂРІРµСЂ',
             'row' => array(
                 array(
-                    'label' => 'Загрузка превью для роликов You Tube:<br /><small>глобальный параметр.</small>',
+                    'label' => 'Р—Р°РіСЂСѓР·РєР° РїСЂРµРІСЊСЋ РґР»СЏ СЂРѕР»РёРєРѕРІ You Tube:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'checkbox',
                     'key' => 'youTubeThumbManualLoad'
                 ),
                 array(
-                    'label' => 'Загрузка превью для роликов Vimeo:<br /><small>глобальный параметр.</small>',
+                    'label' => 'Р—Р°РіСЂСѓР·РєР° РїСЂРµРІСЊСЋ РґР»СЏ СЂРѕР»РёРєРѕРІ Vimeo:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'checkbox',
                     'key' => 'vimeoThumbManualLoad'
                 ),
                 array(
-                    'label' => 'Группы допуска к загрузке:<br /><small>глобальный параметр.</small>',
+                    'label' => 'Р“СЂСѓРїРїС‹ РґРѕРїСѓСЃРєР° Рє Р·Р°РіСЂСѓР·РєРµ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessupload',
                     'values' => array(
@@ -81,21 +79,21 @@ return array(
             )
         ),
         'fileWork' => array(
-            'legend' => 'Обработка загруженных файлов',
+            'legend' => 'РћР±СЂР°Р±РѕС‚РєР° Р·Р°РіСЂСѓР¶РµРЅРЅС‹С… С„Р°Р№Р»РѕРІ',
             'row' => array(
 //                array(
 //                    'type' => 'select',
 //                    'key' => 'image_handler',
-//                    'label' => 'Обработчик по умолчанию',
+//                    'label' => 'РћР±СЂР°Р±РѕС‚С‡РёРє РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ',
 //                    'values' => $options
 //                ),
                 array(
-                    'label' => 'Максимальный размер в kb:<br /><small>1024kb = 1mb</small>',
+                    'label' => 'РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РІ kb:<br /><small>1024kb = 1mb</small>',
                     'type' => 'text',
                     'key' => 'maxsize'
                 ),
                 array(
-                    'label' => 'Максимальный размер в px:<br />Превью оригинала:<small> 800x600, 800</small>',
+                    'label' => 'РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РІ px:<br />РџСЂРµРІСЊСЋ РѕСЂРёРіРёРЅР°Р»Р°:<small> 800x600, 800</small>',
                     'type' => 'text',
                     'key' => 'maxprop_original',
                     'subelement' => array(
@@ -103,117 +101,117 @@ return array(
                         'key' => 'resize_mode_original',
                         'width' => '200',
                         'values' => array(
-                            '0' => 'По наибольшей стороне',
-                            '1' => 'По ширине',
-                            '2' => 'По высоте'
+                            '0' => 'РџРѕ РЅР°РёР±РѕР»СЊС€РµР№ СЃС‚РѕСЂРѕРЅРµ',
+                            '1' => 'РџРѕ С€РёСЂРёРЅРµ',
+                            '2' => 'РџРѕ РІС‹СЃРѕС‚Рµ'
                         )
                     )
                 ),
                 array(
-                    'label' => 'Наложение watermark:<br /><small>Превью оригинала.</small>',
+                    'label' => 'РќР°Р»РѕР¶РµРЅРёРµ watermark:<br /><small>РџСЂРµРІСЊСЋ РѕСЂРёРіРёРЅР°Р»Р°.</small>',
                     'type' => 'checkbox',
                     'key' => 'watermark'
                 ),
                 array(
-                    'label' => 'Максимальный размер в px:<br />Превью слайдера:<small> 250x150, 250</small>',
+                    'label' => 'РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РІ px:<br />РџСЂРµРІСЊСЋ СЃР»Р°Р№РґРµСЂР°:<small> 250x150, 250</small>',
                     'type' => 'text',
                     'key' => 'maxprop_slider',
                     'subelement' => array(
                         'type' => 'select',
                         'key' => 'resize_mode_thumbs',
                         'values' => array(
-                            '0' => 'По наибольшей стороне',
-                            '1' => 'По ширине',
-                            '2' => 'По высоте'
+                            '0' => 'РџРѕ РЅР°РёР±РѕР»СЊС€РµР№ СЃС‚РѕСЂРѕРЅРµ',
+                            '1' => 'РџРѕ С€РёСЂРёРЅРµ',
+                            '2' => 'РџРѕ РІС‹СЃРѕС‚Рµ'
                         )
                     )
                 ),
                 array(
-                    'label' => 'Наложение watermark:<br /><small>Превью слайдера.</small>',
+                    'label' => 'РќР°Р»РѕР¶РµРЅРёРµ watermark:<br /><small>РџСЂРµРІСЊСЋ СЃР»Р°Р№РґРµСЂР°.</small>',
                     'type' => 'checkbox',
                     'key' => 'watermarkSlider'
                 ),
                 array(
-                    'label' => 'Максимальный размер в px:<br />Обложка категории:<small> 250x150, 250</small>',
+                    'label' => 'РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РІ px:<br />РћР±Р»РѕР¶РєР° РєР°С‚РµРіРѕСЂРёРё:<small> 250x150, 250</small>',
                     'type' => 'text',
                     'key' => 'maxprop_cover',
                     'subelement' => array(
                         'type' => 'select',
                         'key' => 'resize_mode_cover',
                         'values' => array(
-                            '0' => 'По наибольшей стороне',
-                            '1' => 'По ширине',
-                            '2' => 'По высоте'
+                            '0' => 'РџРѕ РЅР°РёР±РѕР»СЊС€РµР№ СЃС‚РѕСЂРѕРЅРµ',
+                            '1' => 'РџРѕ С€РёСЂРёРЅРµ',
+                            '2' => 'РџРѕ РІС‹СЃРѕС‚Рµ'
                         )
                     )
                 ),
                 array(
-                    'label' => 'Наложение watermark:<br /><small>Обложка категории.</small>',
+                    'label' => 'РќР°Р»РѕР¶РµРЅРёРµ watermark:<br /><small>РћР±Р»РѕР¶РєР° РєР°С‚РµРіРѕСЂРёРё.</small>',
                     'type' => 'checkbox',
                     'key' => 'watermarkCover'
                 ),
                 array(
-                    'label' => 'Источник watermark:<br /><small>dleimages/.</small>',
+                    'label' => 'РСЃС‚РѕС‡РЅРёРє watermark:<br /><small>dleimages/.</small>',
                     'type' => 'text',
                     'key' => 'watermarkSource'
                 ),
 //                array(
-//                    'label' => 'Минимальный размер для накладывания watermark:<br /><small>100</small>',
+//                    'label' => 'РњРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РґР»СЏ РЅР°РєР»Р°РґС‹РІР°РЅРёСЏ watermark:<br /><small>100</small>',
 //                    'type' => 'text',
 //                    'key' => 'watermarkMinSize'
 //                ),
                 array(
-                    'label' => 'Получение цветов:',
+                    'label' => 'РџРѕР»СѓС‡РµРЅРёРµ С†РІРµС‚РѕРІ:',
                     'type' => 'checkbox',
                     'key' => 'rainbow'
                 ),
                 array(
-                    'label' => 'Кол-во цветов:<br /><small> max 10</small>',
+                    'label' => 'РљРѕР»-РІРѕ С†РІРµС‚РѕРІ:<br /><small> max 10</small>',
                     'type' => 'text',
                     'key' => 'rainbowColorNum'
                 ),
                 array(
-                    'label' => 'Получение превью из кадра:<br /><small>форматы .flv, mp4.</small>',
+                    'label' => 'РџРѕР»СѓС‡РµРЅРёРµ РїСЂРµРІСЊСЋ РёР· РєР°РґСЂР°:<br /><small>С„РѕСЂРјР°С‚С‹ .flv, mp4.</small>',
                     'type' => 'checkbox',
                     'key' => 'fileFrame'
                 ),
                 array(
-                    'label' => 'Создавать и проверять хэш файла:<br /> ',
+                    'label' => 'РЎРѕР·РґР°РІР°С‚СЊ Рё РїСЂРѕРІРµСЂСЏС‚СЊ С…СЌС€ С„Р°Р№Р»Р°:<br /> ',
                     'type' => 'checkbox',
                     'key' => 'FileHash'
                 ),
             )
         ),
         'uploadify' => array(
-            'legend' => 'Настройка загрузчика "Uploadify"',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєР° Р·Р°РіСЂСѓР·С‡РёРєР° "Uploadify"',
             'row' => array(
                 array(
-                    'label' => 'Максимольное кол-во файлов:<br /><small> 0 = no limit</small>',
+                    'label' => 'РњР°РєСЃРёРјРѕР»СЊРЅРѕРµ РєРѕР»-РІРѕ С„Р°Р№Р»РѕРІ:<br /><small> 0 = no limit</small>',
                     'type' => 'text',
                     'key' => 'uploadifyMaxFile'
                 ),
 //                array(
-//                    'label' => 'Размер загрузчика в px:<br /><small> 100x70</small>',
+//                    'label' => 'Р Р°Р·РјРµСЂ Р·Р°РіСЂСѓР·С‡РёРєР° РІ px:<br /><small> 100x70</small>',
 //                    'type' => 'text',
 //                    'key' => 'uploadifysize'
 //                ),
 //                array(
-//                    'label' => 'Изображение:<br /><small> uploadify-background.png</small>',
+//                    'label' => 'РР·РѕР±СЂР°Р¶РµРЅРёРµ:<br /><small> uploadify-background.png</small>',
 //                    'type' => 'text',
 //                    'key' => 'uploadifyimg'
 //                ),
 //                array(
-//                    'label' => 'Текст (eng):<br /><small>"Select File", "Browse", "-" </small>',
+//                    'label' => 'РўРµРєСЃС‚ (eng):<br /><small>"Select File", "Browse", "-" </small>',
 //                    'type' => 'text',
 //                    'key' => 'uploadifytext'
 //                ),
             )
         ),
         'contentAccess' => array(
-            'legend' => 'Настройки доступа к функциям скрипта.',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РґРѕСЃС‚СѓРїР° Рє С„СѓРЅРєС†РёСЏРј СЃРєСЂРёРїС‚Р°.',
             'row' => array(
                 array(
-                    'label' => 'Создание альбомов:<br /><small>глобальный параметр.</small>',
+                    'label' => 'РЎРѕР·РґР°РЅРёРµ Р°Р»СЊР±РѕРјРѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessCreate',
                     'values' => array(
@@ -223,7 +221,7 @@ return array(
                     )
                 ),
 //                array(
-//                    'label' => 'Модерация альбомов:<br /><small>глобальный параметр.</small>',
+//                    'label' => 'РњРѕРґРµСЂР°С†РёСЏ Р°Р»СЊР±РѕРјРѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
 //                    'type' => 'multiple',
 //                    'key' => 'albomApprove',
 //                    'values' => array(
@@ -233,7 +231,7 @@ return array(
 //                    )
 //                ),
 //                array(
-//                    'label' => 'Комментирование альбомов:<br /><small>глобальный параметр.</small>',
+//                    'label' => 'РљРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ Р°Р»СЊР±РѕРјРѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
 //                    'type' => 'multiple',
 //                    'key' => 'accessComm',
 //                    'values' => array(
@@ -243,7 +241,7 @@ return array(
 //                    )
 //                ),
                 array(
-                    'label' => 'Комментирование файлов:<br /><small>глобальный параметр.</small>',
+                    'label' => 'РљРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»РѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessCommFile',
                     'values' => array(
@@ -253,7 +251,7 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Модерация комментариев:<br /><small>глобальный параметр.</small>',
+                    'label' => 'РњРѕРґРµСЂР°С†РёСЏ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'commentsApprove',
                     'values' => array(
@@ -265,285 +263,285 @@ return array(
             )
         ),
         'videoSetting' => array(
-            'legend' => 'Настройки добавления видео материалов.',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РґРѕР±Р°РІР»РµРЅРёСЏ РІРёРґРµРѕ РјР°С‚РµСЂРёР°Р»РѕРІ.',
             'row' => array(
                 array(
-                    'label' => 'Разрешить ролики c <a href="http://www.youtube.com" class="web-link" target="_blank">You Tube</a> ',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё c <a href="http://www.youtube.com" class="web-link" target="_blank">You Tube</a> ',
                     'type' => 'checkbox',
                     'key' => 'allowYouTube'
                 ),
                 array(
-                    'label' => 'Разрешить ролики c <a href="http://smotri.com" class="web-link" target="_blank">smotri.com</a>',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё c <a href="http://smotri.com" class="web-link" target="_blank">smotri.com</a>',
                     'type' => 'checkbox',
                     'key' => 'allow_smotri_com'
                 ),
                 array(
-                    'label' => 'Разрешить ролики с  <a href="http://vimeo.com" class="web-link"  target="_blank">vimeo.com</a>',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё СЃ  <a href="http://vimeo.com" class="web-link"  target="_blank">vimeo.com</a>',
                     'type' => 'checkbox',
                     'key' => 'allow_vimeo_com'
                 ),
                 array(
-                    'label' => 'Разрешить ролики c <a href="http://rutube.ru"  class="web-link"  target="_blank">rutube.ru</a>',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё c <a href="http://rutube.ru"  class="web-link"  target="_blank">rutube.ru</a>',
                     'type' => 'checkbox',
                     'key' => 'allow_rutube_ru'
                 ),
                 array(
-                    'label' => 'Разрешить ролики <a href="http://gametrailers.com"  class="web-link"  target="_blank">gametrailers.com</a>',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё <a href="http://gametrailers.com"  class="web-link"  target="_blank">gametrailers.com</a>',
                     'type' => 'checkbox',
                     'key' => 'allow_gametrailers_com'
                 ),
 //                array(
-//                    'label' => 'Разрешить ролики <a href="http://video.mail.ru"  class="web-link"  target="_blank">video.mail.ru</a>',
+//                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ СЂРѕР»РёРєРё <a href="http://video.mail.ru"  class="web-link"  target="_blank">video.mail.ru</a>',
 //                    'type' => 'checkbox',
 //                    'key' => 'allow_video_mail_ru'
 //                ),
             )
         ),
         'videoSettingPlayerGlobal' => array(
-            'legend' => 'Общие настройки',
+            'legend' => 'РћР±С‰РёРµ РЅР°СЃС‚СЂРѕР№РєРё',
             'row' => array(
                 array(
-                    'label' => 'Ширина плеера:',
+                    'label' => 'РЁРёСЂРёРЅР° РїР»РµРµСЂР°:',
                     'type' => 'text',
                     'key' => 'widthPlayer'
                 ),
                 array(
-                    'label' => 'Высота плеера:',
+                    'label' => 'Р’С‹СЃРѕС‚Р° РїР»РµРµСЂР°:',
                     'type' => 'text',
                     'key' => 'heightPlayer'
                 ),
                 array(
-                    'label' => 'Включить автоматическое воспроизведение:',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёРµ:',
                     'type' => 'checkbox',
                     'key' => 'autoPlay'
                 ),
                 array(
-                    'label' => 'Разрешить наложение водяных знаков на видеофайлы формата .flv:',
+                    'label' => 'Р Р°Р·СЂРµС€РёС‚СЊ РЅР°Р»РѕР¶РµРЅРёРµ РІРѕРґСЏРЅС‹С… Р·РЅР°РєРѕРІ РЅР° РІРёРґРµРѕС„Р°Р№Р»С‹ С„РѕСЂРјР°С‚Р° .flv:',
                     'type' => 'checkbox',
                     'key' => 'watermarkVideo'
                 ),
                 array(
-                    'label' => 'Местоположение водяного знака:',
+                    'label' => 'РњРµСЃС‚РѕРїРѕР»РѕР¶РµРЅРёРµ РІРѕРґСЏРЅРѕРіРѕ Р·РЅР°РєР°:',
                     'subelement' => array(
                         'type' => 'select',
                         'key' => 'flv_watermark_pos',
                         'values' => array(
-                            'left' => 'По левому краю',
-                            'center' => 'По центру',
-                            'right' => 'По правому краю'
+                            'left' => 'РџРѕ Р»РµРІРѕРјСѓ РєСЂР°СЋ',
+                            'center' => 'РџРѕ С†РµРЅС‚СЂСѓ',
+                            'right' => 'РџРѕ РїСЂР°РІРѕРјСѓ РєСЂР°СЋ'
                         )
                     )
                 ),
                 array(
-                    'label' => 'Степень прозрачности водяного знака',
+                    'label' => 'РЎС‚РµРїРµРЅСЊ РїСЂРѕР·СЂР°С‡РЅРѕСЃС‚Рё РІРѕРґСЏРЅРѕРіРѕ Р·РЅР°РєР°',
                     'type' => 'text',
                     'key' => 'flv_watermark_al'
                 ),
                 array(
-                    'label' => 'Включить показ похожих видео для сервиса Youtube',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ РїРѕРєР°Р· РїРѕС…РѕР¶РёС… РІРёРґРµРѕ РґР»СЏ СЃРµСЂРІРёСЃР° Youtube',
                     'type' => 'checkbox',
                     'key' => 'tube_related'
                 ),
                 array(
-                    'label' => 'Использовать плеер DLE при воспроизведении роликов с сервиса Youtube',
+                    'label' => 'РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РїР»РµРµСЂ DLE РїСЂРё РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёРё СЂРѕР»РёРєРѕРІ СЃ СЃРµСЂРІРёСЃР° Youtube',
                     'type' => 'checkbox',
                     'key' => 'tube_dle'
                 ),
             )
         ),
         'videoSettingPlayer' => array(
-            'legend' => 'Настройки флэш плеера для воспроизведения FLV и MP3 формата',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё С„Р»СЌС€ РїР»РµРµСЂР° РґР»СЏ РІРѕСЃРїСЂРѕРёР·РІРµРґРµРЅРёСЏ FLV Рё MP3 С„РѕСЂРјР°С‚Р°',
             'row' => array(
                 array(
-                    'label' => 'Использовать настройки DLE',
+                    'label' => 'РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РЅР°СЃС‚СЂРѕР№РєРё DLE',
                     'type' => 'checkbox',
                     'key' => 'video_setting_dle'
                 ),
                 array(
-                    'label' => 'Качество видеороликов Youtube',
+                    'label' => 'РљР°С‡РµСЃС‚РІРѕ РІРёРґРµРѕСЂРѕР»РёРєРѕРІ Youtube',
                     'subelement' => array(
                         'type' => 'select',
                         'key' => 'youtube_quality',
                         'values' => array(
-                            'small' => 'Низкое',
-                            'medium' => 'Среднее',
-                            'large' => 'Высокое',
+                            'small' => 'РќРёР·РєРѕРµ',
+                            'medium' => 'РЎСЂРµРґРЅРµРµ',
+                            'large' => 'Р’С‹СЃРѕРєРѕРµ',
                             'hd720' => 'HD 720'
                         )
                     )
                 ),
                 array(
-                    'label' => 'Включить показ первого кадра в качестве превью видео',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ РїРѕРєР°Р· РїРµСЂРІРѕРіРѕ РєР°РґСЂР° РІ РєР°С‡РµСЃС‚РІРµ РїСЂРµРІСЊСЋ РІРёРґРµРѕ',
                     'type' => 'checkbox',
                     'key' => 'first_frame_preview'
                 ),
                 array(
-                    'label' => 'Использовать стандартную обложку при отображении видеоплеера',
+                    'label' => 'РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃС‚Р°РЅРґР°СЂС‚РЅСѓСЋ РѕР±Р»РѕР¶РєСѓ РїСЂРё РѕС‚РѕР±СЂР°Р¶РµРЅРёРё РІРёРґРµРѕРїР»РµРµСЂР°',
                     'type' => 'checkbox',
                     'key' => 'standart_cover'
                 ),
                 array(
-                    'label' => 'Скрывать автоматически панель управления плеером',
+                    'label' => 'РЎРєСЂС‹РІР°С‚СЊ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїР°РЅРµР»СЊ СѓРїСЂР°РІР»РµРЅРёСЏ РїР»РµРµСЂРѕРј',
                     'type' => 'checkbox',
                     'key' => 'autohide'
                 ),
                 array(
-                    'label' => 'Размер видеобуфера в секундах',
+                    'label' => 'Р Р°Р·РјРµСЂ РІРёРґРµРѕР±СѓС„РµСЂР° РІ СЃРµРєСѓРЅРґР°С…',
                     'type' => 'text',
                     'key' => 'buffer'
                 ),
                 array(
-                    'label' => 'Цвет индикатора проигрывания ролика:',
+                    'label' => 'Р¦РІРµС‚ РёРЅРґРёРєР°С‚РѕСЂР° РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ СЂРѕР»РёРєР°:',
                     'type' => 'text',
                     'key' => 'progressBarColor'
                 ),
             )
         ),
         'viewTools' => array(
-            'legend' => 'Настройки дополнительных параметров.',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹С… РїР°СЂР°РјРµС‚СЂРѕРІ.',
             'row' => array(
                 array(
-                    'label' => 'Включить алфавит:<br /><small>глобальный параметр.</small>',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ Р°Р»С„Р°РІРёС‚:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'checkbox',
                     'key' => 'statusAlfavit'
                 ),
                 array(
-                    'label' => 'Все Категории:<br /><small>список категорий.</small>',
+                    'label' => 'Р’СЃРµ РљР°С‚РµРіРѕСЂРёРё:<br /><small>СЃРїРёСЃРѕРє РєР°С‚РµРіРѕСЂРёР№.</small>',
                     'type' => 'checkbox',
                     'key' => 'allCategory'
                 ),
                 array(
-                    'label' => 'Древовидные комментарии:<br /><small>модель<a href="http://en.wikipedia.org/wiki/Nested_set_model" class="web-link" target="_blank"> Nested Sets</a></small>',
+                    'label' => 'Р”СЂРµРІРѕРІРёРґРЅС‹Рµ РєРѕРјРјРµРЅС‚Р°СЂРёРё:<br /><small>РјРѕРґРµР»СЊ<a href="http://en.wikipedia.org/wiki/Nested_set_model" class="web-link" target="_blank"> Nested Sets</a></small>',
                     'type' => 'checkbox',
                     'key' => 'coments_tree'
                 ),
             )
         ),
         'pagination' => array(
-            'legend' => 'Настройки постраничной навигации',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РїРѕСЃС‚СЂР°РЅРёС‡РЅРѕР№ РЅР°РІРёРіР°С†РёРё',
             'row' => array(
                 array(
-                    'label' => 'Главная страница:<br />',
+                    'label' => 'Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°:<br />',
                     'type' => 'text',
                     'key' => 'indexPage'
                 ),
                 array(
-                    'label' => 'В категориях:<br />',
+                    'label' => 'Р’ РєР°С‚РµРіРѕСЂРёСЏС…:<br />',
                     'type' => 'text',
                     'key' => 'catPage'
                 ),
                 array(
-                    'label' => 'В альбомах:<br />',
+                    'label' => 'Р’ Р°Р»СЊР±РѕРјР°С…:<br />',
                     'type' => 'text',
                     'key' => 'albomPage'
                 ),
                 array(
-                    'label' => 'Комментариев:<br />',
+                    'label' => 'РљРѕРјРјРµРЅС‚Р°СЂРёРµРІ:<br />',
                     'type' => 'text',
                     'key' => 'commPage'
                 ),
                 array(
-                    'label' => 'Последние комментарии:<br />',
+                    'label' => 'РџРѕСЃР»РµРґРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёРё:<br />',
                     'type' => 'text',
                     'key' => 'lastCommPage'
                 ),
                 array(
-                    'label' => 'Страницы поиска:<br />',
+                    'label' => 'РЎС‚СЂР°РЅРёС†С‹ РїРѕРёСЃРєР°:<br />',
                     'type' => 'text',
                     'key' => 'searchPage'
                 ),
             )
         ),
         'performance' => array(
-            'legend' => 'Настройки производительности скрипта.',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё СЃРєСЂРёРїС‚Р°.',
             'row' => array(
                 array(
-                    'label' => 'Сжатие JavaScript:<br /><small><a href=" http://code.google.com/p/minify/" class="web-link" target="_blank">Minify</a></small>',
+                    'label' => 'РЎР¶Р°С‚РёРµ JavaScript:<br /><small><a href=" http://code.google.com/p/minify/" class="web-link" target="_blank">Minify</a></small>',
                     'type' => 'checkbox',
                     'key' => 'minJs'
                 ),
 //                array(
-//                    'label' => 'Рейтинг альбомов:<br /><small>mysql: +1 (4)</small>',
+//                    'label' => 'Р РµР№С‚РёРЅРі Р°Р»СЊР±РѕРјРѕРІ:<br /><small>mysql: +1 (4)</small>',
 //                    'type' => 'checkbox',
 //                    'key' => 'ratingAlbom'
 //                ),
 //                array(
-//                    'label' => 'Рейтинг альбомов (+ -):<br /><small>mysql: +3</small>',
+//                    'label' => 'Р РµР№С‚РёРЅРі Р°Р»СЊР±РѕРјРѕРІ (+ -):<br /><small>mysql: +3</small>',
 //                    'type' => 'checkbox',
 //                    'key' => 'ratingAlbomType'
 //                ),
                 array(
-                    'label' => 'Рейтинг файлов:<br /><small>mysql: +1 (4)</small>',
+                    'label' => 'Р РµР№С‚РёРЅРі С„Р°Р№Р»РѕРІ:<br /><small>mysql: +1 (4)</small>',
                     'type' => 'checkbox',
                     'key' => 'ratingFile'
                 ),
                 array(
-                    'label' => 'Рейтинг файлов (+ -):<br /><small>mysql: +3</small>',
+                    'label' => 'Р РµР№С‚РёРЅРі С„Р°Р№Р»РѕРІ (+ -):<br /><small>mysql: +3</small>',
                     'type' => 'checkbox',
                     'key' => 'ratingFileType'
                 ),
                 array(
-                    'label' => 'Просмотры файла:<br /><small>mysql: +1</small>',
+                    'label' => 'РџСЂРѕСЃРјРѕС‚СЂС‹ С„Р°Р№Р»Р°:<br /><small>mysql: +1</small>',
                     'type' => 'checkbox',
                     'key' => 'logViewFile'
                 ),
                 array(
-                    'label' => 'Скачивание файла:<br /><small>mysql: +1 </small>',
+                    'label' => 'РЎРєР°С‡РёРІР°РЅРёРµ С„Р°Р№Р»Р°:<br /><small>mysql: +1 </small>',
                     'type' => 'checkbox',
                     'key' => 'coutnDownloadFile'
                 ),
             )
         ),
         'performanceExtend' => array(
-            'legend' => 'Настройки производительности скрипта (расширенно).',
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё СЃРєСЂРёРїС‚Р° (СЂР°СЃС€РёСЂРµРЅРЅРѕ).',
             'row' => array(
                 array(
-                    'label' => 'Обновление кеша при добавление комментариев:<br /><small>mysql: +3 - 5 </small> ',
+                    'label' => 'РћР±РЅРѕРІР»РµРЅРёРµ РєРµС€Р° РїСЂРё РґРѕР±Р°РІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ:<br /><small>mysql: +3 - 5 </small> ',
                     'type' => 'checkbox',
                     'key' => 'update_cache_addcomm'
                 ),
                 array(
-                    'label' => 'Счетчик комментариев:<br /><small>mysql: +3</small> ',
+                    'label' => 'РЎС‡РµС‚С‡РёРє РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ:<br /><small>mysql: +3</small> ',
                     'type' => 'checkbox',
                     'key' => 'countComm'
                 ),
                 array(
-                    'label' => 'Счетчик файлов:<br /><small>mysql: +1</small> ',
+                    'label' => 'РЎС‡РµС‚С‡РёРє С„Р°Р№Р»РѕРІ:<br /><small>mysql: +1</small> ',
                     'type' => 'checkbox',
                     'key' => 'countFile'
                 ),
                 array(
-                    'label' => 'Защита от флуда:<br /><small>mysql: +2</small>',
+                    'label' => 'Р—Р°С‰РёС‚Р° РѕС‚ С„Р»СѓРґР°:<br /><small>mysql: +2</small>',
                     'type' => 'text',
                     'key' => 'def_flood'
                 ),
                 array(
-                    'label' => 'Уведомление о новых комментариях:',
+                    'label' => 'РЈРІРµРґРѕРјР»РµРЅРёРµ Рѕ РЅРѕРІС‹С… РєРѕРјРјРµРЅС‚Р°СЂРёСЏС…:',
                     'type' => 'checkbox',
                     'key' => 'sendEmailcomm'
                 ),
 //                array(
-//                    'label' => 'Уведомление о новых альбомах:',
+//                    'label' => 'РЈРІРµРґРѕРјР»РµРЅРёРµ Рѕ РЅРѕРІС‹С… Р°Р»СЊР±РѕРјР°С…:',
 //                    'type' => 'checkbox',
 //                    'key' => 'sendEmailalbom'
 //                ),
             )
         ),
         'debug' => array(
-            'legend' => 'Отладка скрипта.',
+            'legend' => 'РћС‚Р»Р°РґРєР° СЃРєСЂРёРїС‚Р°.',
             'row' => array(
                 array(
-                    'label' => 'Включить режим отладки:<br /><small>только для опытных</small>',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ СЂРµР¶РёРј РѕС‚Р»Р°РґРєРё:<br /><small>С‚РѕР»СЊРєРѕ РґР»СЏ РѕРїС‹С‚РЅС‹С…</small>',
                     'type' => 'checkbox',
                     'key' => 'debug'
                 ),
                 array(
-                    'label' => 'Включить режим отладки Ajax:<br /><small>только для опытных</small>',
+                    'label' => 'Р’РєР»СЋС‡РёС‚СЊ СЂРµР¶РёРј РѕС‚Р»Р°РґРєРё Ajax:<br /><small>С‚РѕР»СЊРєРѕ РґР»СЏ РѕРїС‹С‚РЅС‹С…</small>',
                     'type' => 'checkbox',
                     'key' => 'debugAjax'
                 ),
                 array(
-                    'label' => 'Выводить группам:<br /><small>глобальный параметр.</small>',
+                    'label' => 'Р’С‹РІРѕРґРёС‚СЊ РіСЂСѓРїРїР°Рј:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'debugAccessGroup',
                     'values' => array(

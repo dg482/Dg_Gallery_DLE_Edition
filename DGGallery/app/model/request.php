@@ -1,16 +1,17 @@
 <?php
-
 /**
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
 abstract class model_request {
 
     /**
-     * model_request::getPost()
-     *
-     * @param mixed $n
-     * @return
+     * @static
+     * @param $n
+     * @return null
      */
     public static function getPost($n) {
         return (isset($_POST [$n])) ? $_POST [$n] : null;

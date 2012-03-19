@@ -1,15 +1,14 @@
 <?php
-
-/*
- * Модель комментариев (толстая)
- * Все методы по работе с комментариями, добавление, удаление, редактирование, вывод и т.д.
- *
+/**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.6 (08.2011)
- *
+ * @since 1.5.6 (19.03.12)
+ */
+
+/*
+ * РњРѕРґРµР»СЊ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ (С‚РѕР»СЃС‚Р°СЏ)
+ * Р’СЃРµ РјРµС‚РѕРґС‹ РїРѕ СЂР°Р±РѕС‚Рµ СЃ РєРѕРјРјРµРЅС‚Р°СЂРёСЏРјРё, РґРѕР±Р°РІР»РµРЅРёРµ, СѓРґР°Р»РµРЅРёРµ, СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ, РІС‹РІРѕРґ Рё С‚.Рґ.
  */
 
 class model_comments extends model_gallery
@@ -51,6 +50,9 @@ class model_comments extends model_gallery
      */
     public $_user;
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->_db = model_gallery::getClass('module_db');
@@ -60,7 +62,7 @@ class model_comments extends model_gallery
     }
 
     /**
-     * Подсчет комм. по ключу 'parent_id'
+     * РџРѕРґСЃС‡РµС‚ РєРѕРјРј. РїРѕ РєР»СЋС‡Сѓ 'parent_id'
      * @param int $id
      * @param string $status
      * @return array
@@ -81,16 +83,16 @@ class model_comments extends model_gallery
     }
 
     /**
-     * Добавление комментария в б.д.
-     * В методе производится валидация данных поступивших из формы добавления комментариев.
-     * В зависимоти от метода передачи данных будет произведена соответствующая обработка строк.
-     * В зависимости от настроек скрипта буду произведены дополнительные действия:
-     * 1 - обновление счетчиков.
-     * 2 - обновление кэша альбома.
-     * 3 - добавление записи о произведенном деиствие (flood)
-     * Возвращаемые значения могут быть двух типов
-     * 1 - строка для вывода в шаблоне main.tpl
-     * 2 - json объект для разбора методами javascript
+     * Р”РѕР±Р°РІР»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ РІ Р±.Рґ.
+     * Р’ РјРµС‚РѕРґРµ РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РІР°Р»РёРґР°С†РёСЏ РґР°РЅРЅС‹С… РїРѕСЃС‚СѓРїРёРІС€РёС… РёР· С„РѕСЂРјС‹ РґРѕР±Р°РІР»РµРЅРёСЏ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ.
+     * Р’ Р·Р°РІРёСЃРёРјРѕС‚Рё РѕС‚ РјРµС‚РѕРґР° РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С… Р±СѓРґРµС‚ РїСЂРѕРёР·РІРµРґРµРЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰Р°СЏ РѕР±СЂР°Р±РѕС‚РєР° СЃС‚СЂРѕРє.
+     * Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅР°СЃС‚СЂРѕРµРє СЃРєСЂРёРїС‚Р° Р±СѓРґСѓ РїСЂРѕРёР·РІРµРґРµРЅС‹ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ РґРµР№СЃС‚РІРёСЏ:
+     * 1 - РѕР±РЅРѕРІР»РµРЅРёРµ СЃС‡РµС‚С‡РёРєРѕРІ.
+     * 2 - РѕР±РЅРѕРІР»РµРЅРёРµ РєСЌС€Р° Р°Р»СЊР±РѕРјР°.
+     * 3 - РґРѕР±Р°РІР»РµРЅРёРµ Р·Р°РїРёСЃРё Рѕ РїСЂРѕРёР·РІРµРґРµРЅРЅРѕРј РґРµРёСЃС‚РІРёРµ (flood)
+     * Р’РѕР·РІСЂР°С‰Р°РµРјС‹Рµ Р·РЅР°С‡РµРЅРёСЏ РјРѕРіСѓС‚ Р±С‹С‚СЊ РґРІСѓС… С‚РёРїРѕРІ
+     * 1 - СЃС‚СЂРѕРєР° РґР»СЏ РІС‹РІРѕРґР° РІ С€Р°Р±Р»РѕРЅРµ main.tpl
+     * 2 - json РѕР±СЉРµРєС‚ РґР»СЏ СЂР°Р·Р±РѕСЂР° РјРµС‚РѕРґР°РјРё javascript
      *
      * @global array $user_group
      * @global array $lang
@@ -121,7 +123,7 @@ class model_comments extends model_gallery
         $date = date('Y-m-d H:i:s', $_TIME);
         $_IP = $this->_db->safesql($_SERVER['REMOTE_ADDR']);
         $flooder = false;
-        ///$this->_config['def_flood'] = 30; //TODO:настроика защиты от флуда перенести в админпанеть
+        ///$this->_config['def_flood'] = 30; //TODO:РЅР°СЃС‚СЂРѕРёРєР° Р·Р°С‰РёС‚С‹ РѕС‚ С„Р»СѓРґР° РїРµСЂРµРЅРµСЃС‚Рё РІ Р°РґРјРёРЅРїР°РЅРµС‚СЊ
         if ($this->_config['def_flood']) {
             $this_time = ($_TIME - $this->_config['def_flood']);
             $this->_db->query("DELETE FROM " . PREFIX . "_flood where id < '$this_time'");
@@ -263,10 +265,10 @@ class model_comments extends model_gallery
             }
 
 
-            $config['allow_combine_alb'] = false; //TODO: добавить параметры в админпанель
+            $config['allow_combine_alb'] = false; //TODO: РґРѕР±Р°РІРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ РІ Р°РґРјРёРЅРїР°РЅРµР»СЊ
             if ($config['allow_combine_alb']) {
                 $row = $this->_db->super_query("SELECT id, parent_id, user_id, date, text, ip, is_register  FROM "
-                                               . DBNAME . '.' . PREFIX . "_dg_gallery_comments WHERE parent_id='{$parent_id}' AND status='file' ORDER BY id DESC LIMIT 0,1");
+                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments WHERE parent_id='{$parent_id}' AND status='file' ORDER BY id DESC LIMIT 0,1");
                 if ($row['id'] and $this->_isLogged) {
                     if ($row['user_id'] == $this->user['user_id'] and $row['is_register'])
                         $update_comments = true;
@@ -304,22 +306,22 @@ class model_comments extends model_gallery
                     $_ns_id = (int)model_request::getRequest('ns_parent_id');
                     if ($_ns_id) {
                         $dbtree->Insert($_ns_id, array(
-                                                      'and' => array(
-                                                          'status' => "status='file'",
-                                                          'parent_id' => "parent_id='" . $parent_id . "'"
-                                                      )
-                                                 ), array(
-                                                         'parent_id' => $parent_id,
-                                                         'user_id' => $this->user['user_id'],
-                                                         'date' => $date,
-                                                         'autor' => $name,
-                                                         'email' => $mail,
-                                                         'text' => $comments,
-                                                         'ip' => $_IP,
-                                                         'is_register' => $logged,
-                                                         'status' => 'file',
-                                                         'approve' => $approve
-                                                    ));
+                            'and' => array(
+                                'status' => "status='file'",
+                                'parent_id' => "parent_id='" . $parent_id . "'"
+                            )
+                        ), array(
+                            'parent_id' => $parent_id,
+                            'user_id' => $this->user['user_id'],
+                            'date' => $date,
+                            'autor' => $name,
+                            'email' => $mail,
+                            'text' => $comments,
+                            'ip' => $_IP,
+                            'is_register' => $logged,
+                            'status' => 'file',
+                            'approve' => $approve
+                        ));
                         $_lastId = $_db->insert_id();
                     } else {
                         $this->_db->query("INSERT INTO " . DBNAME . '.' . PREFIX . "_dg_gallery_comments
@@ -350,7 +352,7 @@ class model_comments extends model_gallery
                     model_gallery::getClass('model_albom')->updateAlbom($check['parent_id']);
                 }
                 if ($this->_config['sendEmailcomm']) { //send e-mail
-                    $msg = 'Текст комментария: <br />';
+                    $msg = 'РўРµРєСЃС‚ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ: <br />';
                     $msg .= stripslashes($comments) . '<br /><br />';
                     if (1 === GALLERY_MODE) { // Categories + Albom + file Mode
                         $cat = model_gallery::getRegistry('model_category');
@@ -366,9 +368,9 @@ class model_comments extends model_gallery
                         if (is_string($albInfo["meta_data"]))
                             $albInfo["meta_data"] = unserialize($albInfo["meta_data"]);
                         $msg .= '<a href="' . HOME_URL . 'gallery/albom/' . $albInfo['id'] . '-' . $albInfo['meta_data']["meta_title"] .
-                                '.' . $parent_id . '">переити к прочтению на сайте</a>';
+                            '.' . $parent_id . '">РїРµСЂРµРёС‚Рё Рє РїСЂРѕС‡С‚РµРЅРёСЋ РЅР° СЃР°Р№С‚Рµ</a>';
                     }
-                    model_mail::send('Добавлен новый комментарий.', $msg);
+                    model_mail::send('Р”РѕР±Р°РІР»РµРЅ РЅРѕРІС‹Р№ РєРѕРјРјРµРЅС‚Р°СЂРёР№.', $msg);
                 }
             }
             if ($this->_config['def_flood']) {
@@ -382,16 +384,14 @@ class model_comments extends model_gallery
                         'tpl' => model_gallery::getClass('view_template')->msgbox($lang['add_comm'], $lang['news_err_31'])
                     );
                 } else {
-
-
                     return array('tpl' => '<div id="blind-animation" style="display:none">' . $this->load(array(
-                                                                                                               'id' => $_lastId,
-                                                                                                               'status' => 'file',
-                                                                                                               'start' => 0,
-                                                                                                               'end' => 1,
-                                                                                                               'count' => false,
-                                                                                                               'where' => 'id'
-                                                                                                          ), $view->getView(), false) . '</div>');
+                        'id' => $_lastId,
+                        'status' => 'file',
+                        'start' => 0,
+                        'end' => 1,
+                        'count' => false,
+                        'where' => 'id'
+                    ), $view->getView(), false) . '</div>');
                 }
             }
         } else {
@@ -407,15 +407,11 @@ class model_comments extends model_gallery
     }
 
     /**
-     * Метод выводит комментарии для файлов, по сути аналогичен стандартному [DLE].
-     *
-     * @global array $lang
-     * @global array $user_group
-     * @global bool $is_logged
-     * @global string $dle_login_hash
+     * РњРµС‚РѕРґ РІС‹РІРѕРґРёС‚ РєРѕРјРјРµРЅС‚Р°СЂРёРё РґР»СЏ С„Р°Р№Р»РѕРІ, РїРѕ СЃСѓС‚Рё Р°РЅР°Р»РѕРіРёС‡РµРЅ СЃС‚Р°РЅРґР°СЂС‚РЅРѕРјСѓ [DLE].
      * @param array $param
      * @param dle_template $tpl
-     * @return mixed
+     * @param bool $_isAdmin
+     * @return string
      */
     public function load(array $param, dle_template $tpl, $_isAdmin = false)
     {
@@ -451,21 +447,21 @@ class model_comments extends model_gallery
             }
             if (null === $param['mysqlId']) {
                 $param['mysqlId'] = $this->_db->query('SELECT  ' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.*,'
-                                                      . DBNAME . '.' . PREFIX . '_users.name,'
-                                                      . DBNAME . '.' . PREFIX . '_users.reg_date,'
-                                                      . DBNAME . '.' . PREFIX . '_users.reg_date,fullname,'
-                                                      . DBNAME . '.' . PREFIX . '_users.icq,'
-                                                      . DBNAME . '.' . PREFIX . '_users.user_group,'
-                                                      . DBNAME . '.' . PREFIX . '_users.news_num,'
-                                                      . DBNAME . '.' . PREFIX . '_users.comm_num,'
-                                                      . DBNAME . '.' . PREFIX . '_users.signature  FROM '
-                                                      . DBNAME . '.' . PREFIX . '_dg_gallery_comments LEFT JOIN '
-                                                      . DBNAME . '.' . PREFIX . '_users ON '
-                                                      . DBNAME . '.' . PREFIX . '_users.user_id=' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.user_id  WHERE '
-                                                      . DBNAME . '.' . PREFIX . "_dg_gallery_comments.{$param['where']}='{$id}' AND "
-                                                      . DBNAME . '.' . PREFIX . "_dg_gallery_comments.approve='{$param['approve']}' AND "
-                                                      . DBNAME . '.' . PREFIX . "_dg_gallery_comments.status='{$status}' ORDER BY "
-                                                      . DBNAME . '.' . PREFIX . "_dg_gallery_comments.{$order} $limit");
+                    . DBNAME . '.' . PREFIX . '_users.name,'
+                    . DBNAME . '.' . PREFIX . '_users.reg_date,'
+                    . DBNAME . '.' . PREFIX . '_users.reg_date,fullname,'
+                    . DBNAME . '.' . PREFIX . '_users.icq,'
+                    . DBNAME . '.' . PREFIX . '_users.user_group,'
+                    . DBNAME . '.' . PREFIX . '_users.news_num,'
+                    . DBNAME . '.' . PREFIX . '_users.comm_num,'
+                    . DBNAME . '.' . PREFIX . '_users.signature  FROM '
+                    . DBNAME . '.' . PREFIX . '_dg_gallery_comments LEFT JOIN '
+                    . DBNAME . '.' . PREFIX . '_users ON '
+                    . DBNAME . '.' . PREFIX . '_users.user_id=' . DBNAME . '.' . PREFIX . '_dg_gallery_comments.user_id  WHERE '
+                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.{$param['where']}='{$id}' AND "
+                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.approve='{$param['approve']}' AND "
+                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.status='{$status}' ORDER BY "
+                    . DBNAME . '.' . PREFIX . "_dg_gallery_comments.{$order} $limit");
             }
 
             while ($row = $this->_db->get_row($param['mysqlId'])) {
@@ -503,9 +499,9 @@ HTML;
     }
 
     /**
-     * Редактирование комментариев
-     *
-     * Вернуть объет json для разбора в javascript
+     * Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ
+     * Р’РµСЂРЅСѓС‚СЊ РѕР±СЉРµС‚ json РґР»СЏ СЂР°Р·Р±РѕСЂР° РІ javascript
+     * @return mixed
      */
     public function edit()
     {
@@ -513,10 +509,10 @@ HTML;
     }
 
     /**
-     * Сохранение редактируемого комментария.
-     * Метод получает данные, обрабатывает из для хранения в б.д., обновляет комментарий.
+     * РЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµРґР°РєС‚РёСЂСѓРµРјРѕРіРѕ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ.
+     * РњРµС‚РѕРґ РїРѕР»СѓС‡Р°РµС‚ РґР°РЅРЅС‹Рµ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµС‚ РёР· РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РІ Р±.Рґ., РѕР±РЅРѕРІР»СЏРµС‚ РєРѕРјРјРµРЅС‚Р°СЂРёР№.
      *
-     * Вернуть объет json для разбора в javascript
+     * Р’РµСЂРЅСѓС‚СЊ РѕР±СЉРµС‚ json РґР»СЏ СЂР°Р·Р±РѕСЂР° РІ javascript
      * @global array $lang
      * @return array
      */
@@ -560,7 +556,7 @@ HTML;
     }
 
     /**
-     *  Удаление комментария из б.д., обновлление счетчика у альбома.
+     *  РЈРґР°Р»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёСЏ РёР· Р±.Рґ., РѕР±РЅРѕРІР»Р»РµРЅРёРµ СЃС‡РµС‚С‡РёРєР° Сѓ Р°Р»СЊР±РѕРјР°.
      * @param null $id
      * @return void
      */
@@ -581,7 +577,7 @@ HTML;
                 if ($check['comm']) {
                     $this->_db->query("UPDATE " . DBNAME . '.' . PREFIX . "_dg_gallery_albom set comm=comm-1 where id='{$check['id']}' LIMIT 1");
                 }
-                $this->_config['update_cache_addcomm'] = 1; //TODO: ддобавить параметр обновления кеша в раздел оптимизации
+                $this->_config['update_cache_addcomm'] = 1; //TODO: РґРґРѕР±Р°РІРёС‚СЊ РїР°СЂР°РјРµС‚СЂ РѕР±РЅРѕРІР»РµРЅРёСЏ РєРµС€Р° РІ СЂР°Р·РґРµР» РѕРїС‚РёРјРёР·Р°С†РёРё
                 if ($this->_config['update_cache_addcomm']) {
                     model_gallery::getClass('model_albom')->updateAlbom($check['parent_id']);
                 }
@@ -590,7 +586,7 @@ HTML;
     }
 
     /**
-     * Массовое удаление комментариев из б.д.
+     * РњР°СЃСЃРѕРІРѕРµ СѓРґР°Р»РµРЅРёРµ РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ РёР· Р±.Рґ.
      */
     public function massAction()
     {
@@ -626,7 +622,7 @@ HTML;
                             }
                         }
                     }
-                    $this->_config['update_cache_addcomm'] = 1; //TODO: ддобавить параметр обновления кеша в раздел оптимизации
+                    $this->_config['update_cache_addcomm'] = 1; //TODO: РґРґРѕР±Р°РІРёС‚СЊ РїР°СЂР°РјРµС‚СЂ РѕР±РЅРѕРІР»РµРЅРёСЏ РєРµС€Р° РІ СЂР°Р·РґРµР» РѕРїС‚РёРјРёР·Р°С†РёРё
                     if ($this->_config['update_cache_addcomm']) {
                         if ($parent_id)
                             model_gallery::getClass('model_albom')->updateAlbom($parent_id);
@@ -639,7 +635,7 @@ HTML;
     }
 
     /**
-     * Перенос длинных строк, согласно параметрам конфигурации[DLE]
+     * РџРµСЂРµРЅРѕСЃ РґР»РёРЅРЅС‹С… СЃС‚СЂРѕРє, СЃРѕРіР»Р°СЃРЅРѕ РїР°СЂР°РјРµС‚СЂР°Рј РєРѕРЅС„РёРіСѓСЂР°С†РёРё[DLE]
      * @param string $text
      * @return string
      */
@@ -671,14 +667,14 @@ HTML;
         global $user_group;
         if ($is_reg)
             return ((true === $this->_isLogged) && (($this->_user['name'] == $row['name']) && (1 == $row['is_register'])
-                                                    || (1 == $user_group[$this->_user['user_group']]['allow_editc'])) ||
-                    (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group']))
-                    ? true : false;
+                || (1 == $user_group[$this->_user['user_group']]['allow_editc'])) ||
+                (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group']))
+                ? true : false;
         else
             return
-                    (((true === $this->_isLogged) && (1 == $user_group[$this->_user['user_group']]['allow_editc']))
-                     || (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group']))
-                            ? true : false;
+                (((true === $this->_isLogged) && (1 == $user_group[$this->_user['user_group']]['allow_editc']))
+                    || (1 == $user_group[$this->_user['user_group']]['edit_allc']) || (1 == $this->_user['user_group']))
+                    ? true : false;
     }
 
 //    /**
@@ -705,6 +701,4 @@ HTML;
             $this->_parse->safe_mode = true;
         }
     }
-
 }
-

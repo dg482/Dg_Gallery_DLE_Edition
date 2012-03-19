@@ -1,11 +1,11 @@
 <?php
-
 /**
- * @author Dark Ghost  _ALL_CMSka.ru
- * @copyright 9.10.2010
- * @package  dle9
- * Назначение: Скачивание картинок
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
 @session_start();
 define('DATALIFEENGINE', true);
 define('FILE_DIR', '../uploads/files/');

@@ -1,28 +1,28 @@
 <?php
-
 /**
- * Ïðåäñòàâëåíèå cover.tpl
- * Ìåòîäû âûâîäà êàòåãîðèé, àëüáîìîâ, ôàéëîâ.
- *
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
- *
+ * @since 1.5.6 (19.03.12)
+ */
+
+/**
+ * ÐŸÑ€ÐµÐ´ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ cover.tpl
+ * ÐœÐµÑ‚Ð¾Ð´Ñ‹ Ð²Ñ‹Ð²Ð¾Ð´Ð° ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¹, Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð², Ñ„Ð°Ð¹Ð»Ð¾Ð².
  */
 class view_cover extends view_template {
 
+    /**
+     *
+     */
     public function __construct() {
         parent::__construct();
         $this->setView('cover.tpl');
     }
 
     /**
-     *
      * @param array $result
-     * @return string
+     * @return mixed
      */
     public function renderIndexCategory(array $result) {
         $alb = model_gallery::getClass('model_albom');
@@ -66,9 +66,8 @@ class view_cover extends view_template {
     }
 
     /**
-     *
      * @param array $result
-     * @return string
+     * @return mixed
      */
     public function renderAlbom(array $result) {
         $alb = model_gallery::getClass('model_albom');
@@ -120,9 +119,8 @@ class view_cover extends view_template {
     }
 
     /**
-     *
      * @param array $result
-     * @return string
+     * @return mixed
      */
     public function renderFile(array $result) {
         $access_data = null;
@@ -186,4 +184,3 @@ class view_cover extends view_template {
     }
 
 }
-

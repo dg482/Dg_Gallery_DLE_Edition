@@ -1,13 +1,13 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.4 (08.2011)
+ * @since 1.5.6 (19.03.12)
  */
-class Default_Model_Images_Gd {
+
+class Default_Model_Images_Gd
+{
 
     /**
      * @var
@@ -44,17 +44,27 @@ class Default_Model_Images_Gd {
      * @var type
      */
     private $_watermark;
+
+    /**
+     * @var mixed|null
+     */
     private $_configs;
+
+    /**
+     * @var boll
+     */
     public $youTube;
+
+    /**
+     * @var boll
+     */
     public $vimeo;
 
     /**
-     * module_images::__construct()
-     *
-     * @param mixed $path
-     * @return void
+     * @param $path
      */
-    public function __construct($path) {
+    public function __construct($path)
+    {
         $this->_path = $path;
         $config = $this->_getConfig();
         $this->_configs = $config;
@@ -72,7 +82,11 @@ class Default_Model_Images_Gd {
         $this->setResource($path);
     }
 
-    public function checkSize($watermark = false) {
+    /**
+     * @param bool $watermark
+     */
+    public function checkSize($watermark = false)
+    {
         $size = explode('x', $this->_configs ['maxprop_original']);
         if (count($size) == 2) {
             if ($this->_thumb ['width'] > $size [0] or $this->_thumb ['height'] > $size [1]) {
@@ -91,7 +105,7 @@ class Default_Model_Images_Gd {
                 $this->_watermark = true;
             }
         }
-        //FIX: доп проверка на наложение
+        //FIX: РґРѕРї РїСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РѕР¶РµРЅРёРµ
         if ((true != $this->_watermark) && ($watermark)) {
             $this->setWatermarkImage($this->_path);
         }
@@ -100,10 +114,10 @@ class Default_Model_Images_Gd {
     }
 
     /**
-     *
-     * @param type $path string
+     * @param $path
      */
-    public function setResource($path) {
+    public function setResource($path)
+    {
         $info = getimagesize($path);
         switch ($info [2]) {
             case 1 :
@@ -127,23 +141,22 @@ class Default_Model_Images_Gd {
     }
 
     /**
-     * module_images::_copyOriginal()
-     *
-     * @return void
+     * @param $copyFile
+     * @param $destination
      */
-    public function _copyOriginal($copyFile, $destination) {
+    public function _copyOriginal($copyFile, $destination)
+    {
 
         copy($copyFile, $destination);
     }
 
     /**
-     * module_images::cteateThumb()
-     *
-     * @param string $s - size 120x120
-     * @param bool $watermark- watermark
-     * @return void
+     * @param $s
+     * @param bool $watermark
+     * @param bool $mode
      */
-    public function cteateThumb($s, $watermark = false, $mode = false) {
+    public function cteateThumb($s, $watermark = false, $mode = false)
+    {
         $size = null;
         if (null == $s) {
             $size = array(0 => 800, 1 => $this->_thumb ['height']);
@@ -175,7 +188,7 @@ class Default_Model_Images_Gd {
                 }
                 break;
         }
-        //FIX: не учитывалось $this->_thumb ['mode'] = 0
+        //FIX: РЅРµ СѓС‡РёС‚С‹РІР°Р»РѕСЃСЊ $this->_thumb ['mode'] = 0
         if ($this->_thumb ['mode'] == 0) {
             if ($this->_thumb ['width'] > $this->_thumb ['height']) {
                 $this->_thumb ['scale'] = 'width';
@@ -220,7 +233,12 @@ class Default_Model_Images_Gd {
         }
     }
 
-    public function setWatermarkImage($path) {
+    /**
+     * @param $path
+     * @return null
+     */
+    public function setWatermarkImage($path)
+    {
         if ($this->_watermark) {
             return null;
         }
@@ -232,16 +250,15 @@ class Default_Model_Images_Gd {
         $this->save(TRUE, $path);
     }
 
-    //TODO: inse?tWaterMark -))
+    //TODO: insertWaterMark ?
     /**
-     * module_images::insertWaterMark()
-     *
-     * @param mixed $x
-     * @param mixed $y
+     * @param $x
+     * @param $y
      * @param bool $res
-     * @return
+     * @return bool
      */
-    public function insertWaterMark($x, $y, $res = false) {
+    public function insertWaterMark($x, $y, $res = false)
+    {
         $min_image = 80;
         if ($x <= $min_image or $y <= $min_image) {
             return false;
@@ -277,7 +294,7 @@ class Default_Model_Images_Gd {
             $b = $rgb & 0xFF;
             $max = min($r, $g, $b);
             $min = max($r, $g, $b);
-            $lightness = (double) (($max + $min) / 510.0);
+            $lightness = (double)(($max + $min) / 510.0);
             imagedestroy($test);
             $watermark_image = ($lightness < 0.5) ? $watermark_image : $watermark_image_;
             $watermark = imagecreatefrompng($watermark_image);
@@ -289,13 +306,11 @@ class Default_Model_Images_Gd {
     }
 
     /**
-     * module_images::save()
-     *
-     * @param bool $res - imagedestroy
-     * @param string $save -  path new file
-     * @return
+     * @param bool $res
+     * @param string $save
      */
-    public function save($res = false, $save = "") {
+    public function save($res = false, $save = "")
+    {
         if (!$this->_thumb ['dest']) {
             $this->_thumb ['dest'] = $this->_thumb ['src'];
         }
@@ -316,19 +331,32 @@ class Default_Model_Images_Gd {
         if ($res) {
             $this->clear();
         }
-
         #$this->_thumb = null;
     }
 
-    public function getWidth() {
-        return (int) $this->_thumb ['width'];
+    /**
+     * @return int
+     */
+    public function getWidth()
+    {
+        return (int)$this->_thumb ['width'];
     }
 
-    public function getHeight() {
-        return (int) $this->_thumb ['height'];
+    /**
+     * @return int
+     */
+    public function getHeight()
+    {
+        return (int)$this->_thumb ['height'];
     }
 
-    public function extractColors($file, $n = 10) {
+    /**
+     * @param $file
+     * @param int $n
+     * @return array|bool
+     */
+    public function extractColors($file, $n = 10)
+    {
 
         $extractor = new Default_Model_Images_ExtractColors ();
         $_colors = $extractor->Extract($file, $n);
@@ -343,14 +371,22 @@ class Default_Model_Images_Gd {
         return $_colors;
     }
 
-    public function clear() {
+    /**
+     *
+     */
+    public function clear()
+    {
         if (is_resource($this->_thumb ['src']))
             imagedestroy($this->_thumb ['src']);
         if (is_resource($this->_thumb ['dest']))
             imagedestroy($this->_thumb ['dest']);
     }
 
-    private function _getConfig() {
+    /**
+     * @return mixed|null
+     */
+    private function _getConfig()
+    {
         if (file_exists(ROOT_DIR . '/DGGallery/app/config/config_gallery.php')) {
             return require ROOT_DIR . '/DGGallery/app/config/config_gallery.php';
         } else {

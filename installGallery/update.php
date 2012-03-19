@@ -1,14 +1,11 @@
 <?php
-
 /**
- * install
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (08.2011)
+ * @since 1.5.6 (19.03.12)
  */
+
 class install {
 
     protected $_action;
@@ -16,9 +13,7 @@ class install {
     public $lang;
 
     /**
-     * install::__construct()
      *
-     * @return void
      */
     public function __construct() {
         $this->_action = (isset($_REQUEST ['action'])) ? trim($_REQUEST ['action']) : 'index';
@@ -27,9 +22,7 @@ class install {
     }
 
     /**
-     * install::init()
-     *
-     * @return
+     * @return string
      */
     public function init() {
         $result = $this->setHeader();
@@ -43,19 +36,15 @@ class install {
     }
 
     /**
-     * install::_getLic()
-     *
-     * @return
+     * @return bool|string
      */
     protected function _getLic() {
         return (file_exists(ROOT_DIR . '/DGGallery/cache/system/page/lic.tmp')) ?
-                file_get_contents(ROOT_DIR . '/DGGallery/cache/system/page/lic.tmp') : false;
+            file_get_contents(ROOT_DIR . '/DGGallery/cache/system/page/lic.tmp') : false;
     }
 
     /**
-     * install::GetOsServer()
-     *
-     * @return
+     * @return string
      */
     protected function GetOsServer() {
         return @php_uname("s") . " " . @php_uname("r");
@@ -79,9 +68,7 @@ class install {
     }
 
     /**
-     * install::GetGDInfo()
-     *
-     * @return
+     * @return string
      */
     protected function GetGDInfo() {
         if (function_exists('gd_info')) {
@@ -103,9 +90,7 @@ class install {
     }
 
     /**
-     * install::checkDir()
-     *
-     * @return
+     * @return string
      */
     protected function checkDir() {
         $file_status = '';
@@ -121,19 +106,19 @@ class install {
         );
         foreach ($files as $file) {
             if (!file_exists($file)) {
-                $file_status = "<font color=red>не найден!</font>";
+                $file_status = "<font color=red>РЅРµ РЅР°Р№РґРµРЅ!</font>";
             } elseif (is_writable($file)) {
-                $file_status = "<font color=green>разрешено</font>";
+                $file_status = "<font color=green>СЂР°Р·СЂРµС€РµРЅРѕ</font>";
             } else {
                 @chmod($file, 0777);
                 if (is_writable($file)) {
-                    $file_status = "<font color=green>разрешено</font>";
+                    $file_status = "<font color=green>СЂР°Р·СЂРµС€РµРЅРѕ</font>";
                 } else {
                     @chmod("$file", 0755);
                     if (is_writable($file)) {
-                        $file_status = "<font color=green>разрешено</font>";
+                        $file_status = "<font color=green>СЂР°Р·СЂРµС€РµРЅРѕ</font>";
                     } else {
-                        $file_status = "<font color=red>запрещено</font>";
+                        $file_status = "<font color=red>Р·Р°РїСЂРµС‰РµРЅРѕ</font>";
                     }
                 }
             }
@@ -158,16 +143,9 @@ HTML;
         return (extension_loaded('ffmpeg')) ? $this->lang ['info'] ['enable'] : $this->lang ['info'] ['disable'];
     }
 
-    /**
-     * install::_getInfo()
-     *
-     * @return
-     */
 
     /**
-     * install::_getInfo()
-     *
-     * @return
+     * @return string
      */
     protected function _getInfo() {
         $php = phpversion();
@@ -180,11 +158,11 @@ HTML;
 <div class="check b-4 step">
 <table width="100%">
 <tr>
-<td width="200">Версия php:</td>
+<td width="200">Р’РµСЂСЃРёСЏ php:</td>
 <td>$php</td>
 </tr>
 <tr>
-<td>Операционная система:</td>
+<td>РћРїРµСЂР°С†РёРѕРЅРЅР°СЏ СЃРёСЃС‚РµРјР°:</td>
 <td>{$os}</td>
 </tr>
 <tr>
@@ -196,7 +174,7 @@ HTML;
 <td>$ffmpeg</td>
 </tr>
 <tr>
-<td>Информация о GD:</td>
+<td>РРЅС„РѕСЂРјР°С†РёСЏ Рѕ GD:</td>
 <td>{$gd}</td>
 </tr>
 {$fc}
@@ -206,9 +184,7 @@ HTML;
     }
 
     /**
-     * install::checkOld()
-     *
-     * @return
+     * @return bool
      */
     protected function checkOld() {
         $this->_setDbAdapter();
@@ -242,9 +218,7 @@ HTML;
     }
 
     /**
-     * install::_configure()
-     *
-     * @return
+     * @return string
      */
     protected function _configure() {
         $old = '';
@@ -255,7 +229,7 @@ HTML;
             $dle_version = $config ['version_id'];
             $dle = <<< HTML
 <tr>
-<td width="200">Версия DLE:</td>
+<td width="200">Р’РµСЂСЃРёСЏ DLE:</td>
 <td>{$dle_version}</td>
 </tr>
 HTML;
@@ -301,10 +275,10 @@ HTML;
 <table width="100%">
 {$dle}
 <tr>
-<td>Конфигурация: </td>
+<td>РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ: </td>
 <td><select name="GALLERY_MODE">
-<option value="1">Портал</option>
-<option value="2">Архив</option>
+<option value="1">РџРѕСЂС‚Р°Р»</option>
+<option value="2">РђСЂС…РёРІ</option>
 </select>
 </td>
 </tr>
@@ -312,7 +286,7 @@ HTML;
 {$old}
 <input type="hidden" name="action" value="install" />
 <input type="hidden" name="type" value="json" />
-<button class="buttons b-4" onclick="installStart(); return false;">продолжить</button>
+<button class="buttons b-4" onclick="installStart(); return false;">РїСЂРѕРґРѕР»Р¶РёС‚СЊ</button>
 <div id="proccess">
 <div class="info b-4 hidden">
 <p>{$this->lang['info']['process']}: <b id="count"></b></p>
@@ -328,9 +302,7 @@ HTML;
     }
 
     /**
-     * install::setHeader()
-     *
-     * @return
+     * @return string
      */
     protected function setHeader() {
         return <<< HTML
@@ -368,9 +340,7 @@ HTML;
     }
 
     /**
-     * install::setFooter()
-     *
-     * @return
+     * @return string
      */
     protected function setFooter() {
         return <<< HTML
@@ -379,6 +349,9 @@ HTML;
 HTML;
     }
 
+    /**
+     * @return string
+     */
     public function InstallGallery() {
         $inf = array();
         $sql = false;
@@ -386,9 +359,9 @@ HTML;
             $_POST['GALLERY_MODE'] = intval($_POST['GALLERY_MODE']);
             $config = new model_config();
             $config->saveToArray(
-                    array(
-                        'mode' => $_POST['GALLERY_MODE']
-                    )
+                array(
+                    'mode' => $_POST['GALLERY_MODE']
+                )
             );
         }
         $this->_setDbAdapter();

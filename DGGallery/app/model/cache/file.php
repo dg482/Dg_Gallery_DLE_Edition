@@ -1,39 +1,56 @@
 <?php
-
 /**
+ * @package gallery
  * @author Dark Ghost
- * @copyright 15.3.2011
- * @package dle92
- * Назначение:
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
-class model_cache_file {
 
+class model_cache_file
+{
+
+    /**
+     * @var string
+     */
     private static $dir;
+    /**
+     * @var string
+     */
     private static $dirJson;
+    /**
+     *
+     */
     const CACHE_SYSTEM = '/DGGallery/cache/system/';
+    /**
+     *
+     */
     const CAHCHE_JSON = '/DGGallery/cache/json/';
 
     /**
-     * model_cache_file::__construct()
      *
-     * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         self::$dir = ROOT_DIR . self::CACHE_SYSTEM;
         self::$dirJson = ROOT_DIR . self::CAHCHE_JSON;
     }
 
     /**
-     * model_cache_file::get()
-     *
-     * @param mixed $name
-     * @return
+     * @static
+     * @param $name
+     * @return mixed|null
      */
-    public static function get($name) {
+    public static function get($name)
+    {
         return (file_exists(self::$dir . $name . '.php')) ? unserialize(file_get_contents(self::$dir . $name . '.php')) : null;
     }
 
-    public static function delete($name) {
+    /**
+     * @static
+     * @param $name
+     */
+    public static function delete($name)
+    {
         if ((file_exists(self::$dir . $name . '.php'))) {
             unlink(self::$dir . $name . '.php');
         }
@@ -43,22 +60,21 @@ class model_cache_file {
     }
 
     /**
-     * model_cache_file::getJson()
-     *
-     * @return
+     * @static
+     * @param $name
+     * @return null|string
      */
-    public static function getJson($name) {
+    public static function getJson($name)
+    {
         return (file_exists(self::$dirJson . $name . '.json')) ? file_get_contents(self::$dirJson . $name . '.json') : null;
     }
 
     /**
-     * model_cache_file::setCache()
-     *
-     * @param mixed $name
-     * @param mixed $data
-     * @return void
+     * @param $name
+     * @param $data
      */
-    public function setCache($name, $data) {
+    public function setCache($name, $data)
+    {
         $file = fopen(self::$dir . $name . '.php', "wb+");
         fwrite($file, serialize($data));
         fclose($file);
@@ -66,13 +82,11 @@ class model_cache_file {
     }
 
     /**
-     * model_cache_file::setCacheJson()
-     *
-     * @param mixed $name
-     * @param mixed $data
-     * @return void
+     * @param $name
+     * @param $data
      */
-    public function setCacheJson($name, $data) {
+    public function setCacheJson($name, $data)
+    {
         $mod_json = new module_json ();
         $file = fopen(self::$dirJson . $name . '.json', "wb+");
         fwrite($file, $mod_json->getJson($data));

@@ -1,12 +1,11 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.2 (06.2011)
+ * @since 1.5.6 (19.03.12)
  */
+
 class model_config {
 
     /**
@@ -19,20 +18,16 @@ class model_config {
     private $filename;
 
     /**
-     * model_config::initArray()
      *
-     * @return void
      */
     public function initArray() {
         $this->arr = parse_ini_file($this->filename, true);
     }
 
     /**
-     * model_config::setConfig()
-     *
-     * @param mixed $filename
+     * @param $filename
      * @param string $section
-     * @return
+     * @return array|null
      */
     public function setConfig($filename, $section = 'production') {
         if ($this->load($filename)) {
@@ -41,10 +36,8 @@ class model_config {
     }
 
     /**
-     * model_config::getSection()
-     *
-     * @param mixed $section
-     * @return
+     * @param $section
+     * @return array|null
      */
     public function getSection($section) {
         $tmp = $this->arr[$section];
@@ -69,10 +62,9 @@ class model_config {
     }
 
     /**
-     * model_config::load()
-     *
-     * @param mixed $file
-     * @return
+     * @param $file
+     * @return bool
+     * @throws Exception
      */
     public function load($file) {
         $result = true;
@@ -90,12 +82,10 @@ class model_config {
     }
 
     /**
-     * model_config::read()
-     *
-     * @param mixed $section
-     * @param mixed $key
+     * @param $section
+     * @param $key
      * @param string $def
-     * @return
+     * @return string
      */
     public function read($section, $key, $def = '') {
         if (isset($this->arr[$section][$key])) {
@@ -119,10 +109,7 @@ class model_config {
     }
 
     /**
-     * model_config::eraseSection()
-     *
-     * @param mixed $section
-     * @return void
+     * @param $section
      */
     public function eraseSection($section) {
         if (isset($this->arr[$section]))
@@ -130,11 +117,8 @@ class model_config {
     }
 
     /**
-     * model_config::deleteKey()
-     *
-     * @param mixed $section
-     * @param mixed $key
-     * @return void
+     * @param $section
+     * @param $key
      */
     public function deleteKey($section, $key) {
         if (isset($this->arr[$section][$key]))
@@ -142,10 +126,8 @@ class model_config {
     }
 
     /**
-     * model_config::readSections()
-     *
-     * @param mixed $array
-     * @return
+     * @param $array
+     * @return array
      */
     public function readSections(&$array) {
         $array = array_keys($this->arr);
@@ -153,11 +135,9 @@ class model_config {
     }
 
     /**
-     * model_config::readKeys()
-     *
-     * @param mixed $section
-     * @param mixed $array
-     * @return
+     * @param $section
+     * @param $array
+     * @return array
      */
     public function readKeys($section, &$array) {
         if (isset($this->arr[$section])) {
@@ -168,9 +148,7 @@ class model_config {
     }
 
     /**
-     * model_config::updateFile()
-     *
-     * @return
+     * @return bool
      */
     public function updateFile() {
         $result = '';
@@ -186,11 +164,7 @@ class model_config {
     }
 
     /**
-     * model_config::saveToArray()
-     *
-     * @param bool $f
-     * @param mixed $config
-     * @return void
+     * @param $config
      */
     public function saveToArray($config) {
         $file_config = ROOT_DIR . '/DGGallery/app/config/config_gallery.php';

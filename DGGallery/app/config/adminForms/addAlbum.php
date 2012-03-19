@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * Р¤РѕСЂРјР° РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕРіРѕ Р°Р»СЊР±РѕРјР°.
+ * Form for adding new album.
+ */
 
 return array(
     'form' => array(
@@ -6,15 +14,15 @@ return array(
         'method' => 'post',
         'name' => 'addalbum',
         'addalbum' => array(
-            'legend' => 'Добавление нового альбома',
+            'legend' => 'Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕРіРѕ Р°Р»СЊР±РѕРјР°',
             'row' => array(
                 array(
-                    'label' => 'Название:<br /><small></small>',
+                    'label' => 'РќР°Р·РІР°РЅРёРµ:<br /><small></small>',
                     'type' => 'text',
                     'key' => 'title'
                 ),
                 array(
-                    'label' => 'Категория:<br /><small></small>',
+                    'label' => 'РљР°С‚РµРіРѕСЂРёСЏ:<br /><small></small>',
                     'type' => 'select',
                     'key' => 'parent_id',
                     'values' => array(
@@ -24,37 +32,37 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Альтернативное имя:<br /><small>метатег title</small>',
+                    'label' => 'РђР»СЊС‚РµСЂРЅР°С‚РёРІРЅРѕРµ РёРјСЏ:<br /><small>РјРµС‚Р°С‚РµРі title</small>',
                     'type' => 'text',
                     'key' => 'meta_title'
                 ),
                 array(
-                    'label' => 'Описание:<br /><small>полное описание</small>',
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РїРѕР»РЅРѕРµ РѕРїРёСЃР°РЅРёРµ</small>',
                     'type' => 'textareawysiwyg',
                     'key' => 'descr'
                 ),
                 array(
-                    'label' => 'Описание:<br /><small>метатег description</small>',
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РјРµС‚Р°С‚РµРі description</small>',
                     'type' => 'textarea',
                     'key' => 'meta_descr'
                 ),
                 array(
-                    'label' => 'Ключевые слова:<br /><small>метатег keywords</small>',
+                    'label' => 'РљР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР°:<br /><small>РјРµС‚Р°С‚РµРі keywords</small>',
                     'type' => 'textarea',
                     'key' => 'meta_keywords'
                 ),
             )
         ),
-         'contentAccess' => array(
-            'legend' => 'Настройки доступа к функциям скрипта.',
+        'contentAccess' => array(
+            'legend' => 'РќР°СЃС‚СЂРѕР№РєРё РґРѕСЃС‚СѓРїР° Рє С„СѓРЅРєС†РёСЏРј СЃРєСЂРёРїС‚Р°.',
             'row' => array(
 //                array(
-//                    'label' => 'Гостевой режим:',
+//                    'label' => 'Р“РѕСЃС‚РµРІРѕР№ СЂРµР¶РёРј:',
 //                    'type' => 'checkbox',
 //                    'key' => 'guestMode'
 //                ),
-                 array(
-                    'label' => 'Просмотр разрешен:<br /><small>локальное правило.</small>',
+                array(
+                    'label' => 'РџСЂРѕСЃРјРѕС‚СЂ СЂР°Р·СЂРµС€РµРЅ:<br /><small>Р»РѕРєР°Р»СЊРЅРѕРµ РїСЂР°РІРёР»Рѕ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessView',
                     'values' => array(
@@ -64,7 +72,7 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Комментирование альбомов:<br /><small>глобальный параметр.</small>',
+                    'label' => 'РљРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ Р°Р»СЊР±РѕРјРѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessComments',
                     'values' => array(
@@ -74,7 +82,7 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Комментирование файлов:<br /><small>глобальный параметр.</small>',
+                    'label' => 'РљРѕРјРјРµРЅС‚РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»РѕРІ:<br /><small>РіР»РѕР±Р°Р»СЊРЅС‹Р№ РїР°СЂР°РјРµС‚СЂ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessCommentsFile',
                     'values' => array(
@@ -83,7 +91,6 @@ return array(
                         'label' => 'group_name'
                     )
                 ),
-
             )
         ),
     )

@@ -1,37 +1,54 @@
 <?php
-
 /**
- * Представление show_preview.tpl, show_full.tpl
- * вывод файла.
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.6 (09.2011)
- *
+ * @since 1.5.6 (19.03.12)
+ */
+
+/**
+ * РџСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ show_preview.tpl, show_full.tpl
+ * РІС‹РІРѕРґ С„Р°Р№Р»Р°.
  */
 class view_show extends view_template {
 
+    /**
+     * @var string
+     */
     protected $_dir;
 
+    /**
+     *
+     */
     public function __construct() {
         parent::__construct();
         $this->_tpl = new dle_template();
         $this->_tpl->dir = $this->_dir;
     }
 
+    /**
+     * @param array $result
+     * @return mixed|string
+     */
     public function renderPreview(array $result) {
         $this->setView('show_preview.tpl');
         return $this->_render($result);
     }
 
+    /**
+     * @param array $result
+     * @return mixed|string
+     */
     public function renderFull(array $result) {
         $this->setView('show_full.tpl');
-
         return $this->_render($result);
     }
 
+    /**
+     * @param array $result
+     * @return mixed|string
+     * @throws controller_exception
+     */
     protected function _render(array $result) {
 
         self::$CATEGORY = controller_gallery::$CATEGORY;
@@ -93,14 +110,14 @@ class view_show extends view_template {
                     $ids = model_gallery::getClass('model_file')->getMinMaxId($file['parent_id']);
                     if ($file['id'] != $ids['min']) {
                         $this->_tpl->set('[prev-file]', '<a href="' . HOME_URL . 'gallery/albom/' . $result ['info'] ['id'] . '-' .
-                                $result ['info'] ["meta_data"] ['meta_title'] . '.' . $file['id'] . '/prev/">');
+                            $result ['info'] ["meta_data"] ['meta_title'] . '.' . $file['id'] . '/prev/">');
                         $this->_tpl->set('[/prev-file]', '</a>');
                     } else {
                         $this->_tpl->set_block("#\\[prev-file\\](.*?)\\[/prev-file\\]#si", '');
                     }
                     if ($file['id'] != $ids['max']) {
                         $this->_tpl->set('[next-file]', '<a href="' . HOME_URL . 'gallery/albom/' . $result ['info'] ['id'] . '-' .
-                                $result ['info'] ["meta_data"] ['meta_title'] . '.' . $file['id'] . '/next/">');
+                            $result ['info'] ["meta_data"] ['meta_title'] . '.' . $file['id'] . '/next/">');
                         $this->_tpl->set('[/next-file]', '</a>');
                     } else {
                         $this->_tpl->set_block("#\\[next-file\\](.*?)\\[/next-file\\]#si", '');
@@ -109,7 +126,7 @@ class view_show extends view_template {
                     $ids = model_gallery::getClass('model_file')->getMinMaxId(self::$CATEGORY ['id']);
                     if ($file['id'] != $ids['min']) {
                         $this->_tpl->set('[prev-file]', '<a href="' . HOME_URL . 'gallery/full/' . self::$CATEGORY ['id'] . '-' .
-                                self::$CATEGORY ['meta_title'] . '.' . $file['id'] . '/prev/">');
+                            self::$CATEGORY ['meta_title'] . '.' . $file['id'] . '/prev/">');
                         $this->_tpl->set('[/prev-file]', '</a>');
                     } else {
                         $this->_tpl->set_block("#\\[prev-file\\](.*?)\\[/prev-file\\]#si", '');
@@ -117,7 +134,7 @@ class view_show extends view_template {
 
                     if ($file['id'] != $ids['max']) {
                         $this->_tpl->set('[next-file]', '<a href="' . HOME_URL . 'gallery/full/' . self::$CATEGORY ['id'] . '-'
-                                . self::$CATEGORY ['meta_title'] . '.' . $file['id'] . '/next/">');
+                            . self::$CATEGORY ['meta_title'] . '.' . $file['id'] . '/next/">');
                         $this->_tpl->set('[/next-file]', '</a>');
                     } else {
                         $this->_tpl->set_block("#\\[next-file\\](.*?)\\[/next-file\\]#si", '');
@@ -133,27 +150,27 @@ class view_show extends view_template {
                 $_albomInfo['id'] = true;
             }
 
-            //TODO: в режиме 2 массивы не пусты но и не содержат информации,
+            //TODO: РІ СЂРµР¶РёРјРµ 2 РјР°СЃСЃРёРІС‹ РЅРµ РїСѓСЃС‚С‹ РЅРѕ Рё РЅРµ СЃРѕРґРµСЂР¶Р°С‚ РёРЅС„РѕСЂРјР°С†РёРё,
             //dump array(1) { ["other_dat"]=> bool(false) } array(2) { ["access_data"]=> bool(false) ["data"]=> bool(false) }
-            // ? вернуть из модели null в режиме 2 или ..........
+            // ? РІРµСЂРЅСѓС‚СЊ РёР· РјРѕРґРµР»Рё null РІ СЂРµР¶РёРјРµ 2 РёР»Рё ..........
             if ($file['id'] && $_albomInfo['id']) {
                 if ($this->_config['logViewFile']) {//count views file
                     model_gallery::getClass('model_file')->updateViewFile($file['id']);
                 }
                 if ($file ['title'] || $file ["descr"] || $file ["other_dat"] ['tag']) { //file metadata
                     $this->_setMetaTag(
-                            array(
-                                'meta_title' => $file ['title'],
-                                'meta_descr' => substr(strip_tags($file ["descr"]), 0, 200),
-                                'meta_keywords' => $file ["other_dat"] ['tag']
-                    ));
+                        array(
+                            'meta_title' => $file ['title'],
+                            'meta_descr' => substr(strip_tags($file ["descr"]), 0, 200),
+                            'meta_keywords' => $file ["other_dat"] ['tag']
+                        ));
                 } else { // albom metadata
                     $this->_setMetaTag(
-                            array(
-                                'meta_title' => $_albomInfo ['title'], //htmlentities($_albomInfo ['title'], ENT_QUOTES, 'cp1251'),
-                                'meta_descr' => $_albomInfo ['meta_data'] ['meta_descr'],
-                                'meta_keywords' => $_albomInfo ['meta_data'] ['meta_keywords']
-                    ));
+                        array(
+                            'meta_title' => $_albomInfo ['title'], //htmlentities($_albomInfo ['title'], ENT_QUOTES, 'cp1251'),
+                            'meta_descr' => $_albomInfo ['meta_data'] ['meta_descr'],
+                            'meta_keywords' => $_albomInfo ['meta_data'] ['meta_keywords']
+                        ));
                 }
 
                 $this->_tpl->set('{meta_keyword}', stripcslashes($file ["other_dat"] ['tag']));
@@ -172,17 +189,17 @@ class view_show extends view_template {
                 //-------
                 if ($result ['info'] ['info_author'])
                     $this->_setInfoUser($result ['info'] ['info_author'], $this->_tpl); // set info author
-                if (GALLERY_MODE === 2 && $file['user_id'])//KLUDGE: исходный массив с данными в режиме 2 пуст берем данные пользователя из $file, надо востановить его в модели, чтобы избежать подзапросов и доп проверок в контроллере, хотя .....
+                if (GALLERY_MODE === 2 && $file['user_id'])//KLUDGE: РёСЃС…РѕРґРЅС‹Р№ РјР°СЃСЃРёРІ СЃ РґР°РЅРЅС‹РјРё РІ СЂРµР¶РёРјРµ 2 РїСѓСЃС‚ Р±РµСЂРµРј РґР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РёР· $file, РЅР°РґРѕ РІРѕСЃС‚Р°РЅРѕРІРёС‚СЊ РµРіРѕ РІ РјРѕРґРµР»Рё, С‡С‚РѕР±С‹ РёР·Р±РµР¶Р°С‚СЊ РїРѕРґР·Р°РїСЂРѕСЃРѕРІ Рё РґРѕРї РїСЂРѕРІРµСЂРѕРє РІ РєРѕРЅС‚СЂРѕР»Р»РµСЂРµ, С…РѕС‚СЏ .....
                     $this->_setInfoUser($file, $this->_tpl); // set info author
                 $this->_tpl->set('{description_albom}', stripslashes($result ['info'] ['meta_data'] ['description']));
                 $file ['comm_access'] = intval($file ['comm_access']);
                 //FIX:29.08.11
-                //комментарии выводились тольок для групп которым разрешено добавление
+                //РєРѕРјРјРµРЅС‚Р°СЂРёРё РІС‹РІРѕРґРёР»РёСЃСЊ С‚РѕР»СЊРѕРє РґР»СЏ РіСЂСѓРїРї РєРѕС‚РѕСЂС‹Рј СЂР°Р·СЂРµС€РµРЅРѕ РґРѕР±Р°РІР»РµРЅРёРµ
                 $comm = model_gallery::getClass('model_comments'); //get comments model
                 $count = $comm->count($_current_file_id, 'file');
                 if ((($file ['comm_access'] || model_gallery::getRegistry('model_albom')->getAccessComments()) ||
-                        ((false == model_gallery::getRegistry('model_albom')->getAccessComments()) && (1 === $file ['comm_access']))) ||
-                        ((GALLERY_MODE === 2) && (in_array(model_gallery::$user['user_id'], $this->_config['accessCommFile'])))
+                    ((false == model_gallery::getRegistry('model_albom')->getAccessComments()) && (1 === $file ['comm_access']))) ||
+                    ((GALLERY_MODE === 2) && (in_array(model_gallery::$user['user_id'], $this->_config['accessCommFile'])))
                 ) { //set add comments form
                     $this->_tpl->set('[addcommentfile]', '');
                     $this->_tpl->set('[/addcommentfile]', '');
@@ -195,23 +212,23 @@ class view_show extends view_template {
                 }
                 if ($count ['count'] > $this->_config ['commPage'] && !$this->_config['coments_tree']) { // set comm pager
                     $this->_tpl->set('{pagination}', model_gallery::getClass('model_gallery')->_nav((int) $count ['count'], array(
-                                'global_query_end' => $this->_config ['commPage'],
-                                'nav_prefix' => 'gallery/albom/' . $result ['info'] ['id'] . '-' . $result ['info'] ["meta_data"] ['meta_title'] . '.' . $_current_file_id),
-                                    //'nav_suffix' => '.html'
-                                    clone $this->_tpl));
+                            'global_query_end' => $this->_config ['commPage'],
+                            'nav_prefix' => 'gallery/albom/' . $result ['info'] ['id'] . '-' . $result ['info'] ["meta_data"] ['meta_title'] . '.' . $_current_file_id),
+                        //'nav_suffix' => '.html'
+                        clone $this->_tpl));
                 } else {
                     $this->_tpl->set('{pagination}', '');
                 }
                 if ($count['count']) {//load comments
                     $this->_tpl->set('{comments}', $comm->load(
-                                    array(
-                                'id' => $_current_file_id,
-                                'status' => 'file',
-                                'where' => 'parent_id',
-                                'start' => 0,
-                                'end' => $this->_config ['commPage'],
-                                'count' => $count
-                                    ), clone $this->_tpl));
+                        array(
+                            'id' => $_current_file_id,
+                            'status' => 'file',
+                            'where' => 'parent_id',
+                            'start' => 0,
+                            'end' => $this->_config ['commPage'],
+                            'count' => $count
+                        ), clone $this->_tpl));
                 } else {
                     $this->_tpl->set('{comments}', '<div id="gallery-ajax-comments"></div>');
                 }
@@ -243,7 +260,7 @@ class view_show extends view_template {
                         break;
                     case 'video' :
                     case 'youtube' :
-                    case 'vimeo'://ADD: добавлены vimeo, smotri.com, rutube, gametrailers
+                    case 'vimeo'://ADD: РґРѕР±Р°РІР»РµРЅС‹ vimeo, smotri.com, rutube, gametrailers
                     case 'smotri.com':
                     case 'rutube':
                     case 'gametrailers':
@@ -259,7 +276,7 @@ class view_show extends view_template {
                     //  $js .= 'gallery.lang =' . module_json::getJson($this->_lang ['javaScript']) . ";\r";
                     $this->_tpl->set('{json}', $js);
                 }
-                if (stripos($this->_tpl->copy_template, '{related-files}') !== false) {//похожие файлы
+                if (stripos($this->_tpl->copy_template, '{related-files}') !== false) {//РїРѕС…РѕР¶РёРµ С„Р°Р№Р»С‹
                     $rnd = model_gallery::getClass('view_related');
                     $_result = model_gallery::getClass('model_file')->getRelatedFiles();
                     $this->_tpl->set('{related-files}', $rnd->render($_result));
@@ -279,7 +296,7 @@ class view_show extends view_template {
     }
 
     /**
-     * Формирование списка файлов.
+     * Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ.
      * @param string $tpl
      * @return string
      */

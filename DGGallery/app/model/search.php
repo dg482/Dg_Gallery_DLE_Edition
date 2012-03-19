@@ -1,12 +1,12 @@
 <?php
-
 /**
- * Êëàññ: search
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class model_search extends model_gallery {
 
     /**
@@ -20,13 +20,16 @@ class model_search extends model_gallery {
      */
     public static $DEF_ORDER = 'ORDER_DATE';
 
+    /**
+     *
+     */
     public function __construct() {
         $this->_db = model_gallery::getRegistry('module_db');
     }
 
     /**
-     *
-     * @return array
+     * @param null $data
+     * @return bool
      */
     public function addKeywordsFile($data = null) {
         $key = ($data) ? $data : model_request::getPost('tag');
@@ -80,6 +83,11 @@ class model_search extends model_gallery {
         return $text;
     }
 
+    /**
+     * @param array $param
+     * @param int $pageLimit
+     * @return mixed
+     */
     public function get(array $param, $pageLimit = 3) {
         $offset = (int) model_request::getRequest('page');
         $offset = ($offset) ? (($offset - 1) * $pageLimit) : 0;
@@ -88,47 +96,47 @@ class model_search extends model_gallery {
         if (GALLERY_MODE === 1) {
             if ($param['where'] == 'color')
                 return $this->_db->query('SELECT ' . PREFIX . '_dg_gallery_file.*,' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data FROM ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_file.other_dat REGEXP  '[[:<:]]{$param['search']}[[:>:]]' AND " .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_file.status='albom' LIMIT {$offset},{$pageLimit}");
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data FROM ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_file.other_dat REGEXP  '[[:<:]]{$param['search']}[[:>:]]' AND " .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_file.status='albom' LIMIT {$offset},{$pageLimit}");
             if ($param['where'] == 'keyword') {
                 return $this->_db->query('SELECT ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id, ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file. * , ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data  FROM  ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_tags  JOIN ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file ON ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file.id= ' . DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id  JOIN ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.id= ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_tags.tag='{$param['search']}' LIMIT {$offset},{$pageLimit}");
+                    DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id, ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file. * , ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data  FROM  ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_tags  JOIN ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file ON ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file.id= ' . DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id  JOIN ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.id= ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_tags.tag='{$param['search']}' LIMIT {$offset},{$pageLimit}");
             }
         } elseif (GALLERY_MODE === 2) {
             if ($param['where'] == 'keyword') {
                 return $this->_db->query('SELECT ' . DBNAME . '.' . PREFIX . '_dg_gallery_tags.*,' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file.* FROM ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_tags LEFT JOIN ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file ON ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file.id =' . DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id  WHERE ' .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_tags.tag='{$param['search']}'");
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file.* FROM ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_tags LEFT JOIN ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file ON ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file.id =' . DBNAME . '.' . PREFIX . '_dg_gallery_tags.parent_id  WHERE ' .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_tags.tag='{$param['search']}'");
             }
             if ($param['where'] == 'color')
                 return $this->_db->query('SELECT ' . PREFIX . '_dg_gallery_file.*,' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data FROM ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
-                        DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_file.other_dat REGEXP  '[[:<:]]{$param['search']}[[:>:]]' AND " .
-                        DBNAME . '.' . PREFIX . "_dg_gallery_file.status='catfile' LIMIT {$offset},{$pageLimit}");
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data FROM ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom ON ' .
+                    DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id  WHERE ' .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_file.other_dat REGEXP  '[[:<:]]{$param['search']}[[:>:]]' AND " .
+                    DBNAME . '.' . PREFIX . "_dg_gallery_file.status='catfile' LIMIT {$offset},{$pageLimit}");
         }
         if ($param['where'] == 'letter') {
             $where = "symbol='{$param['search']}'";
-           
+
             if ($param['search'] == '\#') {
                 $where = 'symbol  REGEXP  \'[0-9]\' ';
             }
@@ -139,8 +147,9 @@ class model_search extends model_gallery {
     }
 
     /**
-     *
-     * @param string $letter
+     * @static
+     * @param $letter
+     * @return mixed
      */
     public static function addLetter($letter) {
         $_config = model_gallery::getRegistry('config');
@@ -164,7 +173,7 @@ class model_search extends model_gallery {
     }
 
     /**
-     *
+     * @static
      * @return string
      */
     public static function getAlfa() {
@@ -177,16 +186,20 @@ class model_search extends model_gallery {
         $sw = array('rus' => 'rus', 'eng' => 'eng');
         unset($sw[self::$DEF_LANG]);
         $lng = current($sw);
-        $html .= '<span class="search-letter">' . self::$DEF_LANG . '</span>';
+        $html = '<span class="search-letter">' . self::$DEF_LANG . '</span>';
         $html .= '<a href="javascript:void(0)" class="search-letter" rel="' . $lng . '">' . $lng . '</a>';
         foreach ($_lang[self::$DEF_LANG] as $key) {
             $html .= ( in_array($key, $alfa)) ? '<a href="' . HOME_URL . 'gallery/search/letter/' . urlencode(strtolower($key)) .
-                    '" class="search-letter">' . $key . '</a>' : '<span class="search-letter">' . $key . '</span>';
+                '" class="search-letter">' . $key . '</a>' : '<span class="search-letter">' . $key . '</span>';
         }
 
         return $html;
     }
 
+    /**
+     * @static
+     * @return string
+     */
     public static function getForm() {
         $param = model_gallery::getRegistry('route')->getParam();
         $_lang = self::getRegistry('lang');
@@ -208,22 +221,21 @@ class model_search extends model_gallery {
         }
         $html = '<form name="search" action="#" method="post" >';
         $html .= '<fieldset><legend>' . $_lang['search']['form']['legend'] . '</legend>';
-//        $html .='<label for="_where">' . $_lang['search']['form']['legend'] . '</label>';
-//        $html .='<select id="_where" name="_where">';
-//        foreach ($_where as $key => $value) {
-//            if ($key == $_checked) {
-//                $html .= '<option value="' . $key . '" selected="selected">' . $value . '</option>';
-//            } else {
-//                $html .= '<option value="' . $key . '">' . $value . '</option>';
-//            }
-//        }
-//        $html .= '</select>';
+        //        $html .='<label for="_where">' . $_lang['search']['form']['legend'] . '</label>';
+        //        $html .='<select id="_where" name="_where">';
+        //        foreach ($_where as $key => $value) {
+        //            if ($key == $_checked) {
+        //                $html .= '<option value="' . $key . '" selected="selected">' . $value . '</option>';
+        //            } else {
+        //                $html .= '<option value="' . $key . '">' . $value . '</option>';
+        //            }
+        //        }
+        //        $html .= '</select>';
 
         $html .='</fieldset>';
-        $html .= '<input type="submit" value="Íà÷àòü ïîèñê" id="dosearch" name="dosearch" style="margin:0px 20px 0 0px;" class="bbcodes">';
+        $html .= '<input type="submit" value="ÐÐ°Ñ‡Ð°Ñ‚ÑŒ Ð¿Ð¾Ð¸ÑÐº" id="dosearch" name="dosearch" style="margin:0px 20px 0 0px;" class="bbcodes">';
         $html .='</form>';
         return $html;
     }
 
 }
-

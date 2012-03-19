@@ -1,54 +1,63 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * Р¤РѕСЂРјР° РґРѕР±Р°РІР»РµРЅРёСЏ РЅРѕРІРѕР№ РєР°С‚РµРіРѕСЂРёРё.
+ * Form for adding new category.
+ */
+
 return array(
     'form' => array(
         'action' => '',
         'method' => 'post',
         'name' => 'newcat',
         'addcat' => array(
-            'legend' => 'Добавление новой категории',
+            'legend' => 'Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ РєР°С‚РµРіРѕСЂРёРё',
             'row' => array(
                 array(
-                    'label' => 'Имя:<br /><small></small>',
+                    'label' => 'РРјСЏ:<br /><small></small>',
                     'type' => 'text',
                     'key' => 'title'
                 ),
                 array(
-                    'label' => 'Родительская категория:<br /><small></small>',
+                    'label' => 'Р РѕРґРёС‚РµР»СЊСЃРєР°СЏ РєР°С‚РµРіРѕСЂРёСЏ:<br /><small></small>',
                     'type' => 'select',
                     'key' => 'parent_id',
                     'values' => array(
                         'data' => 'gallery_cat',
                         'key' => 'id',
                         'label' => 'title',
-                        'check'=>'parent_id'
+                        'check' => 'parent_id'
                     )
                 ),
                 array(
-                    'label' => 'Альтернативное имя:<br /><small>метатег title</small>',
+                    'label' => 'РђР»СЊС‚РµСЂРЅР°С‚РёРІРЅРѕРµ РёРјСЏ:<br /><small>РјРµС‚Р°С‚РµРі title</small>',
                     'type' => 'text',
                     'key' => 'meta_title'
                 ),
                 array(
-                    'label' => 'Обложка категории:<br /><small></small>',
+                    'label' => 'РћР±Р»РѕР¶РєР° РєР°С‚РµРіРѕСЂРёРё:<br /><small></small>',
                     'type' => 'uploadify'
                 ),
                 array(
-                    'label' => 'Описание:<br /><small>полное описание</small>',
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РїРѕР»РЅРѕРµ РѕРїРёСЃР°РЅРёРµ</small>',
                     'type' => 'textareawysiwyg',
                     'key' => 'descr'
                 ),
                 array(
-                    'label' => 'Описание:<br /><small>метатег description</small>',
+                    'label' => 'РћРїРёСЃР°РЅРёРµ:<br /><small>РјРµС‚Р°С‚РµРі description</small>',
                     'type' => 'textarea',
                     'key' => 'meta_descr'
                 ),
                 array(
-                    'label' => 'Ключевые слова:<br /><small>метатег keywords</small>',
+                    'label' => 'РљР»СЋС‡РµРІС‹Рµ СЃР»РѕРІР°:<br /><small>РјРµС‚Р°С‚РµРі keywords</small>',
                     'type' => 'textarea',
                     'key' => 'meta_keywords'
                 ),
                 array(
-                    'label' => 'Загрузка разрешена:<br /><small>локальное правило.</small>',
+                    'label' => 'Р—Р°РіСЂСѓР·РєР° СЂР°Р·СЂРµС€РµРЅР°:<br /><small>Р»РѕРєР°Р»СЊРЅРѕРµ РїСЂР°РІРёР»Рѕ.</small>',
                     'type' => 'multiple',
                     'key' => 'accessupload',
                     'values' => array(
@@ -59,7 +68,7 @@ return array(
                     )
                 ),
                 array(
-                    'label' => 'Просмотр разрешен:<br /><small>локальное правило.</small>',
+                    'label' => 'РџСЂРѕСЃРјРѕС‚СЂ СЂР°Р·СЂРµС€РµРЅ:<br /><small>Р»РѕРєР°Р»СЊРЅРѕРµ РїСЂР°РІРёР»Рѕ.</small>',
                     'type' => 'multiple',
                     'key' => 'access',
                     'values' => array(
@@ -69,7 +78,7 @@ return array(
                     )
                 ),
 //                array(
-//                    'label' => 'Гостевой режим:<br /><small>локальное правило.</small>',
+//                    'label' => 'Р“РѕСЃС‚РµРІРѕР№ СЂРµР¶РёРј:<br /><small>Р»РѕРєР°Р»СЊРЅРѕРµ РїСЂР°РІРёР»Рѕ.</small>',
 //                    'type' => 'checkbox',
 //                    'key' => 'guestMode'
 //                ),

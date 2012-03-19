@@ -11,7 +11,6 @@ gallery.ass = {
     label: true,// on || off label images
     init: function(){
     // this.setLabel();
-
     },
     initThumbHelper: function(){
         $('#viewport').children('ul').children('li').hover(function(e){
@@ -36,7 +35,6 @@ gallery.ass = {
         $('#thumbHelper').click(function(){
             gallery.ass.setPopUp();
         });
-
     },
     hideThumbHelper: function(i){
         setTimeout(function(){

@@ -1,12 +1,12 @@
 <?php
-
 /**
- * Класс: model_albom
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class model_albom extends model_gallery {
 
     /**
@@ -58,6 +58,9 @@ class model_albom extends model_gallery {
      */
     protected $_info;
 
+    /**
+     *
+     */
     public function __construct() {
         parent::__construct();
         $this->setId(model_request::getRequest('id'));
@@ -65,9 +68,9 @@ class model_albom extends model_gallery {
     }
 
     /**
-     *
-     * @param array $data
-     * @return array
+     * @param $data
+     * @param null $redirect
+     * @return bool|string
      */
     public function add($data, $redirect = null) {
         if (null === $data) {
@@ -81,7 +84,7 @@ class model_albom extends model_gallery {
         $_data = array();
         if (null == $data['id'])
             if ($data['parent_id'] == 0) {
-                return '<div class="error b-4"><p>Невыбрана родительская категория.</p></div>';
+                return '<div class="error b-4"><p>РќРµРІС‹Р±СЂР°РЅР° СЂРѕРґРёС‚РµР»СЊСЃРєР°СЏ РєР°С‚РµРіРѕСЂРёСЏ.</p></div>';
             }
 
         if (null == $data['id'])
@@ -96,7 +99,7 @@ class model_albom extends model_gallery {
 
         $parse = null;
         require_once ROOT_DIR . '/engine/classes/parse.class.php';
-        $this->_config['allow_wysiwyg'] = 1; //TOFO: добавить в настройки
+        $this->_config['allow_wysiwyg'] = 1; //TOFO: РґРѕР±Р°РІРёС‚СЊ РІ РЅР°СЃС‚СЂРѕР№РєРё
         if ($this->_config['allow_wysiwyg']) {
             $parse = new ParseFilter(Array('div', 'span', 'p', 'br', 'strong', 'em', 'ul', 'li', 'ol'), Array(), 0, 1);
             $parse->wysiwyg = true;
@@ -110,10 +113,10 @@ class model_albom extends model_gallery {
         $data ['title'] = $parse->process($data ['title']);
         $symbol = strtolower(substr($data['title'], 0, 1));
         if ($data['title'] == '') {
-            return '<div class="error b-4"><p>Незаполнено поле "Название".</p></div>';
+            return '<div class="error b-4"><p>РќРµР·Р°РїРѕР»РЅРµРЅРѕ РїРѕР»Рµ "РќР°Р·РІР°РЅРёРµ".</p></div>';
         }
         $meta_data ['meta_title'] = ($data ['meta_title'] != '') ? totranslit($parse->process($data ['meta_title'])) :
-                totranslit($data ['title']);
+            totranslit($data ['title']);
         $meta_data ['meta_descr'] = ($data ['meta_descr'] != '') ? $parse->process($data ['meta_descr']) : null;
         $meta_data ['meta_keywords'] = ($data ['meta_keywords'] != '') ? $parse->process($data ['meta_keywords']) : null;
         $data ['descr'] = stripslashes($data ['descr']);
@@ -127,12 +130,12 @@ class model_albom extends model_gallery {
 
         if (null == $data['id']) { //add
             $approve = 1;
-//            if ($this->_config['albomApprove']) {
-//                $this->_config['albomApprove'] = explode(',', $this->_config['albomApprove']);
-//                if (in_array(model_gallery::$user['user_group'], $this->_config['albomApprove'])) {
-//                    $approve = 0;
-//                }
-//            }
+            //            if ($this->_config['albomApprove']) {
+            //                $this->_config['albomApprove'] = explode(',', $this->_config['albomApprove']);
+            //                if (in_array(model_gallery::$user['user_group'], $this->_config['albomApprove'])) {
+            //                    $approve = 0;
+            //                }
+            //            }
 
             $this->_db->query('INSERT INTO ' . DBNAME . '.' . PREFIX . "_dg_gallery_albom (author,parent_id,author_id,title,meta_data,access_data,data,approve,symbol)
 		 VALUES ('{$data['author']}','{$data['parent_id']}','{$_data['user_id']}','{$data['title']}','" . serialize($meta_data) . "',
@@ -145,9 +148,9 @@ class model_albom extends model_gallery {
             model_gallery::getClass('model_category')->setCategory();
             model_gallery::getClass('model_user')->updateAlbom('+1', $_data['user_id']);
             if ($this->_config['sendEmailalbom']) {
-                $msg = 'Автор: ' . $data['author'] . '<br />';
-                $msg .='Название: ' . $data['title'];
-                model_mail::send('Добавлен новый альбом.', $msg);
+                $msg = 'РђРІС‚РѕСЂ: ' . $data['author'] . '<br />';
+                $msg .='РќР°Р·РІР°РЅРёРµ: ' . $data['title'];
+                model_mail::send('Р”РѕР±Р°РІР»РµРЅ РЅРѕРІС‹Р№ Р°Р»СЊР±РѕРј.', $msg);
             }
 
             if ($redirect) {
@@ -165,8 +168,8 @@ class model_albom extends model_gallery {
     }
 
     /**
-     *
-     * @return array
+     * @param int $id
+     * @return array|mixed|null
      */
     public function openAlbom($id=0) {
         if ($id)
@@ -184,7 +187,7 @@ class model_albom extends model_gallery {
     }
 
     /**
-     * @return void
+     * @param null $id
      */
     public function deleteAlbum($id = null) {
         if (null === $id)
@@ -245,7 +248,7 @@ class model_albom extends model_gallery {
     }
 
     /**
-     * Обновление кэша альбома
+     * РћР±РЅРѕРІР»РµРЅРёРµ РєСЌС€Р° Р°Р»СЊР±РѕРјР°
      * @param int $id
      * @return array
      */
@@ -308,7 +311,6 @@ class model_albom extends model_gallery {
     }
 
     /**
-     *
      * @return string
      */
     public function getParentAlbon() {
@@ -324,7 +326,6 @@ class model_albom extends model_gallery {
     }
 
     /**
-     *
      * @return string
      */
     public function getFileListTable() {
@@ -383,7 +384,8 @@ HTML;
     }
 
     /**
-     * Проверка существования альбома.
+     * РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ Р°Р»СЊР±РѕРјР°.
+     * @param null $id
      * @return bool
      */
     public function checkAlbom($id = null) {
@@ -398,7 +400,7 @@ HTML;
     }
 
     /**
-     * Обновлениее параметров альбома.
+     * РћР±РЅРѕРІР»РµРЅРёРµРµ РїР°СЂР°РјРµС‚СЂРѕРІ Р°Р»СЊР±РѕРјР°.
      * @param int $id
      * @param array $data
      * @return void
@@ -412,7 +414,7 @@ HTML;
     }
 
     /**
-     * Изменение прав доступа к альбому
+     * РР·РјРµРЅРµРЅРёРµ РїСЂР°РІ РґРѕСЃС‚СѓРїР° Рє Р°Р»СЊР±РѕРјСѓ
      * @return void
      */
     public function setPermission() {
@@ -462,7 +464,7 @@ HTML;
     }
 
     /**
-     * Установить абложку альома.
+     * РЈСЃС‚Р°РЅРѕРІРёС‚СЊ Р°Р±Р»РѕР¶РєСѓ Р°Р»СЊРѕРјР°.
      * @return array
      */
     public function setCoverAlbom() {
@@ -521,12 +523,13 @@ HTML;
      */
     public function count($id) {
         return ($id) ?
-                $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_albom WHERE parent_id='{$id}' LIMIT 1") : 0;
+            $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_albom WHERE parent_id='{$id}' LIMIT 1") : 0;
     }
 
     /**
-     * Вернуть постраничную выборку при просмотре альомав с сайта.
-     * @param int $id
+     * Р’РµСЂРЅСѓС‚СЊ РїРѕСЃС‚СЂР°РЅРёС‡РЅСѓСЋ РІС‹Р±РѕСЂРєСѓ РїСЂРё РїСЂРѕСЃРјРѕС‚СЂРµ Р°Р»СЊРѕРјР°РІ СЃ СЃР°Р№С‚Р°.
+     * @param $id
+     * @param $pageLimit
      * @return array
      */
     public function getPageCategory($id, $pageLimit) {
@@ -588,7 +591,7 @@ HTML;
     }
 
     /**
-     * Вернуть все данные о случайном файле в альбоме
+     * Р’РµСЂРЅСѓС‚СЊ РІСЃРµ РґР°РЅРЅС‹Рµ Рѕ СЃР»СѓС‡Р°Р№РЅРѕРј С„Р°Р№Р»Рµ РІ Р°Р»СЊР±РѕРјРµ
      * @param int $id
      * @return string
      */
@@ -611,7 +614,7 @@ HTML;
     }
 
     /**
-     * Метод возвращает данные о альбоме при разных условиях показа.
+     * РњРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ РґР°РЅРЅС‹Рµ Рѕ Р°Р»СЊР±РѕРјРµ РїСЂРё СЂР°Р·РЅС‹С… СѓСЃР»РѕРІРёСЏС… РїРѕРєР°Р·Р°.
      * @return array
      */
     public function openAlbomSite() {
@@ -680,8 +683,8 @@ HTML;
     }
 
     /**
-     * Заполнение строки шаблона данными.
-     * Метод возвращает список файлов.
+     * Р—Р°РїРѕР»РЅРµРЅРёРµ СЃС‚СЂРѕРєРё С€Р°Р±Р»РѕРЅР° РґР°РЅРЅС‹РјРё.
+     * РњРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ.
      *
      * @param string $str
      * @param dle_template $tpl
@@ -698,14 +701,14 @@ HTML;
                 $title = stripslashes($val ['title']);
                 $tpl->set('{preview-alt}', $title);
                 $tpl->set('{preview-title}', $title);
-                //UPDATE: добавлен {item-id} для прокрутки списка слайдера
+                //UPDATE: РґРѕР±Р°РІР»РµРЅ {item-id} РґР»СЏ РїСЂРѕРєСЂСѓС‚РєРё СЃРїРёСЃРєР° СЃР»Р°Р№РґРµСЂР°
                 $tpl->set('{item-id}', $val['id']);
                 if (empty($this->_info ['meta_data']['meta_title']) || $this->_info ['meta_data']['meta_title'] == '') {
                     $this->_info ['meta_data']['meta_title'] = 'albom';
                 }
 
                 $tpl->set('{link-file}', $config['http_home_url'] . 'gallery/albom/' . $this->_info['id'] . '-' . $this->_info ['meta_data']['meta_title'] .
-                        '.' . $val['id']);
+                    '.' . $val['id']);
 
 
                 $tpl->set('{preview}', model_file::getThumb($val['path'], $val['status']));
@@ -717,9 +720,8 @@ HTML;
     }
 
     /**
-     *
      * @param int $id
-     * @return mixed
+     * @return array
      */
     public function getInfo($id = 0) {
         if ($this->_info)
@@ -730,12 +732,11 @@ HTML;
     }
 
     /**
-     *
      * @return bool
      */
     public function getAccessAlbon() {
-        //FIX: 28.08.11   приведение данных к нужному формату
-        //при добавление комм строка вмесо масиива в результате возвращает не вероное значение доступа к альбому
+        //FIX: 28.08.11   РїСЂРёРІРµРґРµРЅРёРµ РґР°РЅРЅС‹С… Рє РЅСѓР¶РЅРѕРјСѓ С„РѕСЂРјР°С‚Сѓ
+        //РїСЂРё РґРѕР±Р°РІР»РµРЅРёРµ РєРѕРјРј СЃС‚СЂРѕРєР° РІРјРµСЃРѕ РјР°СЃРёРёРІР° РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРµ РІРµСЂРѕРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РґРѕСЃС‚СѓРїР° Рє Р°Р»СЊР±РѕРјСѓ
         if (is_string($this->_info ["access_data"])) {
             $this->_info ["access_data"] = unserialize($this->_info ["access_data"]);
         }
@@ -745,23 +746,28 @@ HTML;
         }
 
         return(is_array($access)) ?
-                in_array(model_gallery::$user['user_group'], $access) : false;
+            in_array(model_gallery::$user['user_group'], $access) : false;
     }
 
     /**
-     *
      * @return bool
      */
     public function getAccessComments() {
         $access = explode(',', $this->_info ["access_data"]["accessCommentsFile"]);
         return(is_array($access)) ?
-                in_array(model_gallery::$user['user_group'], $access) : false;
+            in_array(model_gallery::$user['user_group'], $access) : false;
     }
 
+    /**
+     * @return bool
+     */
     protected function _isAuthor() {
         return ($this->_info['author_id'] == self::$user['user_id']);
     }
 
+    /**
+     * @return bool
+     */
     public function isAuthor() {
         return ($this->_info['author_id'] == self::$user['user_id']);
     }

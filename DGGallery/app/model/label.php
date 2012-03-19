@@ -1,22 +1,40 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.2 (06.2011)
+ * @since 1.5.6 (19.03.12)
  */
-class model_label {
 
+class model_label
+{
+
+    /**
+     * @var module_db
+     */
     protected $_db;
+    /**
+     * @var mixed
+     */
     private $_imgId;
+
+    /**
+     * @var
+     */
     private $_data;
+
+    /**
+     * @var
+     */
     protected $_parse;
 
     const CHECK_IMAGE = true;
 
-    public function __construct() {
+    /**
+     *
+     */
+    public function __construct()
+    {
         $this->_imgId = model_request::getRequest('id');
         if (null == $this->_db) {
             $this->_db = model_gallery::getRegistry('module_db');
@@ -28,12 +46,20 @@ class model_label {
         }
     }
 
-    public function __destruct() {
+    /**
+     *
+     */
+    public function __destruct()
+    {
         model_debug::mysql($this->_db->query_num);
         model_debug::setQuery($this->_db->queryText);
     }
 
-    private function _getRequestParam() {
+    /**
+     * @return array
+     */
+    private function _getRequestParam()
+    {
         $c = model_request::getRequest('coord');
         require_once ROOT_DIR . '/engine/classes/parse.class.php';
         $this->_parse = new ParseFilter(array(), array(), 1, 1);
@@ -52,11 +78,15 @@ class model_label {
         );
     }
 
-    public function add() {
+    /**
+     * @return mixed
+     */
+    public function add()
+    {
         $p = $this->_getRequestParam();
         $file = model_gallery::getClass('model_file');
 
-        $this->_data =  $file->getFile($this->_imgId);
+        $this->_data = $file->getFile($this->_imgId);
         $id = $this->_data['parent_id'];
         $this->_data = unserialize($this->_data['other_dat']);
         //  $this->_data['label'] = array();
@@ -66,7 +96,11 @@ class model_label {
         return $alb->updateAlbom($id);
     }
 
-    public function delete() {
+    /**
+     * @return mixed
+     */
+    public function delete()
+    {
         $lId = model_request::getPost('idL');
 
         $file = model_gallery::getClass('model_file');
@@ -84,11 +118,19 @@ class model_label {
         return $alb->updateAlbom($id);
     }
 
-    private function _checkImage() {
+    /**
+     * @return bool
+     */
+    private function _checkImage()
+    {
         return ($this->_data = $this->_db->super_query('SELECT * FROM ' . PREFIX . "_dg_gallery_file WHERE id='{$this->_imgId}' LIMIT 1")) ? true : false;
     }
 
-    private function _getImage() {
+    /**
+     * @return mixed
+     */
+    private function _getImage()
+    {
         if (!$this->_data) {
             $this->_data = $this->_db->super_query('SELECT * FROM ' . PREFIX . "_dg_gallery_file WHERE id='{$this->_imgId}' LIMIT 1");
         }
@@ -96,4 +138,3 @@ class model_label {
     }
 
 }
-

@@ -1,40 +1,40 @@
 <?php
-
 /**
- * Ïðîôèëü ïîëüçîâàòåëÿ â ðàçäåëå ãàëåðåè.
- *
- * Ïðè âûçîâå ïðîèçâîäèòñÿ ïðîâåðêà ñóùåñòâîâàíèÿ çàïèñè äëÿ ïîëüçîâàòåëÿ â òàáëèöå ó÷åòà,
- * åñëè çàïèñü îòñóòñòâóåò îíà áóäåò ñîçäàííà, äàëüíåéøàÿ ðàáîòà áóäåò ïðîèçâîäèòñÿ ïî èäåíòèôèêàòîðó îïðåäåëåííîìó ïðè ïðîâåðêå.
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
+ * @since 1.5.6 (19.03.12)
+ */
+
+
+/**
+ * ÐŸÑ€Ð¾Ñ„Ð¸Ð»ÑŒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð² Ñ€Ð°Ð·Ð´ÐµÐ»Ðµ Ð³Ð°Ð»ÐµÑ€ÐµÐ¸.
  *
+ * ÐŸÑ€Ð¸ Ð²Ñ‹Ð·Ð¾Ð²Ðµ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° ÑÑƒÑ‰ÐµÑÑ‚Ð²Ð¾Ð²Ð°Ð½Ð¸Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð´Ð»Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ ÑƒÑ‡ÐµÑ‚Ð°,
+ * ÐµÑÐ»Ð¸ Ð·Ð°Ð¿Ð¸ÑÑŒ Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð¾Ð½Ð° Ð±ÑƒÐ´ÐµÑ‚ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ð°, Ð´Ð°Ð»ÑŒÐ½ÐµÐ¹ÑˆÐ°Ñ Ñ€Ð°Ð±Ð¾Ñ‚Ð° Ð±ÑƒÐ´ÐµÑ‚ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¿Ð¾ Ð¸Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€Ñƒ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½Ð¾Ð¼Ñƒ Ð¿Ñ€Ð¸ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐµ.
  */
 class controller_user extends controller_gallery {
 
     /**
-     * Äàííûå ïîëüçîâàòåëÿ.
+     * Ð”Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ.
      * @var array
      */
     protected $_user;
 
     /**
-     * ßâëÿåòñÿ ëè ïîëüçîâàòåëü àâòîðîì ïðîñìàòðèâàåìûõ àëüáîìîâ.
+     * Ð¯Ð²Ð»ÑÐµÑ‚ÑÑ Ð»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð°Ð²Ñ‚Ð¾Ñ€Ð¾Ð¼ Ð¿Ñ€Ð¾ÑÐ¼Ð°Ñ‚Ñ€Ð¸Ð²Ð°ÐµÐ¼Ñ‹Ñ… Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð².
      * @var bool
      */
     private $_isAuthor;
 
     /**
-     * ßâëÿåòñÿ ëè ïîëüçîâàòåëü Àäìèíèñòðàòîðîì.
+     * Ð¯Ð²Ð»ÑÐµÑ‚ÑÑ Ð»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ ÐÐ´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ð¾Ð¼.
      * @var bool
      */
     private $_isAdmin;
 
     /**
-     * Èäåíòèôèêàòîð ïîëüçîâàòåëÿ â òàáëèöå ñòàòèñòèêè
+     * Ð˜Ð´ÐµÐ½Ñ‚Ð¸Ñ„Ð¸ÐºÐ°Ñ‚Ð¾Ñ€ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ ÑÑ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ¸
      * @var int
      */
     protected $_userId;
@@ -72,6 +72,10 @@ class controller_user extends controller_gallery {
         return $this->_view->compile('main');
     }
 
+    /**
+     * @return string
+     * @throws controller_exception
+     */
     public function addalbomAction() {
         $content = '';
         $allowCat = model_gallery::getClass('model_category')->getAccessGranted();
@@ -99,7 +103,7 @@ class controller_user extends controller_gallery {
                     ));
 
                     $content .= model_gallery::getRegistry('view_template')->
-                            msgbox($this->_lang['info']['save_ok'], '<br /><br /><a href="' . HOME_URL . 'gallery/user/editalbom/' . $info['id'] . '">' . $this->_lang['info']['add_ok'] . "</a>");
+                        msgbox($this->_lang['info']['save_ok'], '<br /><br /><a href="' . HOME_URL . 'gallery/user/editalbom/' . $info['id'] . '">' . $this->_lang['info']['add_ok'] . "</a>");
                 }
             } else {
                 $this->_setSpeedbar(array(
@@ -122,12 +126,9 @@ class controller_user extends controller_gallery {
     }
 
     /**
-     * Ïðîñìîòð ïðîôèëÿ..
+     * ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ.
      *
-     * Ïåðåõâàò èñêëþ÷åíèé ïî ñëåäóþùèì ñîáûòèÿì:
-     * 1 - ïîëüçîâàòåëü íå àâòîðèçîâàí.
-     *
-     * Âåðíóòü user  .tpl äëÿ ïåðåäà÷è â òåã {content} øàáëîíà gallery/main.tpl
+     * Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ user  .tpl Ð´Ð»Ñ Ð¿ÐµÑ€ÐµÐ´Ð°Ñ‡Ð¸ Ð² Ñ‚ÐµÐ³ {content} ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° gallery/main.tpl
      * @return string
      */
     public function profileAction() {
@@ -161,7 +162,7 @@ class controller_user extends controller_gallery {
     }
 
     /**
-     * Ðåäàêòèðîâàíèå àëüáîìà àâòîðîì.
+     * Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð° Ð°Ð²Ñ‚Ð¾Ñ€Ð¾Ð¼.
      *
      * @global null $gallery_cat
      * @return type
@@ -177,8 +178,8 @@ class controller_user extends controller_gallery {
             if (null === $info) {
                 throw new controller_exception('albom no exists');
             }
-            //TODO: ñòðàííîå óñëîâèå, òåì áîëåå ÷òî àëüáîìû âûâîäÿòñÿ òîëüêî òåêóùåìó ïîëüçîâàòåëþ
-            // è âèçèò â ÷óæîé ïîôèëü íå âîçìîæåí
+            //TODO: ÑÑ‚Ñ€Ð°Ð½Ð½Ð¾Ðµ ÑƒÑÐ»Ð¾Ð²Ð¸Ðµ, Ñ‚ÐµÐ¼ Ð±Ð¾Ð»ÐµÐµ Ñ‡Ñ‚Ð¾ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñ‹ Ð²Ñ‹Ð²Ð¾Ð´ÑÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¼Ñƒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
+            // Ð¸ Ð²Ð¸Ð·Ð¸Ñ‚ Ð² Ñ‡ÑƒÐ¶Ð¾Ð¹ Ð¿Ð¾Ñ„Ð¸Ð»ÑŒ Ð½Ðµ Ð²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½
             if ($this->_isAdmin || $this->_isAuthor) {
                 $content = model_gallery::getClass('view_editAlbom')->render($info);
                 $this->_setJsMin('user');
@@ -202,11 +203,11 @@ class controller_user extends controller_gallery {
     }
 
     /**
-     * Ïðîâåðêà íàëè÷èÿ çàïèñè ïîëüçîâàòåëÿ â òàáëèöå ñòàòèñòèêè, îïðåäåëåíèå ID.
+     * ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð² Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ðµ ÑÑ‚Ð°Ñ‚Ð¸ÑÑ‚Ð¸ÐºÐ¸, Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ ID.
      */
     public function check() {
         $check = $this->_db->super_query('SELECT * FROM ' . DBNAME . '.' . PREFIX .
-                "_dg_gallery_user WHERE user_id='{$this->_user['user_id']}'");
+            "_dg_gallery_user WHERE user_id='{$this->_user['user_id']}'");
         if (null === $check['id']) {
             $this->_db->query('INSERT INTO ' . DBNAME . '.' . PREFIX . '_dg_gallery_user (user_id) VALUES ' . "('{$this->_user['user_id']}')");
             $check['id'] = $this->_db->insert_id();
@@ -215,13 +216,10 @@ class controller_user extends controller_gallery {
     }
 
     /**
-     * Âñïîìîãàòåëüíûé ìåòîä îáåñïå÷èâàþùèé âûâîä ñïèñêà àëüáîìîâ ïîëüçîâàòåëÿ ïðè ïðîñìîòðå ïðîôèëÿ.
-     * Âõîäíîé ïàðàìåòð ñòðîêà øàáëîíà user.tpl çàêëþ÷åííàÿ â òåãè [list-albom][/list-albom]
+     * Ð’ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð¼ÐµÑ‚Ð¾Ð´ Ð¾Ð±ÐµÑÐ¿ÐµÑ‡Ð¸Ð²Ð°ÑŽÑ‰Ð¸Ð¹ Ð²Ñ‹Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐºÐ° Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð² Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ð¿Ñ€Ð¸ Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€Ðµ Ð¿Ñ€Ð¾Ñ„Ð¸Ð»Ñ.
+     * Ð’Ñ…Ð¾Ð´Ð½Ð¾Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€ ÑÑ‚Ñ€Ð¾ÐºÐ° ÑˆÐ°Ð±Ð»Ð¾Ð½Ð° user.tpl Ð·Ð°ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ð°Ñ Ð² Ñ‚ÐµÐ³Ð¸ [list-albom][/list-albom]
      *
-     * Ïåðåõâàò èñêëþ÷åíèé ïî ñëåäóþùèì ñîáûòèÿì:
-     * 1 - èíôîðìàöèÿ î àëüáîìàõ îòñóòñòâóåò èëè ïîâðåæäåíà.
-     *
-     * Âåðíóòü ñêîìïèëèðîâàííóþ ñòðîêó ñ çàïëíåíûìè äàííûìè ïîî àëüáîìó.
+     * Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÑÐºÐ¾Ð¼Ð¿Ð¸Ð»Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½ÑƒÑŽ ÑÑ‚Ñ€Ð¾ÐºÑƒ Ñ Ð·Ð°Ð¿Ð»Ð½ÐµÐ½Ñ‹Ð¼Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ð¼Ð¸ Ð¿Ð¾Ð¾ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ñƒ.
      * @param string $str
      * @return string
      */
@@ -229,7 +227,7 @@ class controller_user extends controller_gallery {
         $tpl = clone $this->_tpl;
         $tpl->template = stripslashes($str);
         $tpl->copy_template = stripslashes($str);
-        //TODO: ïðîñìîòð àëüáîìîâ?
+        //TODO: Ð¿Ñ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð¾Ð²?
         $userAlb = model_gallery::getClass('model_user')->getAlbom($this->_user['name']);
         try {
             if (!is_array($userAlb["alb"])) {
@@ -253,7 +251,7 @@ class controller_user extends controller_gallery {
                 if ($val['meta_data']['cover'] != '') {
                     $cover = str_replace('%replace%/', 'thumbs/', $val['meta_data']['cover']);
                     $tpl->set('{cover}', ($cover != '' && file_exists(ROOT_DIR . $cover)) ? $cover :
-                                    model_gallery::getClass('model_albom')->getRandFile($val['id']) );
+                        model_gallery::getClass('model_albom')->getRandFile($val['id']) );
                 } else {
                     $tpl->set('{cover}', model_gallery::getClass('model_albom')->getRandFile($val ['id']));
                 }
@@ -265,6 +263,10 @@ class controller_user extends controller_gallery {
         }
     }
 
+    /**
+     * @return string
+     * @throws controller_exception
+     */
     public function savealbomAction() {
         $param = model_gallery::getRegistry('route')->getParam();
         model_gallery::setRegistry('view_action', 'edit_albom');
@@ -272,7 +274,6 @@ class controller_user extends controller_gallery {
         $content = '';
         try {
             $this->_isAuthor = ($this->_user['name'] == $info ['author']) ? true : false;
-            //TODO:????????
             if ($info && $this->_isAdmin || $this->_isAuthor) {
                 if (model_request::getPost('config')) {// add albom
                     $data = $_POST['config'];
@@ -281,7 +282,7 @@ class controller_user extends controller_gallery {
                     model_gallery::getClass('model_albom')->add($data, true);
                     global $lang;
                     $content .= model_gallery::getRegistry('view_template')->
-                            msgbox($this->_lang['info']['save_ok'], "<br /><br /><a href=\"javascript:history.go(-1)\">" . $lang['all_prev'] . "</a>");
+                        msgbox($this->_lang['info']['save_ok'], "<br /><br /><a href=\"javascript:history.go(-1)\">" . $lang['all_prev'] . "</a>");
 
                     $this->_setJsMin('user');
                     $this->_setSpeedbar(array(

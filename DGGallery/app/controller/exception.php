@@ -1,21 +1,33 @@
 <?php
-
 /**
- * Класс: exception
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
-class controller_exception extends Exception {
 
+
+class controller_exception extends Exception
+{
+
+    /**
+     * @var string
+     */
     private $_msg;
 
-    public function __construct($message) {
+    /**
+     * @param $message string
+     */
+    public function __construct($message)
+    {
         $this->_msg = $message;
     }
 
-    public function set404() {
+    /**
+     * @return string
+     */
+    public function set404()
+    {
         global $tpl;
         $result = '
 <style type="text/css">
@@ -35,8 +47,12 @@ h1.error { text-align: center; font-size: 10em; color: #A1A8AB; -moz-text-shadow
         return $result;
     }
 
-    public function setInfo() {
-        global $tpl;
+    /**
+     * @return mixed
+     */
+    public function setInfo()
+    {
+        global $tpl, $lang;
         if ($tpl instanceof dle_template) {
 
         }

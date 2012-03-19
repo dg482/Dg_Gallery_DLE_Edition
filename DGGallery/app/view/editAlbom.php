@@ -1,24 +1,30 @@
 <?php
-
 /**
- * Êëàññ: view_editAlbom
- *
+ * @package gallery
  * @author Dark Ghost
- * @copyright 2011
- * @package
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
 class view_editAlbom extends view_template {
 
+    /**
+     *
+     */
     public function __construct() {
         parent::__construct();
     }
 
+    /**
+     * @param array $info
+     * @return string
+     */
     public function render(array $info) {
         $alb = model_gallery::getRegistry('model_albom');
         $alb->setId($info['id']);
         $config = null;
         require_once ROOT_DIR . '/engine/classes/parse.class.php';
-        $this->_config['allow_wysiwyg'] = 1; //TOFO: äîáàâèòü â íàñòðîéêè
+        $this->_config['allow_wysiwyg'] = 1; //TOFO: Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ð² Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸
         if ($this->_config['allow_wysiwyg']) {
             $this->_parse = new ParseFilter(Array('div', 'span', 'p', 'br', 'strong', 'em', 'ul', 'li', 'ol'), Array(), 0, 1);
             $this->_parse->wysiwyg = true;
@@ -31,7 +37,7 @@ class view_editAlbom extends view_template {
 
         global $gallery_cat;
         $gallery_cat = model_gallery::getClass('model_category')->getAccessGranted(); #model_cache_file::get('tree_category');
-        $gallery_cat [0] ['title'] = 'áåç êàòåãîðèè';
+        $gallery_cat [0] ['title'] = 'Ð±ÐµÐ· ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸';
         $gallery_cat [0] ['id'] = '0';
         $this->setView('edit_albom.tpl');
         $files = $alb->getFileListTable();
@@ -245,4 +251,3 @@ JSS;
     }
 
 }
-

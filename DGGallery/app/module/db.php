@@ -1,12 +1,12 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.2 (06.2011)
+ * @since 1.5.6 (19.03.12)
  */
+
+
 class module_db {
 
     public static $mysql_error;
@@ -14,9 +14,7 @@ class module_db {
     public $query_num;
 
     /**
-     * module_db::__construct()
      *
-     * @return
      */
     public function __construct() {
         $this->db_auth['user'] = DBUSER;
@@ -34,11 +32,9 @@ class module_db {
     }
 
     /**
-     * module_db::query()
-     *
-     * @param mixed $query
+     * @param $query
      * @param bool $show_error
-     * @return
+     * @return mixed
      */
     public function query($query, $show_error = true) {
         if ($query == '') {
@@ -74,11 +70,9 @@ class module_db {
     }
 
     /**
-     * module_db::super_query()
-     *
-     * @param mixed $query
+     * @param $query
      * @param bool $multi
-     * @return
+     * @return array|void
      */
     public function super_query($query, $multi = false) {
         if (!$multi) {
@@ -98,10 +92,7 @@ class module_db {
     }
 
     /**
-     * module_db::free()
-     *
      * @param string $query_id
-     * @return void
      */
     public function free($query_id = '') {
         if ($query_id == '')
@@ -118,9 +109,7 @@ class module_db {
     }
 
     /**
-     * module_db::Connect()
-     *
-     * @return
+     * @return bool
      */
     public function Connect() {
         $time_before = $this->get_real_time();
@@ -144,10 +133,10 @@ class module_db {
             $db_location = explode(":", $this->db_auth['host']);
             if (isset($db_location[1])) {
                 $this->db_id = @mysqli_connect($db_location[0], $this->db_auth['user'], $this->
-                                db_auth['pass'], $this->db_auth['dbname'], $db_location[1]);
+                    db_auth['pass'], $this->db_auth['dbname'], $db_location[1]);
             } else {
                 $this->db_id = @mysqli_connect($db_location[0], $this->db_auth['user'], $this->
-                                db_auth['pass'], $this->db_auth['dbname']);
+                    db_auth['pass'], $this->db_auth['dbname']);
             }
             if (!$this->db_id) {
                 self::$mysql_error['error_num'] = '';
@@ -163,9 +152,7 @@ class module_db {
     }
 
     /**
-     * module_db::get_real_time()
-     *
-     * @return
+     * @return float
      */
     private function get_real_time() {
         list($seconds, $microSeconds) = explode(' ', microtime());
@@ -173,10 +160,8 @@ class module_db {
     }
 
     /**
-     * module_db::num_rows()
-     *
      * @param string $id
-     * @return
+     * @return int|void
      */
     public function num_rows($id = '') {
         if ($id == '')
@@ -189,10 +174,8 @@ class module_db {
     }
 
     /**
-     * module_db::get_row()
-     *
      * @param string $id
-     * @return
+     * @return array|void
      */
     public function get_row($id = '') {
         if ($id == '')
@@ -205,10 +188,8 @@ class module_db {
     }
 
     /**
-     * module_db::get_array()
-     *
      * @param string $id
-     * @return
+     * @return array|void
      */
     function get_array($id = '') {
         if ($id == '')
@@ -221,9 +202,7 @@ class module_db {
     }
 
     /**
-     * module_db::insert_id()
-     *
-     * @return
+     * @return int|void
      */
     public function insert_id() {
         if (!$this->mysqlL) {
@@ -234,10 +213,8 @@ class module_db {
     }
 
     /**
-     * module_db::safesql()
-     *
-     * @param mixed $source
-     * @return
+     * @param $source
+     * @return string|void
      */
     public function safesql($source) {
         if (!$this->mysqlL) {

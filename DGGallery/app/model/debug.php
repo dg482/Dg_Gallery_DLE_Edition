@@ -1,29 +1,62 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.2 (06.2011)
+ * @since 1.5.6 (19.03.12)
  */
-class model_debug {
 
+class model_debug
+{
+
+    /**
+     * @var
+     */
     protected static $_mysql;
+    /**
+     * @var
+     */
     protected static $_query;
+
+    /**
+     * @var
+     */
     public static $time;
+
+    /**
+     * @var
+     */
     public static $MySQL_time_taken;
+
+    /**
+     * @var
+     */
     public static $m;
 
-    public static function mysql($num) {
+    /**
+     * @static
+     * @param $num
+     */
+    public static function mysql($num)
+    {
         self::$_mysql += $num;
     }
 
-    public static function setQuery($query) {
+    /**
+     * @static
+     * @param $query
+     */
+    public static function setQuery($query)
+    {
         self::$_query[] = $query;
     }
 
-    public static function get() {
+    /**
+     * @static
+     * @return array
+     */
+    public static function get()
+    {
         return array(
             'mysql' => array(
                 'num' => self::$_mysql,
@@ -32,7 +65,12 @@ class model_debug {
         );
     }
 
-    public static function show() {
+    /**
+     * @static
+     * @return array|string
+     */
+    public static function show()
+    {
         $config = model_gallery::getRegistry('config');
         $user = model_gallery::$user;
         if ($config['debugAccessGroup'] != '') {
@@ -54,7 +92,6 @@ class model_debug {
             $q = $db->query_num;
 
 
-
         $qq = print_r(self::$_query, true);
         $inc = print_r(get_included_files(), true);
         $re = print_r($_REQUEST, true);
@@ -63,32 +100,31 @@ class model_debug {
         if (model_request::isAjax()) {
             return array(
                 'debug' => array(
-                    'Время выполнения скрипта' => $t . 'сек',
-                    'Затрачено памяти' => $m . 'mb',
-                    'MySQL запросов' => $q,
-                    'Время выполнения' => $tm . 'сек',
+                    'Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРёРїС‚Р°' => $t . 'СЃРµРє',
+                    'Р—Р°С‚СЂР°С‡РµРЅРѕ РїР°РјСЏС‚Рё' => $m . 'mb',
+                    'MySQL Р·Р°РїСЂРѕСЃРѕРІ' => $q,
+                    'Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ' => $tm . 'СЃРµРє',
                     'query' => $qq,
-                    'реестр' => $reg,
+                    'СЂРµРµСЃС‚СЂ' => $reg,
                     'request' => $re,
-                    'Подключенные файлы' => $inc
+                    'РџРѕРґРєР»СЋС‡РµРЅРЅС‹Рµ С„Р°Р№Р»С‹' => $inc
                 )
             );
         } else {
             return <<<HTML
-Время выполнения скрипта: ~ $t сек<br />
-Затрачено памяти: ~ $m mb<br />
-MySQL запросов: $q<br />
-Время выполнения: ~ $tm сек<br />
+Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРёРїС‚Р°: ~ $t СЃРµРє<br />
+Р—Р°С‚СЂР°С‡РµРЅРѕ РїР°РјСЏС‚Рё: ~ $m mb<br />
+MySQL Р·Р°РїСЂРѕСЃРѕРІ: $q<br />
+Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ: ~ $tm СЃРµРє<br />
 <pre>  $qq </pre>
-Реестр:
+Р РµРµСЃС‚СЂ:
 <pre>  $reg </pre>
 \$_REQUEST
  <pre>  $re </pre>
-Подключенные файлы:
+РџРѕРґРєР»СЋС‡РµРЅРЅС‹Рµ С„Р°Р№Р»С‹:
 <pre> $inc </pre>
 HTML;
         }
     }
 
 }
-

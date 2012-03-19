@@ -84,18 +84,8 @@ gallery.ajax = {
     },
     hideLoader: function(){
         $('#system-ajax').remove();
-
     }
-
-
 }
-
-
-
-
-
-
-
 
 function activateAjaxDialog(action,id){
     $.ajax({
@@ -128,7 +118,6 @@ function activateAjaxDialog(action,id){
             b['close']=function(){
                 $(this).dialog("close")
             };
-
             $("#dlepopup").remove();
             var $div = $("<div id='dlepopup' title='--' style='display:none'></div>");
             $div.html(data)

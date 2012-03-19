@@ -1,13 +1,11 @@
 <?php
 /**
- * 
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.4 (08.2011)
- *
+ * @since 1.5.6 (19.03.12)
  */
+
 class view_template {
 
     /**
@@ -63,9 +61,6 @@ class view_template {
 
     /**
      *
-     * @global type $tpl
-     * @global array $config
-     * @return void
      */
     public function __construct() {
         global $tpl, $config;
@@ -131,7 +126,7 @@ class view_template {
     public function checkModule($aviable, $block, $action = true) {
         $aviable = explode('|', $aviable);
         $module = model_gallery::getRegistry('view_action');
-            #var_dump($module);
+        #var_dump($module);
         $block = str_replace('\"', '"', $block);
         if ($action) {
             if (!(in_array($module, $aviable)) and ($aviable[0] != "global"))
@@ -178,8 +173,8 @@ class view_template {
     }
 
     /**
-     * Âñïîìîãàòåëüíûé ìåòîä, âûâîäèò èíôîðìàöèþ î àâòîðå àëüáîìà.
-     * Ìåòîä óñòàíàâëèâàåò çíà÷åíèÿ òåãîâ â êîíòåêñòå ïåðåäàííîãî îáúåêòà øàáëîíèçàòîðà.
+     * Ð’ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹ Ð¼ÐµÑ‚Ð¾Ð´, Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ Ð°Ð²Ñ‚Ð¾Ñ€Ðµ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°.
+     * ÐœÐµÑ‚Ð¾Ð´ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ñ‚ÐµÐ³Ð¾Ð² Ð² ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ðµ Ð¿ÐµÑ€ÐµÐ´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¸Ð·Ð°Ñ‚Ð¾Ñ€Ð°.
      *
      * @global array $user_group
      * @global array $lang
@@ -257,7 +252,7 @@ class view_template {
     }
 
     /**
-     * Óñòàíîâêà çíà÷åíèé ãëîáàëüíîé ïåðåìåííîé èñïîëüçóåìîé äëÿ âûâîäà çàãîëîâêà, îïèñàíèÿ, êëþ÷åâûõ ñëîâ.
+     * Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹ Ð³Ð»Ð¾Ð±Ð°Ð»ÑŒÐ½Ð¾Ð¹ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ð¹ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ð¾Ð¹ Ð´Ð»Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ°, Ð¾Ð¿Ð¸ÑÐ°Ð½Ð¸Ñ, ÐºÐ»ÑŽÑ‡ÐµÐ²Ñ‹Ñ… ÑÐ»Ð¾Ð².
      * @global array $metatags
      * @param array $meta
      */
@@ -279,6 +274,10 @@ class view_template {
         return (model_gallery::$user['user_group'] == 1);
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     */
     protected function _setSpeedbar(array $data) {
         if (stripos($this->_tpl->copy_template, '{speedbar}') === false) {
             return;

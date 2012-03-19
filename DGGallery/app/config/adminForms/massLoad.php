@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * Р¤РѕСЂРјР° РІС‹Р±РѕСЂР° РєР°С‚РµРіРѕСЂРёРё РїСЂРё Р·Р°РіСЂСѓР·РєРµ С„Р°Р№Р»РѕРІ РІ СЂРµР¶РёРјРµ РђСЂС…РёРІ (GALLERY_MODE = 2).
+ *
+ */
 
 return array(
     'form' => array(
@@ -6,10 +14,10 @@ return array(
         'method' => 'post',
         'name' => 'newcat',
         'upload' => array(
-            'legend' => 'Массовая загрузка материалом в категорию.',
+            'legend' => 'РњР°СЃСЃРѕРІР°СЏ Р·Р°РіСЂСѓР·РєР° РјР°С‚РµСЂРёР°Р»РѕРј РІ РєР°С‚РµРіРѕСЂРёСЋ.',
             'row' => array(
                 array(
-                    'label' => 'Категория загрузки:<br /><small></small>',
+                    'label' => 'РљР°С‚РµРіРѕСЂРёСЏ Р·Р°РіСЂСѓР·РєРё:<br /><small></small>',
                     'type' => 'select',
                     'key' => 'parent_id',
                     'values' => array(
@@ -19,7 +27,6 @@ return array(
                         'check' => 'parent_id'
                     )
                 ),
-
             )
         ),
     )

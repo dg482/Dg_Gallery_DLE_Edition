@@ -1,4 +1,13 @@
 <?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ * ÐŸÐ¾Ð´ÑÐºÐ°Ð·ÐºÐ¸ Ð¿Ð¾ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð°Ð¼ Ð´Ð»Ñ Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¾Ñ€Ð° Ð² Ð°Ð´Ð¼Ð¸Ð½ Ð¿Ð°Ð½ÐµÐ»Ð¸.
+ * Tooltip for tag in templates for editor in admin panel.
+ */
+
 
 return array(
 //no modify keys
@@ -10,11 +19,11 @@ return array(
         '[not-group=] [/not-group]' => '[not-group=]',
         '{include file="file.tpl"}' => '{include file=".tpl"}',
         '{speedbar}' => '{speedbar}',
-        '{search_keyword}' => '{search_keyword} ñëîâî ïî êîòîðîìó ïðîâîäèòñÿ ïîèñê.',
-        '{alfa}' => '{alfa} - html ðàçìåòêà àëôàâèòà.',
-        '{content}' => '{content} - ñêîìïèëèðîâàííûé êîíòåíò.',
-        '{pagination}' => '{pagination} - ïîñòðàíè÷íàÿ íàâèãàöèÿ.',
-        '{cat_tree}' => '{cat_tree} - äåðåâî êàòåãîðèé.'
+        '{search_keyword}' => '{search_keyword} ÑÐ»Ð¾Ð²Ð¾ Ð¿Ð¾ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¼Ñƒ Ð¿Ñ€Ð¾Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¿Ð¾Ð¸ÑÐº.',
+        '{alfa}' => '{alfa} - html Ñ€Ð°Ð·Ð¼ÐµÑ‚ÐºÐ° Ð°Ð»Ñ„Ð°Ð²Ð¸Ñ‚Ð°.',
+        '{content}' => '{content} - ÑÐºÐ¾Ð¼Ð¿Ð¸Ð»Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹ ÐºÐ¾Ð½Ñ‚ÐµÐ½Ñ‚.',
+        '{pagination}' => '{pagination} - Ð¿Ð¾ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ‡Ð½Ð°Ñ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ.',
+        '{cat_tree}' => '{cat_tree} - Ð´ÐµÑ€ÐµÐ²Ð¾ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¹.'
     ),
     'cover' => array(
         '{THEME}' => '{THEME}',
@@ -223,5 +232,5 @@ return array(
         '{form-access}' => '{form-access}',
         '{form-edit}' => '{form-edit}'
     ),
-   
+
 );

@@ -1,14 +1,13 @@
 <?php
-
-/* *
- * Ðàáîòà ñ êàòåãîðèÿìè ãàëåðåè, äîáàâëåíèå, èçìåíåíèå, êýø è ò.ä.
- *
+/**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.3 (07.2011)
- *
+ * @since 1.5.6 (19.03.12)
+ */
+
+/**
+ * Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸ÑÐ¼Ð¸ Ð³Ð°Ð»ÐµÑ€ÐµÐ¸, Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ, Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ðµ, ÐºÑÑˆ Ð¸ Ñ‚.Ð´.
  */
 
 class model_category {
@@ -40,10 +39,14 @@ class model_category {
      * @var type
      */
     private $_data;
+
+    /**
+     * @var
+     */
     private $_cat;
 
     /**
-     * @return void
+     *
      */
     public function __construct() {
         $this->_db = model_gallery::getRegistry('module_db');
@@ -52,7 +55,7 @@ class model_category {
     }
 
     /**
-     * Âåíóòü âñå êàòåãîðèè.
+     * Ð’ÐµÐ½ÑƒÑ‚ÑŒ Ð²ÑÐµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸.
      * @return array
      */
     public function getAllCategory() {
@@ -65,7 +68,7 @@ class model_category {
     }
 
     /**
-     * Âåðíóòü êàòåãîðèè äîñòóïíûå äëÿ ñîçäàíèÿ àëüáîìà.
+     * Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ðµ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ Ð°Ð»ÑŒÐ±Ð¾Ð¼Ð°.
      *
      * @return array
      */
@@ -82,9 +85,9 @@ class model_category {
     }
 
     /**
-     * Âåðíóòü êýø â ôîðìàòå json
-     * @param mixed $id
-     * @return
+     * Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ ÐºÑÑˆ Ð² Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ðµ json
+     * @param $id
+     * @return null|string
      */
     public function getCategoryJson($id) {
         $cat = model_cache_file::get('category');
@@ -95,13 +98,13 @@ class model_category {
     }
 
     /**
-     * Âåðíóòü äàííûå äëÿ íàâèãàöèè â àäìèíïàíåëè.
+     * Ð’ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´Ð»Ñ Ð½Ð°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ð¸ Ð² Ð°Ð´Ð¼Ð¸Ð½Ð¿Ð°Ð½ÐµÐ»Ð¸.
      * @return string
      */
     public function getCategoryNavJson() {
         $cat = $this->getAllCategory();
         $cahe = array();
-        $cahe ['title'] = 'Êàòåãîðèè';
+        $cahe ['title'] = 'ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸';
         $k = 0;
         foreach ($cat as $k => $v) {
             $cahe [$k] ['title'] = $v ['title'];
@@ -118,9 +121,8 @@ class model_category {
     }
 
     /**
-     *
-     * @param int $id
-     * @return
+     * @param $id
+     * @return null
      */
     public function getCategory($id) {
         if (null === $this->_data)
@@ -129,9 +131,7 @@ class model_category {
     }
 
     /**
-     * model_category::setCategory()
      *
-     * @return void
      */
     public function setCategory() {
         $this->_db->query('SELECT SQL_NO_CACHE * FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery');
@@ -149,7 +149,7 @@ class model_category {
     }
 
     /**
-     * Îòñîðòèðîâàòü êàòåãîðèèâ äåðåâî
+     * ÐžÑ‚ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¸Ð² Ð´ÐµÑ€ÐµÐ²Ð¾
      * @param array $arr
      * @return array
      */
@@ -176,7 +176,7 @@ class model_category {
     }
 
     /**
-     * Äîáàâëåíèå êàòåãîðèé â á.ä., âàëèäàöèÿ äàííûõ, îáíîâëåíèå êýøà.
+     * Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ð¹ Ð² Ð±.Ð´., Ð²Ð°Ð»Ð¸Ð´Ð°Ñ†Ð¸Ñ Ð´Ð°Ð½Ð½Ñ‹Ñ…, Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÑÑˆÐ°.
      * @return void
      */
     public function addCategory() {
@@ -198,7 +198,7 @@ class model_category {
 
         $parse = assistant::getRegistry('parse');
         $parse->allow_code = false;
-#$parse->safe_mode = true;
+        #$parse->safe_mode = true;
         $descr = $this->_db->safesql($parse->process($data ['descr']));
         $descr = str_replace(array('<p>&nbsp;</p>', '\r', '\n'), array('<br />', '', ''), $descr);
         $meta_data ['descr'] = $descr; //metatag
@@ -225,7 +225,7 @@ class model_category {
         }
         $meta_data['title'] = $insert['title'];
         $access_data ["access_load"] = (isset($data ['accessupload']) and is_array($data ['accessupload'])) ?
-                implode(',', $_POST ['config'] ['accessupload']) : '1';
+            implode(',', $_POST ['config'] ['accessupload']) : '1';
         $access_data ["access"] = (isset($data ['access']) and is_array($data ['access'])) ? implode(',', $_POST ['config'] ['access']) : '1';
         $cover = $this->getCover($id);
         $meta_data ['cover'] = ($cover ['path'] and $cover ['path'] != '') ? $cover ['path'] : '';
@@ -262,10 +262,8 @@ class model_category {
     }
 
     /**
-     * model_category::getCover()
-     *
-     * @param integer $id
-     * @return
+     * @param int $id
+     * @return mixed
      */
     public function getCover($id = 0) {
         $id = intval($id);
@@ -390,10 +388,8 @@ class model_category {
     }
 
     /**
-     * model_category::getCatInfo()
-     *
-     * @param int $id
-     * @return
+     * @param $id
+     * @return array|null
      */
     public function getCatInfo($id) {
         $info = model_cache_file::get('category');
@@ -416,10 +412,9 @@ class model_category {
     }
 
     /**
-     *
-     * @param int $parent_id
+     * @param $parent_id
      * @param int $limit
-     * @return obj
+     * @return mixed
      */
     public function getCatAlbom($parent_id, $limit = 0) {
         $limit = ( $limit) ? ' LIMIT 0,' . $limit : '';
@@ -427,7 +422,6 @@ class model_category {
     }
 
     /**
-     *
      * @return array
      */
     public function getCatPage() {
@@ -451,16 +445,16 @@ class model_category {
     }
 
     /**
-     *
-     * @param int $id
-     * @return mixed
+     * @param $id
+     * @param null $data
+     * @return bool
      */
     public function getAccessCat($id, $data = null) {
         $value = (null === $data) ? $this->getCategory($id) : $data;
         $access_data = (is_string($value['access_data'])) ? unserialize($value['access_data']) : $value['access_data'];
         $access_data['access'] = explode(',', $access_data['access']);
         return (is_array($access_data['access'])) ?
-                in_array(model_gallery::$user['user_group'], $access_data['access']) : false;
+            in_array(model_gallery::$user['user_group'], $access_data['access']) : false;
     }
 
     /**
@@ -503,8 +497,6 @@ class model_category {
                 $this->_db->query('DELETE FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_albom WHERE id='{$id}' LIMIT 1");
             }
             model_gallery::getClass('model_file')->deleteCatFiles($id);
-
-
             $this->_db->query('DELETE FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery WHERE id='{$id}'");
             $this->setCategory();
         }

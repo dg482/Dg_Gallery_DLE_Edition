@@ -1,19 +1,18 @@
 <?php
-
 /**
- * Работа с файлами.
- *
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.4 (08.2011)
+ * @since 1.5.6 (19.03.12)
+ */
+
+/**
+ * Р Р°Р±РѕС‚Р° СЃ С„Р°Р№Р»Р°РјРё.
  */
 class model_file extends model_gallery {
 
     /**
      * reflection $this->_info;
-     *
      * @var array
      *
      */
@@ -24,6 +23,7 @@ class model_file extends model_gallery {
      * @var array
      */
     protected $_info;
+
 
     public function __construct() {
         parent::__construct();
@@ -46,10 +46,10 @@ class model_file extends model_gallery {
      */
     public function getFile($id) {
         $this->_info = $this->_db->super_query('SELECT  ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.*," . DBNAME . '.' . PREFIX . '_users.* ' .
-                ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
-                ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
-                DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
-                ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id='{$id}' LIMIT 1 ");
+            ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
+            ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
+            DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
+            ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id='{$id}' LIMIT 1 ");
         $this->_info['other_dat'] = unserialize($this->_info['other_dat']);
         return $this->_info;
     }
@@ -62,11 +62,11 @@ class model_file extends model_gallery {
      */
     public function getNextFile($id, $parent_id) {
         $this->_info = $this->_db->super_query('SELECT  ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.*," . DBNAME . '.' . PREFIX . '_users.* ' .
-                ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
-                ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
-                DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
-                ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id >'{$id}' AND " .
-                DBNAME . '.' . PREFIX . "_dg_gallery_file.parent_id='{$parent_id}' AND status!='folder_cover' AND status!='videocover'
+            ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
+            ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
+            DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
+            ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id >'{$id}' AND " .
+            DBNAME . '.' . PREFIX . "_dg_gallery_file.parent_id='{$parent_id}' AND status!='folder_cover' AND status!='videocover'
                         ORDER BY " . DBNAME . '.' . PREFIX . "_dg_gallery_file.id ASC LIMIT 1 ");
         $this->_info['other_dat'] = unserialize($this->_info['other_dat']);
         return $this->_info;
@@ -80,28 +80,33 @@ class model_file extends model_gallery {
      */
     public function getPrevFile($id, $parent_id) {
         $this->_info = $this->_db->super_query('SELECT  ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.*," . DBNAME . '.' . PREFIX . '_users.* ' .
-                ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
-                ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
-                DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
-                ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id <'{$id}' AND " .
-                DBNAME . '.' . PREFIX . "_dg_gallery_file.parent_id='{$parent_id}' AND status!='folder_cover' AND status!='videocover'
+            ' FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file ' .
+            ' LEFT JOIN ' . DBNAME . '.' . PREFIX . '_users ON ' .
+            DBNAME . '.' . PREFIX . '_users.name = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.author ' .
+            ' WHERE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file.id <'{$id}' AND " .
+            DBNAME . '.' . PREFIX . "_dg_gallery_file.parent_id='{$parent_id}' AND status!='folder_cover' AND status!='videocover'
                         ORDER BY " . DBNAME . '.' . PREFIX . "_dg_gallery_file.id DESC LIMIT 1 ");
         $this->_info['other_dat'] = unserialize($this->_info['other_dat']);
         return $this->_info;
     }
 
+    /**
+     * @param $userName
+     * @param int $pageLimit
+     * @return mixed
+     */
     public function getUserFile($userName, $pageLimit=20) {
         $offset = (int) model_request::getRequest('page');
         $offset = ($offset) ? (($offset - 1) * $pageLimit) : 0;
         return $this->_db->query('SELECT SQL_NO_CACHE * FROM ' . DBNAME . '.'
-                        . PREFIX . "_dg_gallery_file WHERE author='{$userName}' AND status!='folder_cover' AND status!='videocover' LIMIT {$offset},{$pageLimit}");
+            . PREFIX . "_dg_gallery_file WHERE author='{$userName}' AND status!='folder_cover' AND status!='videocover' LIMIT {$offset},{$pageLimit}");
     }
 
     /**
-     *
-     * @param int $id
-     * @param array $array
-     * @return mixed
+     * @param $id
+     * @param $array
+     * @param bool $index
+     * @return int|null|string
      */
     public function getFileCache($id, $array, $index = false) {
         if (is_array($array))
@@ -249,7 +254,7 @@ class model_file extends model_gallery {
     }
 
     /**
-     * Обновление кэша альбома
+     * РћР±РЅРѕРІР»РµРЅРёРµ РєСЌС€Р° Р°Р»СЊР±РѕРјР°
      * @param int $id
      * @return array
      */
@@ -259,7 +264,7 @@ class model_file extends model_gallery {
     }
 
     /**
-     * Обновление данных о файле в б.д.
+     * РћР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… Рѕ С„Р°Р№Р»Рµ РІ Р±.Рґ.
      * @param int $id
      * @param aray $data
      * @return void
@@ -273,7 +278,7 @@ class model_file extends model_gallery {
     }
 
     /**
-     * Удаление файла.
+     * РЈРґР°Р»РµРЅРёРµ С„Р°Р№Р»Р°.
      * @return array
      */
     public function deleteFile() {
@@ -434,7 +439,6 @@ class model_file extends model_gallery {
     }
 
     /**
-     *
      * @return array
      */
     public function setDefaultPlayer() {
@@ -508,11 +512,11 @@ class model_file extends model_gallery {
     }
 
     /**
-     * обложка ?
+     * РѕР±Р»РѕР¶РєР° ?
      * @return array
      * FIX: 4.09.11
-     * метод getFile() возвращает уже распакованные данные,
-     * была повтораная распаковка строки unserialize($parent['other_dat']), в результате данные были потеряны.
+     * РјРµС‚РѕРґ getFile() РІРѕР·РІСЂР°С‰Р°РµС‚ СѓР¶Рµ СЂР°СЃРїР°РєРѕРІР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ,
+     * Р±С‹Р»Р° РїРѕРІС‚РѕСЂР°РЅР°СЏ СЂР°СЃРїР°РєРѕРІРєР° СЃС‚СЂРѕРєРё unserialize($parent['other_dat']), РІ СЂРµР·СѓР»СЊС‚Р°С‚Рµ РґР°РЅРЅС‹Рµ Р±С‹Р»Рё РїРѕС‚РµСЂСЏРЅС‹.
      */
     public function setCover() {
         $id = (int) model_request::getPost('id');
@@ -542,6 +546,11 @@ class model_file extends model_gallery {
         }
     }
 
+    /**
+     * @static
+     * @param $path
+     * @return mixed|null
+     */
     public static function getFilePath($path) {
         $path = str_replace('%replace%/', '', $path);
         if (file_exists(ROOT_DIR . $path)) {
@@ -551,11 +560,11 @@ class model_file extends model_gallery {
     }
 
     /**
-     * Просмотр отдельного файла? перенести в view ..........................
      * @param array $row
      * @param dle_template $tpl
      */
     public function setInfo(array $row, dle_template $tpl) {
+        //TODO: РџСЂРѕСЃРјРѕС‚СЂ РѕС‚РґРµР»СЊРЅРѕРіРѕ С„Р°Р№Р»Р°? РїРµСЂРµРЅРµСЃС‚Рё РІ view ..........................
         $lang = null;
         $albInfo = null;
         $this->currentFile = $row;
@@ -598,7 +607,7 @@ class model_file extends model_gallery {
             $tpl->set_block("#\[field-label\](.*?)\[\/field-label\]#si", '');
         } else {
             if (isset($row ['other_dat']['label_status']) && (1 === (int) $row ['other_dat']['label_status']) &&
-                    is_array($row ['other_dat']['label'])) {// set label
+                is_array($row ['other_dat']['label'])) {// set label
                 $tpl->set('[field-label]', '');
                 $tpl->set('[/field-label]', '');
                 $label = '';
@@ -630,8 +639,8 @@ $(document).ready(function(){
         if (isset($row['other_dat']['tag']) && !empty($row['other_dat']['tag'])) {
             $tpl->set('{file-keyword}', stripslashes($row['other_dat']['tag']));
         } else {
-//$albInfo['meta_data']['meta_title']
-//$albInfo['meta_data']['meta_keywords']
+            //$albInfo['meta_data']['meta_title']
+            //$albInfo['meta_data']['meta_keywords']
             $tpl->set('{file-keyword}', '' . $albInfo['title']);
         }
 
@@ -646,7 +655,7 @@ $(document).ready(function(){
         }
         $tpl->set('{size}', ($row['other_dat']['info']['size']) ? model_gallery::formatsize($row['other_dat']['info']['size']) : '----');
         $tpl->set('{date}', model_gallery::dateFormat($row['date']));
-        $colors .= '';
+        $colors = '';
         if (isset($row['other_dat']['info']['colors'][0]) && is_array($row['other_dat']['info']['colors'][0])) {
             foreach ($row['other_dat']['info']['colors'][0] as $key => $value) {
                 $colors .= '<a class="color-block" style="background-color:#' . $key . '" title="' . $value . '%" href="' . $config['http_home_url'] . 'gallery/search/color/' . $key . '">' . $key . '</a>';
@@ -727,14 +736,14 @@ $(document).ready(function(){
                 $row['other_dat']['path'] = $row['other_dat']["other_dat"]['path'];
             }
             return $this->getVideoPlayerOtherServicess($row['status'], array(
-                        'width' => $width,
-                        'height' => $height,
-                        'video_link' => $row['other_dat']['path']
-                    ));
+                'width' => $width,
+                'height' => $height,
+                'video_link' => $row['other_dat']['path']
+            ));
         }
 
         $src = ('youtube' == $row['status']) ? 'http://www.youtube.com/v/' . $row ["other_dat"]['other_dat']['name'] . '?version=3' :
-                $row['other_dat']['other_dat']['file_path'];
+            $row['other_dat']['other_dat']['file_path'];
 
         $video_config = null;
         $config = model_gallery::getRegistry('config_cms');
@@ -859,7 +868,6 @@ HTML;
                 return '<iframe width="' . $options['width'] . '" height="' . $options['height'] . '" src="' . $options['video_link'] . '" frameborder="0" allowfullscreen></iframe>';
             case 'smotri.com':
                 #http://smotri.com/video/view/?id=v1828839be0a#
-
                 return '<object id="smotriCom" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="' . $options['width'] . '" height="' . $options['height'] . '">
 <param name="movie" value="' . $options['video_link'] . '&bufferTime=3&autoStart=false&str_lang=rus&xmlsource=http%3A%2F%2Fpics.smotri.com%2Fcskins%2Fblue%2Fskin_color.xml&xmldatasource=http%3A%2F%2Fpics.smotri.com%2Fskin_ng.xml" />
 <param name="allowScriptAccess" value="always" />
@@ -876,7 +884,6 @@ HTML;
 <embed src="' . $options['video_link'] . '" type="application/x-shockwave-flash" wmode="transparent" width="' . $options['width'] . '" height="' . $options['height'] . '" allowFullScreen="true" ></embed>
 </object>';
             case 'gametrailers':
-                //хз зачем ctlsoft этот сервис добавил
                 //http://www.gametrailers.com/video/angry-video-screwattack/719815
                 return '<object type="application/x-shockwave-flash" id="mtvn_player" name="mtvn_player" data="' . $options['video_link'] . '" width="' . $options['width'] . '" height="' . $options['height'] . '">
   <param name="allowscriptaccess" value="always" />
@@ -890,9 +897,9 @@ HTML;
     }
 
     /**
-     *
-     * @param type $pageLimit
-     * @return type
+     * @param int $pageLimit
+     * @param array $where
+     * @return array|null
      */
     public function getPage($pageLimit = 9, $where = array()) {
 
@@ -912,28 +919,28 @@ HTML;
 
 
         $where['status'] = (GALLERY_MODE === 1) ? DBNAME . '.' . PREFIX . "_dg_gallery_file.status='albom' " :
-                DBNAME . '.' . PREFIX . "_dg_gallery_file.status='catfile' OR " . DBNAME . '.' . PREFIX . "_dg_gallery_file.status='video' OR "
+            DBNAME . '.' . PREFIX . "_dg_gallery_file.status='catfile' OR " . DBNAME . '.' . PREFIX . "_dg_gallery_file.status='video' OR "
                 . DBNAME . '.' . PREFIX . "_dg_gallery_file.status='youtube' ";
 
         $count = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file WHERE ' .
-                implode(' AND ', $where));
+            implode(' AND ', $where));
 
         if (!$count['count'])
             return;
 
         if (empty($where['parent_id']))
             $sql = 'SELECT ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.* , '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom.images, '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data, '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom.rating FROM '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom ON '
-                    . DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id WHERE '
-                    . implode(' AND ', $where) . ' ORDER BY ' . $order . " LIMIT {$offset},{$pageLimit}";
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom.meta_data, '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom.images, '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom.access_data, '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom.rating FROM '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_file LEFT JOIN '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom ON '
+                . DBNAME . '.' . PREFIX . '_dg_gallery_albom.id = ' . DBNAME . '.' . PREFIX . '_dg_gallery_file.parent_id WHERE '
+                . implode(' AND ', $where) . ' ORDER BY ' . $order . " LIMIT {$offset},{$pageLimit}";
         else
             $sql = 'SELECT * FROM ' . DBNAME . '.' . PREFIX . '_dg_gallery_file WHERE '
-                    . implode(' AND ', $where) . ' ORDER BY ' . $order . " LIMIT {$offset},{$pageLimit}";
+                . implode(' AND ', $where) . ' ORDER BY ' . $order . " LIMIT {$offset},{$pageLimit}";
         $this->_db->query($sql);
         while ($row = $this->_db->get_row()) {
             $result['file'][$row['id']] = $row;
@@ -943,8 +950,7 @@ HTML;
     }
 
     /**
-     *
-     * @param int $id
+     * @param $id
      */
     public function updateViewFile($id) {
         if (null === $this->_config) {
@@ -956,7 +962,6 @@ HTML;
     }
 
     /**
-     *
      * @return bool
      */
     protected function _isAuthor() {
@@ -967,8 +972,8 @@ HTML;
     }
 
     /**
-     *
-     * @return arrau
+     * @param bool $user
+     * @return array
      */
     public function loadUserFile($user = true) {
         $offset = (int) model_request::getRequest('page');
@@ -1034,6 +1039,10 @@ HTML;
         );
     }
 
+    /**
+     * @param $patent_id
+     * @return array
+     */
     public function getMinMaxId($patent_id) {
         if (GALLERY_MODE === 1) {
             $this->_db->query('SELECT (id) FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_file WHERE parent_id='{$patent_id}' ORDER BY position ASC ");
@@ -1051,7 +1060,7 @@ HTML;
     }
 
     /**
-     * Обновление параметров файла с сайта.
+     * РћР±РЅРѕРІР»РµРЅРёРµ РїР°СЂР°РјРµС‚СЂРѕРІ С„Р°Р№Р»Р° СЃ СЃР°Р№С‚Р°.
      * @return array
      */
     public function setParam() {
@@ -1122,12 +1131,12 @@ HTML;
 
                 if ($this->_config['ratingFileType'] == 1) {// + -
                     if (($check['status'] === '-1' && $set === '-1') ||
-                            ($check['status'] === '+1' && $set === '+1')) {
+                        ($check['status'] === '+1' && $set === '+1')) {
                         return;
                     }
                     if (null === $check) {
                         $this->_db->query('INSERT INTO ' . DBNAME . '.' . PREFIX . '_dg_gallery_log (' . implode(',', array_keys($insert)) . ') VALUES (' .
-                                implode(',', $insert) . ")");
+                            implode(',', $insert) . ")");
                     } else {
                         $this->_db->query('UPDATE ' . DBNAME . '.' . PREFIX . "_dg_gallery_log  SET status='{$set}' WHERE id='{$check['id']}' LIMIT 1");
                     }
@@ -1136,7 +1145,7 @@ HTML;
                 } else {
                     if (null === $check['id']) {
                         $this->_db->query('INSERT INTO ' . DBNAME . '.' . PREFIX . '_dg_gallery_log (' . implode(',', array_keys($insert)) . ') VALUES (' .
-                                implode(',', $insert) . ') ');
+                            implode(',', $insert) . ') ');
                         $this->_db->query('UPDATE ' . DBNAME . '.' . PREFIX . "_dg_gallery_file SET rating=rating{$set} WHERE id='{$_id}' LIMIT 1");
                         $this->_updateAlbom($checkFile['parent_id']);
                     } else {
@@ -1195,4 +1204,3 @@ HTML;
     }
 
 }
-

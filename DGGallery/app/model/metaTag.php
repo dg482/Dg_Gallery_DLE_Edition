@@ -1,10 +1,11 @@
 <?php
-
 /**
- * Description of metaTag
- *
+ * @package gallery
  * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
  */
+
 class model_metaTag
 {
     /**
@@ -12,11 +13,9 @@ class model_metaTag
      *
      * */
     private $_config;
+
     /**
-     * model_metaTag::__construct()
-     *
-     * @param mixed $config
-     * @return void
+     * @param model_config $config
      */
     public function __construct(model_config $config)
     {
@@ -35,12 +34,11 @@ class model_metaTag
         }
     }
     /**
-     * model_metaTag::getKeyword()
-     *
-     * @param mixed $str
-     * @param integer $l
-     * @param integer $n
-     * @return
+     * @static
+     * @param $str
+     * @param int $l
+     * @param int $n
+     * @return array|string
      */
     public static function getKeyword($str, $l = 10, $n = 20)
     {
@@ -60,11 +58,11 @@ class model_metaTag
                 }
             }
             if(is_array($keyword_)){
-               $key_word = array_count_values($keyword_);
-            arsort($key_word);
-            $key_word = array_keys($key_word);
-            $key_word = array_slice($key_word, 0, $n);
-            return $key_word;
+                $key_word = array_count_values($keyword_);
+                arsort($key_word);
+                $key_word = array_keys($key_word);
+                $key_word = array_slice($key_word, 0, $n);
+                return $key_word;
             }else{
                 return '';
             }
@@ -72,9 +70,8 @@ class model_metaTag
         }
     }
     /**
-     * model_metaTag::getDescr()
-     *
-     * @return
+     * @static
+     * @return string
      */
     public static function getDescr()
     {
@@ -82,24 +79,23 @@ class model_metaTag
         return substr(trim(strip_tags(stripslashes($_REQUEST['text']))), 0, 300);
     }
     /**
-     * model_metaTag::totranslit()
-     *
-     * @param mixed $var
-     * @return
+     * @static
+     * @param $var
+     * @return mixed|string
      */
     public static function totranslit($var)
     {
-        $langtranslit = array('à' => 'a', 'á' => 'b', 'â' => 'v', 'ã' => 'g', 'ä' => 'd',
-            'å' => 'e', '¸' => 'e', 'æ' => 'zh', 'ç' => 'z', 'è' => 'i', 'é' => 'y', 'ê' =>
-            'k', 'ë' => 'l', 'ì' => 'm', 'í' => 'n', 'î' => 'o', 'ï' => 'p', 'ğ' => 'r', 'ñ' =>
-            's', 'ò' => 't', 'ó' => 'u', 'ô' => 'f', 'õ' => 'h', 'ö' => 'c', '÷' => 'ch',
-            'ø' => 'sh', 'ù' => 'sch', 'ü' => '', 'û' => 'y', 'ú' => '', 'ı' => 'e', 'ş' =>
-            'yu', 'ÿ' => 'ya', "¿" => "yi", "º" => "ye", 'À' => 'A', 'Á' => 'B', 'Â' => 'V',
-            'Ã' => 'G', 'Ä' => 'D', 'Å' => 'E', '¨' => 'E', 'Æ' => 'Zh', 'Ç' => 'Z', 'È' =>
-            'I', 'É' => 'Y', 'Ê' => 'K', 'Ë' => 'L', 'Ì' => 'M', 'Í' => 'N', 'Î' => 'O', 'Ï' =>
-            'P', 'Ğ' => 'R', 'Ñ' => 'S', 'Ò' => 'T', 'Ó' => 'U', 'Ô' => 'F', 'Õ' => 'H', 'Ö' =>
-            'C', '×' => 'Ch', 'Ø' => 'Sh', 'Ù' => 'Sch', 'Ü' => '', 'Û' => 'Y', 'Ú' => '',
-            'İ' => 'E', 'Ş' => 'Yu', 'ß' => 'Ya', "¯" => "yi", "ª" => "ye", );
+        $langtranslit = array('Ğ°' => 'a', 'Ğ±' => 'b', 'Ğ²' => 'v', 'Ğ³' => 'g', 'Ğ´' => 'd',
+            'Ğµ' => 'e', 'Ñ‘' => 'e', 'Ğ¶' => 'zh', 'Ğ·' => 'z', 'Ğ¸' => 'i', 'Ğ¹' => 'y', 'Ğº' =>
+            'k', 'Ğ»' => 'l', 'Ğ¼' => 'm', 'Ğ½' => 'n', 'Ğ¾' => 'o', 'Ğ¿' => 'p', 'Ñ€' => 'r', 'Ñ' =>
+            's', 'Ñ‚' => 't', 'Ñƒ' => 'u', 'Ñ„' => 'f', 'Ñ…' => 'h', 'Ñ†' => 'c', 'Ñ‡' => 'ch',
+            'Ñˆ' => 'sh', 'Ñ‰' => 'sch', 'ÑŒ' => '', 'Ñ‹' => 'y', 'ÑŠ' => '', 'Ñ' => 'e', 'Ñ' =>
+            'yu', 'Ñ' => 'ya', "Ñ—" => "yi", "Ñ”" => "ye", 'Ğ' => 'A', 'Ğ‘' => 'B', 'Ğ’' => 'V',
+            'Ğ“' => 'G', 'Ğ”' => 'D', 'Ğ•' => 'E', 'Ğ' => 'E', 'Ğ–' => 'Zh', 'Ğ—' => 'Z', 'Ğ˜' =>
+            'I', 'Ğ™' => 'Y', 'Ğš' => 'K', 'Ğ›' => 'L', 'Ğœ' => 'M', 'Ğ' => 'N', 'Ğ' => 'O', 'ĞŸ' =>
+            'P', 'Ğ ' => 'R', 'Ğ¡' => 'S', 'Ğ¢' => 'T', 'Ğ£' => 'U', 'Ğ¤' => 'F', 'Ğ¥' => 'H', 'Ğ¦' =>
+            'C', 'Ğ§' => 'Ch', 'Ğ¨' => 'Sh', 'Ğ©' => 'Sch', 'Ğ¬' => '', 'Ğ«' => 'Y', 'Ğª' => '',
+            'Ğ­' => 'E', 'Ğ®' => 'Yu', 'Ğ¯' => 'Ya', "Ğ‡" => "yi", "Ğ„" => "ye", );
         $var = str_replace(".php", "", $var);
         $var = trim(strip_tags($var));
         $var = preg_replace("/\s+/ms", "-", $var);
