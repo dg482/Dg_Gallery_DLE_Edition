@@ -1,13 +1,13 @@
 <?php
-
 /**
  * @package gallery
  * @author Dark Ghost
- * @copyright 2011
  * @access public
- * @since 1.5.4 (08.2011)
+ * @since 1.5.6 (19.03.12)
  */
-class model_gallery {
+
+class model_gallery
+{
 
     /**
      * @var array
@@ -71,9 +71,16 @@ class model_gallery {
      * @var string info messages
      */
     public static $INFO;
+    /**
+     * @var string
+     */
     public static $ORDER;
 
-    public function __construct() {
+    /**
+     *
+     */
+    public function __construct()
+    {
         $this->_db = model_gallery::getClass('module_db');
         $this->_cache = model_gallery::getClass('model_cache_file');
         model_gallery::setRegistry('model_cache_file', $this->_cache);
@@ -83,21 +90,22 @@ class model_gallery {
     }
 
     /**
-     *
      * @return bool
      */
-    protected function _isAdmin() {
-        if (class_exists('assistant')) {// adminpanel
+    protected function _isAdmin()
+    {
+        if (class_exists('assistant')) { // adminpanel
             return (assistant::$_user['user_group'] == 1);
         }
         return (self::$user['user_group'] == 1);
     }
 
     /**
+     * @static
      *
-     * @return void
      */
-    public static function init() {
+    public static function init()
+    {
         $config = null;
         if (file_exists(ROOT_DIR . '/DGGallery/app/config/config_gallery.php')) {
             $config = include ROOT_DIR . '/DGGallery/app/config/config_gallery.php';
@@ -111,17 +119,18 @@ class model_gallery {
     }
 
     /**
-     *
-     * @return void
+     * @static
+     * @return array|mixed|null|string
      */
-    public static function run() {
+    public static function run()
+    {
         global $member_id;
         self::$user = $member_id;
         self::$_copy = '<div id="copy">Powered by D.G. Gallery ' . self::VERSION . ' &copy; 2010 - ' . date('Y') . '</div>';
         $Timer = null;
         $result = null;
         if (self::$debug) {
-            $Timer = new microTimer ( );
+            $Timer = new microTimer ();
             $Timer->start();
         }
         self::init();
@@ -139,7 +148,7 @@ class model_gallery {
                     $debug = model_debug::show();
                     if (is_array($debug))
                         return array_merge($result, $debug);
-                }else {
+                } else {
                     die();
                 }
             }
@@ -151,23 +160,23 @@ class model_gallery {
     }
 
     /**
-     * model_gallery::setRegistry()
-     *
-     * @param string $n
-     * @param mixed $obj
-     * @return void
+     * @static
+     * @param $n
+     * @param $obj
      */
-    public static function setRegistry($n, $obj) {
+
+    public static function setRegistry($n, $obj)
+    {
         self::$_registry[$n] = $obj;
     }
 
     /**
-     * model_gallery::getRegistry()
-     *
-     * @param string $n string
+     * @static
+     * @param $n
      * @return mixed
      */
-    public static function getRegistry($n) {
+    public static function getRegistry($n)
+    {
         if (null === self::$_registry[$n] && !is_object(self::$_registry[$n]) && !is_array(self::$_registry[$n])) {
             if (class_exists($n)) {
                 $new = new $n();
@@ -181,15 +190,21 @@ class model_gallery {
     }
 
     /**
-     * model_gallery::getAllRegistry()
-     *
-     * @return mixed
+     * @static
+     * @return array|null
      */
-    public static function getAllRegistry() {
+    public static function getAllRegistry()
+    {
         return (null == self::$_registry) ? null : self::$_registry;
     }
 
-    public static function getClass($name) {
+    /**
+     * @static
+     * @param $name
+     * @return mixed
+     */
+    public static function getClass($name)
+    {
         if (!is_object(self::$_registry [$name])) {
             $new = new $name ();
             self::setRegistry($name, $new);
@@ -200,14 +215,14 @@ class model_gallery {
     }
 
     /**
-     *
-     * @param int $num
+     * @param $num
      * @param array $data
      * @param dle_template $tpl
-     * @return string
+     * @return bool|string
      */
-    public function _nav($num, array $data, dle_template $tpl) {
-        $data['current_page_d'] = (int) model_request::getRequest('page');
+    public function _nav($num, array $data, dle_template $tpl)
+    {
+        $data['current_page_d'] = (int)model_request::getRequest('page');
         if (0 === $data['current_page_d']) {
             $data['current_page_d'] = 1;
         }
@@ -223,12 +238,12 @@ class model_gallery {
             return false;
         }
         $stop = false;
-        $sp = '';
-        $pp = '';
-        $start = 1;
-        $end = 3;
-        $np = '';
-        $ep = '';
+        //        $sp = '';
+        //        $pp = '';
+        //        $start = 1;
+        //        $end = 3;
+        //        $np = '';
+        //        $ep = '';
         $_nav = '';
         self::$ORDER;
         if ($_page > 1) {
@@ -344,14 +359,13 @@ class model_gallery {
     }
 
     /**
-     *
-     * @global type $_TIME
-     * @global type $lang
-     * @global type $config
-     * @param type $timestamp
+     * @static
+     * @param $timestamp
+     * @param bool $convert
      * @return string
      */
-    public static function dateFormat($timestamp, $convert = TRUE) {
+    public static function dateFormat($timestamp, $convert = TRUE)
+    {
         global $_TIME, $lang, $config;
         if ($convert)
             $timestamp = strtotime($timestamp);
@@ -365,11 +379,12 @@ class model_gallery {
     }
 
     /**
-     *
-     * @param type $file_size
+     * @static
+     * @param $file_size
      * @return string
      */
-    public static function formatsize($file_size) {
+    public static function formatsize($file_size)
+    {
         if ($file_size >= 1073741824) {
             $file_size = round($file_size / 1073741824 * 100) / 100 . " Gb";
         } elseif ($file_size >= 1048576) {

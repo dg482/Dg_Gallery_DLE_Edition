@@ -1,226 +1,426 @@
-<?php //0046a
-if(!extension_loaded('ionCube Loader')){$__oc=strtolower(substr(php_uname(),0,3));$__ln='ioncube_loader_'.$__oc.'_'.substr(phpversion(),0,3).(($__oc=='win')?'.dll':'.so');if(function_exists('dl')){@dl($__ln);}if(function_exists('_il_exec')){return _il_exec();}$__ln='/ioncube/'.$__ln;$__oid=$__id=realpath(ini_get('extension_dir'));$__here=dirname(__FILE__);if(strlen($__id)>1&&$__id[1]==':'){$__id=str_replace('\\','/',substr($__id,2));$__here=str_replace('\\','/',substr($__here,2));}$__rd=str_repeat('/..',substr_count($__id,'/')).$__here.'/';$__i=strlen($__rd);while($__i--){if($__rd[$__i]=='/'){$__lp=substr($__rd,0,$__i).$__ln;if(file_exists($__oid.$__lp)){$__ln=$__lp;break;}}}if(function_exists('dl')){@dl($__ln);}}else{die('The file '.__FILE__." is corrupted.\n");}if(function_exists('_il_exec')){return _il_exec();}echo('Site error: the file <b>'.__FILE__.'</b> requires the ionCube PHP Loader '.basename($__ln).' to be installed by the website operator. If you are the website operator please use the <a href="http://www.ioncube.com/lw/">ionCube Loader Wizard</a> to assist with installation.');exit(199);
-?>
-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
+<?php
+/**
+ * @package gallery
+ * @author Dark Ghost
+ * @access public
+ * @since 1.5.6 (19.03.12)
+ */
+
+class assistant
+{
+
+    /**
+     * @var array
+     * */
+    protected $_config;
+    /**
+     * @var array
+     * */
+    public static $_registry;
+    /**
+     * @var array
+     * */
+    protected $_lang;
+    /**
+     * @var int
+     * */
+    protected $_config_cms;
+    /**
+     * @var array
+     * */
+    public static $_user;
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        define('DEMO', false);
+        global $member_id;
+        if (1 < $member_id ['user_group']) {
+            die('access denied ');
+        }
+        self::$_user = $member_id;
+        if (!self::$_user) {
+            die('ACCESS DENIED!');
+        }
+        define('HOME_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/');
+        $cache = model_gallery::getClass('model_cache_file');
+        model_gallery::setRegistry('model_cache_file', $cache);
+        //set global variable
+        $this->setGlobalVar();
+        self::$_registry = model_gallery::getAllRegistry();
+        $config = new model_config ();
+        self::setRegistry('model_config', $config);
+        if (!file_exists(ROOT_DIR . '/DGGallery/app/config/config_gallery.php')) {
+            die("error, file configuration don't exists");
+        }
+        $this->_config = include ROOT_DIR . '/DGGallery/app/config/config_gallery.php';
+        self::setRegistry('config', $this->_config);
+        // 1 - категории => альбомы => файлы
+        // 2 - категории => файлы
+        define('GALLERY_MODE', ($this->_config['mode']) ? (int)$this->_config['mode'] : 1);
+        $admin = '/admin/index.php?action=cat';
+        if ($this->_config ['dle']) {
+            if (file_exists(ROOT_DIR . '/engine/data/config.php')) {
+                #unset($config);
+                $config = array();
+                include ROOT_DIR . '/engine/data/config.php';
+                $this->_config_cms = $config;
+            }
+            $admin = $this->_config_cms ['http_home_url'] . $this->_config_cms ['admin_path'] . '?mod=dg_gallery';
+        }
+
+        $this->_lang = (include ROOT_DIR . '/DGGallery/app/lang/gallery.php');
+        self::setRegistry('lang', $this->_lang);
+        model_gallery::setRegistry('admin_path', $admin);
+        #model_gallery::setRegistry('route', model_gallery::getClass('model_route'));
+    }
+
+    /**
+     *
+     */
+    public function setGlobalVar()
+    {
+        global $sort_list, $gallery_cat;
+        $sort_list = array(
+            array('id' => '1', 'label' => 'по дате'),
+            array('id' => '2', 'label' => 'по рейтингу'),
+            array('id' => '3', 'label' => 'по скачиваниям'),
+            array('id' => '4', 'label' => 'по комментариям'),
+            array('id' => '5', 'label' => 'только изображения'),
+            array('id' => '6', 'label' => 'только видео'),
+            array('id' => '7', 'label' => 'только you tube')
+        );
+
+        $gallery_cat = model_cache_file::get('tree_category');
+        $gallery_cat [0] ['title'] = 'без категории';
+        $gallery_cat [0] ['id'] = '0';
+    }
+
+    /**
+     * @static
+     * @param $n
+     * @param $obj
+     */
+    public static function setRegistry($n, $obj)
+    {
+        model_gallery::setRegistry($n, $obj);
+    }
+
+    /**
+     * @static
+     * @param $n
+     * @return mixed
+     */
+    public static function getRegistry($n)
+    {
+        return model_gallery::getRegistry($n);
+    }
+
+    /**
+     * @static
+     * @return mixed
+     */
+    public static function getAllRegistry()
+    {
+        return model_gallery::getAllRegistry();
+    }
+
+    /**
+     * @return string
+     */
+    public function run()
+    {
+        $result = $this->setHeader();
+        $result .= $this->setFooter();
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    private function setHeaderCss()
+    {
+        self::$_registry ['config'] ['adminskin'] = 'default';
+        $css = array('style', 'block', 'codemirror/codemirror', 'smoothness/jquery-ui-1.8.9.custom');
+        $link = '';
+        foreach ($css as $f) {
+            $link .= '<link href="' . self::$_registry ['config'] ['http'] . 'DGGallery/admin/theme/default/css/' . $f . '.css" rel="stylesheet" type="text/css" />';
+        }
+        return $link;
+    }
+
+    /**
+     * @return string
+     */
+    private function getHeaderJs()
+    {
+        self::$_registry ['config'] ['adminskin'] = 'default';
+        $js = array( /* 'gallery', 'gallery.ass', 'gallery.effect', 'gallery.label', 'gallery.editor',
+              'gallery.ajax', 'gallery.upload','gallery.player', */
+            'tiny_mce/tiny_mce_gzip', /* 'gallery.ready', */);
+        //'tiny_mce/jquery.tinymce',
+        $link = '';
+        foreach ($js as $f) {
+            #  '$href{$jsUri}'
+            $link .= '<script type="text/javascript" src="' . self::$_registry ['config'] ['http'] . 'DGGallery/admin/theme/default/js/gallery/' . $f . ".js\" ></script>\r";
+        }
+        return $link;
+    }
+
+    /**
+     * @return string
+     */
+    protected function setHeader()
+    {
+
+        $action = strtolower(model_request::getRequest('action'));
+        $action = ('' === $action) ? 'index' : $action;
+        $inlineJs = '';
+        $styleBlock = '';
+        $content = '';
+        $catJson = '';
+        $css = $this->setHeaderCss();
+        if (file_exists(ROOT_DIR . '/DGGallery/min/utils.php'))
+            require ROOT_DIR . '/DGGallery/min/utils.php';
+        else
+            die('file no existt ' . ROOT_DIR . '/DGGallery/min/utils.php');
+        $jsUri = Minify_groupUri('js');
+        # $cssUri = Minify_groupUri('css');
+        $href = self::$_registry ['config'] ['http'] . 'DGGallery';
+        $config = self::$_registry ['config_cms'];
+        $js = $this->getHeaderJs();
+        $nav = $this->setNav();
+
+        $cat = model_gallery::getClass('model_category');
+        model_gallery::setRegistry('model_category', $cat);
+        $catJson = $cat->getCategoryNavJson();
+
+        $admin = model_gallery::getRegistry('admin_path');
+        $sideBar = $this->_sideBar();
+        $admCtrl = new controller_admin;
+
+        $actionCtrl = str_replace('-', '_', $action) . 'Action';
+        $mvcOut = array(
+            'content' => null,
+            'inlineJs' => null,
+            'cssBlock' => null
+        );
+        if (method_exists($admCtrl, $actionCtrl)) {
+            $mvcOut = $admCtrl->$actionCtrl();
+        }
+        $content .= $mvcOut['content'];
+        $inlineJs .= $mvcOut['inlineJs'];
+        $styleBlock = $mvcOut['cssBlock'];
+
+        global $config;
+        $contextMenuCat = module_json::getJson($this->_lang ['contextMenuCat']);
+        $lang = module_json::getJson($this->_lang ['javaScript']);
+        if (null === $this->_db) {
+            $this->_db = model_gallery::getRegistry('module_db');
+        }
+        $comm = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_comments ");
+        $file = $this->_db->super_query('SELECT COUNT(*) AS count FROM ' . DBNAME . '.' . PREFIX . "_dg_gallery_file ");
+        $title = $this->_lang['title']['title_32'];
+        if (false === DEMO) {
+            switch (GALLERY_MODE) {
+                case 1:
+                    $title = $this->_lang['title']['title_30'];
+                    break;
+                case 2:
+                    $title = $this->_lang['title']['title_31'];
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            $file['count'] = $file['count'] . ' / 50';
+        }
+
+        return <<< HTML
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+<title>D.G. Gallery 1.5</title>
+{$css}
+<!-- firebug lite
+<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
+-->
+<script type="text/javascript" src="{$config['http_home_url']}engine/classes/js/bbcodes.js"></script>
+<script type="text/javascript" src="{$href}{$jsUri}"></script>
+{$js}
+<script type="text/javascript">
+//<![CDATA[
+var dle_root = '{$config['http_home_url']}';
+var dle_admin = '{$config['admin_path']}';
+var dle_copy_quote = '';
+var nav = {$nav};\r
+var catMenu = {$contextMenuCat};\r
+var admin = '{$admin}';\r
+gallery.lang = $lang;
+$('document').ready(function(){
+gallery.ass.setContextMenu(catMenu,$('span.item').children('a'));
+gallery.ass.catShow($('span.item').children('a').not('.albom-open'));
+tinyMCE_GZ.init({
+            plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,advlist",
+            themes : 'advanced',
+            skin : "cirkuit",
+            disk_cache : true,
+            languages:"ru",
+            debug : false
+});
+{$inlineJs}
+      $('.albom-open').live('click', function(){
+            document.location.href = admin +'&action=open&id='+$(this).attr('rel');
+        });
+$('a.log').tipsy({
+gravity: 'e'
+})
+$('a.dle').tipsy({
+gravity: 'w'
+})
+});
+//]]>
+</script>
+</head>
+<body>
+<div style="overflow:hidden; width:100%">
+<div id="top">
+
+<a class="dle" href="{$config['http_home_url']}{$config['admin_path']}?mod=options&action=options" title="{$this->_lang['title']['title_25']}"></a>
+<a class="log" href="{$admin}" title="{$this->_lang['title']['title_29']}"></a><div class="statistic">
+<p>{$this->_lang['title']['title_26']}<strong style="display:inline-block; float:right; padding:0 10px;">{$title}</strong></p>
+<p>{$this->_lang['title']['title_27']}<strong style="display:inline-block; float:right; padding:0 10px;">{$file['count']}</strong></p>
+<p>{$this->_lang['title']['title_28']}<strong style="display:inline-block; float:right; padding:0 10px;">{$comm['count']}</strong></p>
+</div>
+</div>
+</div>
+{$sideBar}
+<div id="content">
+<div class="block b-10 edit-images" id="user-work-area">
+<div id="work-area-top-bar">
+<ul class="nav"><li class=""></li></ul>
+</div>
+<div id="work-area-side-bar">
+<ul class="nav"></ul>
+</div>
+<div id="work-area">
+{$content}
+</div>
+</div>
+
+HTML;
+    }
+
+    /**
+     * @return string
+     */
+    private function _sideBar()
+    {
+
+        $action = strtolower(model_request::getRequest('action'));
+        $action = ('' === $action) ? 'index' : $action;
+        $index = array('index', 'info', 'setting', 'mass', 'save_setting', 'add_cat', 'add_category', 'moder');
+        $editcat = array('editcat', 'edit-template', 'add_alb', 'open');
+        $catTree = '';
+        $css = array('index' => (in_array($action, $index)) ? 'active' : '', 'editcat' => (in_array($action, $editcat)) ? 'active' : '');
+        $class = array('index' => (in_array($action, $index)) ? '' : 'class="hidden"', 'editcat' => (in_array($action, $editcat)) ? '' : 'class="hidden"');
+        if ($action != 'edit-template' && $action != 'open') {
+            $cat = self::getRegistry('model_category');
+            //$catTree .= '<span class="search"><input type="text" name="search" value="" class="b-4"/><button onclick="">search</button></span>';
+            $catTree .= $cat->catTree();
+        }
+        if ('open' == $action) {
+            $alb = self::getRegistry('model_albom');
+            if (null === $alb) {
+                $alb = self::getClass('model_albom');
+            }
+            $catTree .= $alb->getTree();
+        }
+
+        return <<< HTML
+         <div id="side-bar">
+<ul class="sysnav">
+<li class="{$css['index']} system"><a href="javascript:" rel="system">{$this->_lang['nav_block']['system']}</a></li>
+<li class="{$css['editcat']} category"><a href="javascript:" rel="category">{$this->_lang['nav_block']['cat']}</a></li>
+<!--<li class="tender"><a href="javascript:" rel="tender">{$this->_lang['nav_block']['tender']}</a></li>-->
+</ul>
+<div id="sysnav" {$class['index']}></div>
+<div id="tree" {$class['editcat']}>
+$catTree
+</div>
+</div>
+HTML;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function runAjax()
+    {
+        $action = model_request::getRequest('action');
+        $action = (null === $action) ? 'index' : $action;
+        $admin = '/admin/index.php?action=cat';
+        if ($this->_config_cms) {
+            $admin = $this->_config_cms ['http_home_url'] . $this->_config_cms ['admin_path'] . '?mod=dg_gallery';
+        }
+        $admCtrl = new controller_ajax_admin;
+        $actionCtrl = str_replace('-', '_', $action) . 'Action';
+        if (method_exists($admCtrl, $actionCtrl)) {
+            return $admCtrl->$actionCtrl();
+        }
+    }
+
+    /**
+     * @return string
+     */
+    protected function setFooter()
+    {
+        model_gallery::$user = self::$_user;
+        $debug = ' '; #model_debug::show();
+        return <<< HTML
+$debug</div></body>
+</html>
+HTML;
+    }
+
+    /**
+     * @return null|string
+     */
+    protected function setNav()
+    {
+        $http = model_gallery::getRegistry('admin_path');
+        $nav = array('group' =>
+        array('title' => $this->_lang ['menu'] ['group1'] ['title'],
+            array('title' => $this->_lang ['menu'] ['group1'] ['info'], 'href' => $http . '&action=index'),
+            array('title' => $this->_lang ['menu'] ['group1'] ['addCat'], 'href' => $http . '&action=add_cat'),
+            array('title' => $this->_lang ['menu'] ['group1'] ['addAlbom'], 'href' => $http . '&action=add_alb'),
+            //array('title' => $this->_lang ['menu'] ['group1'] ['addTender'], 'href' => $http . '&action=add_tender'),
+            array('title' => $this->_lang ['menu'] ['group1'] ['setting'], 'href' => $http . '&action=setting')
+        )
+        );
+        // //            'info' => array(
+        //                'title' => $this->_lang['menu']['info']['title'],
+        //                'imageSetting' => $this->_lang['menu']['info']['imageSetting'],
+        //                'generalSetting' => $this->_lang['menu']['info']['generalSetting'],
+        //                'newCat' => $this->_lang['menu']['info']['newCat'],
+        //                'newAlbom' => $this->_lang['menu']['info']['newAlbom'],
+        //                'newTender' => $this->_lang['menu']['info']['newTender'],
+        //                'loadFile' => $this->_lang['menu']['info']['loadFile'],
+        //                'loadArch' => $this->_lang['menu']['info']['loadArch']
+        //            )
+
+
+        $cache = model_gallery::getRegistry('model_cache_file');
+        $navi = model_cache_file::getJson('admin_nav');
+        if (!$navi) {
+            $json = model_gallery::getClass('module_json');
+            $navi = $json->getJson($nav);
+            $cache->setCacheJson('admin_nav', $nav);
+        }
+        return $navi;
+    }
+
+}
