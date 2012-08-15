@@ -19,6 +19,8 @@ adding:
                 break;
 
 * adding in .htaccess:
+
+
         ###################################GALLERY
         RewriteRule ^gallery/.*$ index.php?do=gallery [NC,L]
         RewriteRule ^dgg/ajax/admin/.*$ admin.php?mod=dg_gallery [NC,L]
