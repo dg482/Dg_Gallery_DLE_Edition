@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- saved from url=(0029)http://www.helpandmanual.com/ -->
+<head>
+   <title>Общая информация.</title>
+   <meta name="generator" content="Help &amp; Manual" />
+   <meta name="keywords" content="" />
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <meta http-equiv="Content-Style-Type" content="text/css" />
+   <link type="text/css" href="default.css" rel="stylesheet" />
+<script type="text/javascript" src="helpman_topicinit.js"></script>
+<!-- Redirect browser to frame page if page is not in the content frame. -->
+<script type="text/javascript">
+if (location.search.lastIndexOf("toc=0")<=0) {
+  if (parent.frames.length==0) { parent.location.href="index.html?base.htm"; }
+  else { parent.lazysync('base.htm'); }
+}
+</script>
+<script type="text/javascript" src="highlight.js"></script></head>
+<body style="margin: 0px 0px 0px 0px; background: #F3F3F3;" onload="highlight();">
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="5" bgcolor="#DFEFFF">
+  <tr valign="middle">
+    <td align="left">
+      <p class="p_Heading1"><span class="f_Heading1">Общая информация.</span></p>
+
+    </td>
+    <td align="right">
+     <span style="font-size: 9pt">
+     <a href="index.htm"><img src="arrow-090.png" border=0 alt="Top"></a>&nbsp;
+     <a href="errors.htm"><img src="arrow-180.png" border=0 alt="Previous"></a>&nbsp;
+     <a href="main_tpl.htm"><img src="arrow.png" border=0 alt="Next"></a>
+     </span>
+    </td>
+  </tr>
+</table>
+
+
+<!-- Placeholder for topic body. -->
+<table width="100%" border="0" cellspacing="0" cellpadding="5"><tr valign="top"><td align="left">
+<p style="margin: 0px 66px 0px 98px;">&nbsp;</p>
+<p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">В скрипте используется стандартный шаблонизатор DLE. &nbsp;В каждой конфигурации используется сой шаблон профиля пользователей. В конфигурации «Портал» используется шаблон <a href="user_mode1_tpl.htm">user_mode1.tpl</a> и <a href="edit_albom_tpl.htm">albom_edit.tpl</a>, &nbsp;в конфигурации «Альбом» только <a href="user_mode2_tpl.htm">user_mode2.tpl</a>. </span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">В каждои конфигурации используется ограниченное кол-во тегов, однако в шаблоне Default/gallery/ используются практически все теги, это сделано для демонстрации возможностей скрипта на одном шаблоне.</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">Для снижения нагрузки рекомендуется удалить все проверки конфигураций, и не нужные в ваших шаблонах теги из методов представления php (app/view/).</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">Во всех шаблонах действуют глобальные теги DLE:</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-weight: bold; font-size: 11pt; font-family: 'Calibri'; color: #000000;">1.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">{include file="my_block.tpl"}</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-weight: bold; font-size: 11pt; font-family: 'Calibri'; color: #000000;">2.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[group=1,2,3]</span><span style="font-size: 11pt; font-family: 'Calibri';"> текст </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[/group]</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-weight: bold; font-size: 11pt; font-family: 'Calibri'; color: #000000;">3.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[not-group=1,2,3]</span><span style="font-size: 11pt; font-family: 'Calibri';"> текст </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[/not-group]</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-weight: bold; font-size: 11pt; font-family: 'Calibri'; color: #000000;">4.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[aviable -gallery =…]</span><span style="font-size: 11pt; font-family: 'Calibri';"> текст </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[/aviable -gallery]</span><span style="font-size: 11pt; font-family: 'Calibri';"> – тег идеентичен </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">[aviable=]</span><span style="font-size: 11pt; font-family: 'Calibri';"> </span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-weight: bold; font-size: 11pt; font-family: 'Calibri'; color: #000000;">5.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;"></span></td></tr></table></div><p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">В качестве параметра для тега </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">aviable -gallery</span><span style="font-size: 11pt; font-family: 'Calibri';"> предусмотренны следующие значения:</span></p>
+<div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">1.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">аlbom</span><span style="font-size: 11pt; font-family: 'Calibri';"> – прои просмотре альбома.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">2.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">category</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при просмотре категории.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">3.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">file</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при просмотре отдельного файла.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">4.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">search</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при поиске по галерее.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">5.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">profile</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при просмотре профиля.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">6.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">full</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при просмотре отдельного файла.</span></td></tr></table></div><div style="text-align: left; text-indent: 0px; padding: 0px 0px 0px 0px; margin: 0px 66px 0px 98px;"><table cellpadding="0" cellspacing="0" style="line-height: normal;"><tr style="vertical-align:baseline"><td style="width:16px"><span style="font-size: 11pt; font-family: 'Calibri'; color: #000000;">7.</span></td><td><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">show_file</span><span style="font-size: 11pt; font-family: 'Calibri';"> – при просмотре файлов в категоии.</span></td></tr></table></div><p style="margin: 0px 66px 0px 98px;"><span style="color: #000000;">&nbsp;</span></p>
+<p style="margin: 0px 66px 0px 98px;"><span style="font-size: 11pt; font-family: 'Calibri';">При использование </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">{include file="my_block.tpl"} </span><span style="font-size: 11pt; font-family: 'Calibri';">файл </span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">my_block.tpl </span><span style="font-size: 11pt; font-family: 'Calibri';">должен находится в директории шаблона скрипта ../templates/</span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">my_template</span><span style="font-size: 11pt; font-family: 'Calibri';">/gallery/</span><span style="font-size: 11pt; font-family: 'Calibri'; font-weight: bold;">my_block.tpl</span></p>
+
+</td></tr></table>
+
+</body>
+</html>
