@@ -10,13 +10,18 @@ Installation
 ------------
 
 * open file "../engine/endine.php" in text editor
-after:
+
+
+        //after:
+
         switch ($do) {
 
-adding:
-        	case 'gallery':
+        //adding:
+
+        case 'gallery':
         		    include_once ROOT_DIR . '/DGGallery/index.php';
                 break;
+
 
 * adding in .htaccess:
 
